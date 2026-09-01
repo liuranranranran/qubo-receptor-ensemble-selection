@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import json
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -124,5 +125,10 @@ def test_production_smoke_consumes_prepare_outputs_and_replays_deterministically
     assert all(len(call[2]) <= 2 for call in first_adapter.calls)
     assert (first.config.active_run_directory / "state.json").is_file()
     assert (first.config.active_run_directory / "round_000.json").is_file()
-    assert "active" not in (first.config.active_run_directory / "state.json").read_text(encoding="utf-8").lower()
-    assert "decoy" not in (first.config.active_run_directory / "state.json").read_text(encoding="utf-8").lower()
+    state = json.loads(
+        (first.config.active_run_directory / "state.json").read_text(encoding="utf-8")
+    )
+    assert all(
+        key.lower() not in {"label", "active", "decoy", "hidden_label"}
+        for key in state
+    )

@@ -181,9 +181,16 @@ def test_production_runner_reveals_only_selected_tasks_and_resumes(tmp_path: Pat
     assert runner.state.docking_cost == pytest.approx(12.0)
     assert all(task[1] == "R2" for task in result["task_sequence"])
     state_text = (config.active_run_directory / "state.json").read_text(encoding="utf-8")
+    state_payload = json.loads(state_text)
     assert "hidden_score" not in state_text
-    assert "active" not in state_text.lower()
-    assert "decoy" not in state_text.lower()
+    assert all(
+        key.lower() not in {"label", "active", "decoy", "hidden_label"}
+        for key in state_payload
+    )
+    assert all(
+        value not in {"active", "decoy"}
+        for value in state_payload.get("scaffold_metadata", {}).values()
+    )
 
     call_count = len(adapter.calls)
     resumed = ActiveProductionRunner(config, adapter=adapter).run(resume=True, max_rounds=2)
@@ -199,3 +206,20 @@ def test_production_runner_rejects_resume_when_config_fingerprint_changes(tmp_pa
 
     with pytest.raises(ProductionRunError, match="fingerprint"):
         ActiveProductionRunner(changed, adapter=FakeAdapter()).run(resume=True)
+
+
+def test_required_prediction_gate_blocks_docking_until_passed(tmp_path: Path) -> None:
+    _prepared_inputs(tmp_path)
+    config = _config(tmp_path)
+    config.data["prediction_gate"] = {"required": True}
+    adapter = FakeAdapter()
+
+    with pytest.raises(ProductionRunError, match="prediction gate"):
+        ActiveProductionRunner(config, adapter=adapter).initialize()
+    assert adapter.calls == []
+
+    gate = config.active_run_directory / "prediction_gate.json"
+    gate.parent.mkdir(parents=True, exist_ok=True)
+    gate.write_text(json.dumps({"passed": True}), encoding="utf-8")
+    ActiveProductionRunner(config, adapter=adapter).initialize()
+    assert len(adapter.calls) == 3

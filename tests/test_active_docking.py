@@ -97,6 +97,29 @@ def test_partial_state_reveal_is_atomic_and_rejects_duplicate_or_invalid_tasks()
         state.reveal({("l2", "r2"): -2.0})
 
 
+def test_partial_state_charges_receptor_activation_once_and_serializes_it() -> None:
+    ligands, receptors = _manifests()
+    state = PartialObservationState(
+        ligand_manifest=ligands,
+        receptor_manifest=receptors,
+        candidate_tasks={("l1", "r1"), ("l2", "r1"), ("l1", "r2")},
+        task_costs={
+            ("l1", "r1"): 3.0,
+            ("l2", "r1"): 3.0,
+            ("l1", "r2"): 3.0,
+        },
+        receptor_activation_costs={"r1": 2.0, "r2": 4.0},
+    )
+    state.reveal({("l1", "r1"): -1.0})
+    assert state.docking_cost == pytest.approx(5.0)
+    state.reveal({("l2", "r1"): -2.0})
+    assert state.docking_cost == pytest.approx(8.0)
+    state.reveal({("l1", "r2"): -3.0})
+    assert state.docking_cost == pytest.approx(15.0)
+    restored = PartialObservationState.from_dict(json.loads(json.dumps(state.to_dict())))
+    assert restored.to_dict() == state.to_dict()
+
+
 def test_warm_start_is_deterministic_scaffold_stratified_and_cluster_covering() -> None:
     ligands, receptors = _manifests()
     config = WarmStartConfig(

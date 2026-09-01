@@ -184,6 +184,22 @@ def _constraints_for(
 ) -> BatchConstraints:
     raw = config.get("constraints", {})
     assert isinstance(raw, Mapping)
+    activation_raw = raw.get("receptor_activation_cost")
+    activated_receptors = {task[1] for task in state.observed_scores}
+    if isinstance(activation_raw, Mapping):
+        activation_cost = {
+            str(receptor_id): 0.0 if str(receptor_id) in activated_receptors else float(cost)
+            for receptor_id, cost in activation_raw.items()
+        }
+    elif activation_raw is None:
+        activation_cost = None
+    else:
+        activation_cost = {
+            str(row["receptor_id"]): 0.0
+            if str(row["receptor_id"]) in activated_receptors
+            else float(activation_raw)
+            for row in state.receptor_manifest
+        }
     return BatchConstraints(
         budget=budget,
         task_costs={task: state.cost_for(task) for task in available},
@@ -194,7 +210,7 @@ def _constraints_for(
             str(row["ligand_id"]): str(row.get("scaffold", row.get("scaffold_smiles", "__unknown__")))
             for row in state.ligand_manifest
         },
-        receptor_activation_cost=raw.get("receptor_activation_cost"),
+        receptor_activation_cost=activation_cost,
         penalty=float(raw.get("penalty", 10.0)),
         cost_unit=raw.get("cost_unit"),
         equal_cost=bool(raw.get("equal_cost", False)),
@@ -324,6 +340,14 @@ def _state_for_replay(
         receptor_manifest=[dict(row) for row in receptor_manifest],
         candidate_tasks=set(tasks),
         task_costs=costs,
+        receptor_activation_costs={
+            str(row["receptor_id"]): float(
+                config.get("constraints", {}).get("receptor_activation_cost", 0.0)
+                if isinstance(config.get("constraints", {}), Mapping)
+                else 0.0
+            )
+            for row in receptor_manifest
+        },
         warm_start_state={"strategy": "fixed_label_free", "tasks": [list(task) for task in warm_tasks]},
         scaffold_metadata={str(row["ligand_id"]): str(row.get("scaffold", row.get("scaffold_smiles", "__unknown__"))) for row in ligand_manifest},
         receptor_cluster_metadata={str(row["receptor_id"]): str(row.get("cluster", row.get("receptor_cluster", "__unknown__"))) for row in receptor_manifest},

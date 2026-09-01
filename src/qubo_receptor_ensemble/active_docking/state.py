@@ -56,6 +56,7 @@ class PartialObservationState:
     warm_start_state: dict[str, object] = field(default_factory=dict)
     docking_cost: float = 0.0
     task_costs: dict[Task, float] = field(default_factory=dict)
+    receptor_activation_costs: dict[str, float] = field(default_factory=dict)
     scaffold_metadata: dict[str, object] = field(default_factory=dict)
     receptor_cluster_metadata: dict[str, object] = field(default_factory=dict)
 
@@ -91,6 +92,17 @@ class PartialObservationState:
             raise StateError("task_costs contains a task outside candidate_tasks")
         if any(not math.isfinite(cost) or cost <= 0.0 for cost in self.task_costs.values()):
             raise StateError("task costs must be positive finite values")
+        self.receptor_activation_costs = {
+            str(receptor_id): float(cost)
+            for receptor_id, cost in self.receptor_activation_costs.items()
+        }
+        if not set(self.receptor_activation_costs).issubset(set(receptor_ids)):
+            raise StateError("receptor activation costs contain an unknown receptor")
+        if any(
+            not math.isfinite(cost) or cost < 0.0
+            for cost in self.receptor_activation_costs.values()
+        ):
+            raise StateError("receptor activation costs must be non-negative finite values")
         self.docking_cost = float(self.docking_cost)
         if not math.isfinite(self.docking_cost) or self.docking_cost < 0:
             raise StateError("docking_cost must be a non-negative finite value")
@@ -128,7 +140,13 @@ class PartialObservationState:
             raise StateError(f"cannot reveal completed tasks again: {duplicate}")
         if any(not math.isfinite(score) for score in normalized.values()):
             raise StateError("revealed scores must be finite")
+        observed_receptors = {task[1] for task in self.observed_scores}
+        new_receptors = {task[1] for task in normalized} - observed_receptors
         cost = sum(self.cost_for(task) for task in normalized)
+        cost += sum(
+            float(self.receptor_activation_costs.get(receptor_id, 0.0))
+            for receptor_id in new_receptors
+        )
         self.observed_scores.update(normalized)
         self.docking_cost += cost
         self.current_round += 1
@@ -160,6 +178,7 @@ class PartialObservationState:
                 {"ligand_id": task[0], "receptor_id": task[1], "cost": cost}
                 for task, cost in sorted(self.task_costs.items())
             ],
+            "receptor_activation_costs": dict(sorted(self.receptor_activation_costs.items())),
             "scaffold_metadata": copy.deepcopy(self.scaffold_metadata),
             "receptor_cluster_metadata": copy.deepcopy(self.receptor_cluster_metadata),
         }
@@ -187,6 +206,10 @@ class PartialObservationState:
             warm_start_state=dict(value.get("warm_start_state", {})),
             docking_cost=float(value.get("docking_cost", 0.0)),
             task_costs=records("task_costs", "cost"),
+            receptor_activation_costs={
+                str(receptor_id): float(cost)
+                for receptor_id, cost in dict(value.get("receptor_activation_costs", {})).items()
+            },
             scaffold_metadata=dict(value.get("scaffold_metadata", {})),
             receptor_cluster_metadata=dict(value.get("receptor_cluster_metadata", {})),
         )

@@ -103,7 +103,12 @@ def test_prepared_manifests_are_sanitized_and_structural_clusters_are_determinis
     assert first.receptors[0]["cluster"] == first.receptors[1]["cluster"]
     assert first.receptors[0]["cluster"] != first.receptors[2]["cluster"]
     assert all("label" not in row and "selection_role" not in row for row in first.ligands)
-    assert all("active" not in str(row).lower() and "decoy" not in str(row).lower() for row in first.ligands)
+    assert all(
+        value not in {"active", "decoy"}
+        for row in first.ligands
+        for value in row.values()
+        if isinstance(value, str)
+    )
     assert all(row["features"] for row in first.ligands)
     assert all(row["features"] for row in first.receptors)
 

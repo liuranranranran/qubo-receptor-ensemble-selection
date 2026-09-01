@@ -61,6 +61,20 @@ def _active_constraints(
     raw = config.get("constraints", {})
     if not isinstance(raw, Mapping):
         raise ProductionRunError("constraints must be an object")
+    activation_raw = raw.get("receptor_activation_cost", 0.0)
+    activated_receptors = {task[1] for task in state.observed_scores}
+    if isinstance(activation_raw, Mapping):
+        activation_costs = {
+            str(receptor_id): 0.0 if str(receptor_id) in activated_receptors else float(cost)
+            for receptor_id, cost in activation_raw.items()
+        }
+    else:
+        activation_costs = {
+            str(row["receptor_id"]): 0.0
+            if str(row["receptor_id"]) in activated_receptors
+            else float(activation_raw or 0.0)
+            for row in state.receptor_manifest
+        }
     return BatchConstraints(
         budget=budget,
         task_costs={task: state.cost_for(task) for task in tasks},
@@ -73,7 +87,7 @@ def _active_constraints(
             )
             for row in state.ligand_manifest
         },
-        receptor_activation_cost=raw.get("receptor_activation_cost", 0.0),
+        receptor_activation_cost=activation_costs,
         penalty=float(raw.get("penalty", 10.0)),
         cost_unit=raw.get("cost_unit"),
         equal_cost=bool(raw.get("equal_cost", False)),
@@ -106,6 +120,22 @@ class ActiveProductionRunner:
             raise ProductionRunError("active run manifests have not been initialized")
         return self._manifests
 
+    def _ensure_prediction_gate(self) -> None:
+        gate_config = self.config.data.get("prediction_gate", {})
+        if not isinstance(gate_config, Mapping) or gate_config.get("required") is not True:
+            return
+        gate_path = self.config.active_run_directory / "prediction_gate.json"
+        try:
+            gate = json.loads(gate_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ProductionRunError(
+                f"prediction gate is required and could not be read: {gate_path}"
+            ) from exc
+        if not isinstance(gate, Mapping) or gate.get("passed") is not True:
+            raise ProductionRunError(
+                f"prediction gate has not passed: {gate_path}"
+            )
+
     def prepare(self, *, resume: bool = False, overwrite: bool = False) -> dict[str, object]:
         """Invoke the old canonical prepare stage and record its output boundary."""
         prepared = prepare_experiment_inputs(
@@ -136,6 +166,7 @@ class ActiveProductionRunner:
         overwrite: bool = False,
     ) -> dict[str, object]:
         """Load prepared inputs, execute deterministic warm-start, and checkpoint."""
+        self._ensure_prediction_gate()
         if resume:
             self._load_checkpoint()
             return self._summary(status="initialized")
@@ -199,11 +230,19 @@ class ActiveProductionRunner:
         }
         task_cost = len(self.config.docking_seeds) * self.config.cost_per_seed
         task_costs = {task: task_cost for task in all_tasks}
+        constraints = self.config.data["constraints"]
+        assert isinstance(constraints, Mapping)
+        activation_cost = float(constraints.get("receptor_activation_cost", 0.0) or 0.0)
+        receptor_activation_costs = {
+            str(row["receptor_id"]): activation_cost
+            for row in self.manifests.receptors
+        }
         self._state = PartialObservationState(
             ligand_manifest=[dict(row) for row in self.manifests.ligands],
             receptor_manifest=[dict(row) for row in self.manifests.receptors],
             candidate_tasks=all_tasks,
             task_costs=task_costs,
+            receptor_activation_costs=receptor_activation_costs,
             warm_start_state={
                 "strategy": "fixed_label_free",
                 "planned_tasks": [list(task) for task in warm_tasks],
@@ -254,6 +293,7 @@ class ActiveProductionRunner:
         max_rounds: int | None = None,
     ) -> dict[str, object]:
         """Run active rounds until budget, candidate exhaustion, or a stop rule."""
+        self._ensure_prediction_gate()
         if resume:
             self._load_checkpoint()
         elif self._state is None:
