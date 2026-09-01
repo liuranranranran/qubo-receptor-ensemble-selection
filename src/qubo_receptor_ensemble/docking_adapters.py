@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
+import math
 import os
 import re
 import shutil
 import subprocess
 from pathlib import Path
-from typing import Protocol
+from typing import Mapping, Protocol
 
 from .io import safe_filename, write_csv
 
@@ -85,18 +86,17 @@ def _score_row(
     *,
     target_id: str,
     receptor_id: str,
-    ligand: dict[str, str],
+    ligand: Mapping[str, object],
     score: float,
     seed: int,
     engine: str,
     pose_path: Path,
     log_path: Path,
 ) -> dict[str, object]:
-    return {
+    row: dict[str, object] = {
         "target_id": target_id,
         "receptor_id": receptor_id,
         "ligand_id": ligand["ligand_id"],
-        "label": ligand["label"],
         "pose_rank": 1,
         "docking_score": score,
         "status": "ok",
@@ -105,6 +105,9 @@ def _score_row(
         "pose_path": pose_path.as_posix(),
         "log_path": log_path.as_posix(),
     }
+    if "label" in ligand:
+        row["label"] = ligand["label"]
+    return row
 
 
 class DockingAdapter(Protocol):
