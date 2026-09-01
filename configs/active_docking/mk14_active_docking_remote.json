@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "workflow": "active_ligand_receptor_docking",
+  "target_id": "MK14",
+  "base_experiment_config": "../experiments/mk14_adaptive_remote.json",
+  "prepared_run_directory": "results/runs/mk14_adaptive_remote",
+  "active_run_directory": "results/runs/mk14_adaptive_remote/active_docking",
+  "baseline_receptor": "11OY",
+  "receptor_cluster": {
+    "method": "aligned_ca_rmsd",
+    "threshold_angstrom": 2.0
+  },
+  "warm_start": {
+    "baseline_receptor": "11OY",
+    "cluster_fraction": 0.1,
+    "min_ligands_per_cluster": 1,
+    "random_seed": 20260901
+  },
+  "docking": {
+    "seeds": [20260821, 20260822, 20260823],
+    "score_fusion": "median",
+    "cost_per_seed": 1.0
+  },
+  "budget": {
+    "total_cost": 6000.0,
+    "batch_cost": 300.0
+  },
+  "strategy": "quantum_compatible_simulator",
+  "candidate_cap": 64,
+  "constraints": {
+    "max_per_ligand": 2,
+    "max_per_receptor": 32,
+    "max_per_scaffold": 4,
+    "receptor_activation_cost": 0.0,
+    "penalty": 25.0,
+    "cost_unit": 0.001,
+    "equal_cost": true,
+    "coefficient_scale": 1.0
+  },
+  "predictor": {
+    "model": "bayesian_residual",
+    "baseline_receptor": "11OY",
+    "posterior_samples": 32
+  },
+  "acquisition": {
+    "top_q": 20,
+    "monte_carlo_samples": 32,
+    "risk_lambda": 0.1,
+    "utility_mode": "ranking_score",
+    "batch_interaction_weight": 1.0
+  },
+  "solver": {
+    "backend": "quantum_compatible_simulator",
+    "time_budget_seconds": 30.0
+  },
+  "prediction_gate": {
+    "required": false
+  },
+  "stop": {
+    "max_rounds": 1000
+  },
+  "replay_mask_strategy": "scaffold_cluster",
+  "evaluation": {
+    "metrics": ["bedroc20", "pr_auc", "ef1", "ef5", "roc_auc", "mae", "rmse"]
+  },
+  "random_seed": 20260901
+}
