@@ -1,0 +1,13 @@
+{
+  "scores": [
+    {"ligand_id": "l1", "receptor_id": "r0", "score": -10.0},
+    {"ligand_id": "l1", "receptor_id": "r1", "score": -10.5},
+    {"ligand_id": "l1", "receptor_id": "r2", "score": -10.2},
+    {"ligand_id": "l2", "receptor_id": "r0", "score": -11.0},
+    {"ligand_id": "l2", "receptor_id": "r1", "score": -11.1},
+    {"ligand_id": "l2", "receptor_id": "r2", "score": -11.4},
+    {"ligand_id": "l3", "receptor_id": "r0", "score": -12.0},
+    {"ligand_id": "l3", "receptor_id": "r1", "score": -12.6},
+    {"ligand_id": "l3", "receptor_id": "r2", "score": -12.3}
+  ]
+}

@@ -1,0 +1,5 @@
+[
+  {"receptor_id": "r0", "cluster": "c0", "features": [1.0, 0.0]},
+  {"receptor_id": "r1", "cluster": "c1", "features": [0.0, 1.0]},
+  {"receptor_id": "r2", "cluster": "c2", "features": [0.5, 0.5]}
+]

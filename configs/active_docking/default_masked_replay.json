@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "workflow": "masked_active_docking_replay",
+  "random_seed": 20260901,
+  "warm_start": {
+    "baseline_receptor": "r0",
+    "cluster_fraction": 0.1,
+    "min_ligands_per_cluster": 1,
+    "random_seed": 20260901
+  },
+  "predictor": {
+    "model": "bayesian_residual",
+    "baseline_receptor": "r0",
+    "prior_precision": 1.0,
+    "noise_variance": 1.0,
+    "posterior_samples": 128
+  },
+  "acquisition": {
+    "top_q": 20,
+    "monte_carlo_samples": 128,
+    "risk_lambda": 0.1,
+    "utility_mode": "ranking_score",
+    "batch_interaction_weight": 1.0
+  },
+  "candidate_cap": 64,
+  "budget": {
+    "total_cost": 100.0,
+    "batch_cost": 10.0
+  },
+  "constraints": {
+    "max_per_ligand": 2,
+    "max_per_receptor": 32,
+    "max_per_scaffold": 4,
+    "receptor_activation_cost": 0.0,
+    "penalty": 25.0,
+    "cost_unit": 0.001,
+    "equal_cost": true,
+    "coefficient_scale": 1.0
+  },
+  "solver": {
+    "backend": "quantum_compatible_simulator",
+    "time_budget_seconds": 30.0
+  },
+  "strategies": [
+    "random",
+    "receptor_round_robin",
+    "value_greedy",
+    "greedy_one_swap",
+    "simulated_annealing",
+    "exact",
+    "quantum_compatible_simulator"
+  ],
+  "replay_mask_strategy": "scaffold_cluster",
+  "evaluation": {
+    "metrics": ["bedroc20", "pr_auc", "ef1", "ef5", "roc_auc"]
+  },
+  "artifact_output_directory": "results/active_docking"
+}
