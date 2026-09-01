@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 import math
 from dataclasses import dataclass
 from pathlib import Path
@@ -129,7 +128,6 @@ class SelectedTaskExecutor:
         for ligand_id, receptor_id in selected:
             by_receptor.setdefault(receptor_id, []).append(ligand_id)
         seed_scores: dict[Task, dict[int, float]] = {task: {} for task in selected}
-        selected_ligand_ids = {ligand_id for ligand_id, _ in selected}
         for receptor_id in sorted(by_receptor):
             receptor = receptors[receptor_id]
             receptor_path = _rooted(receptor.get("receptor_pdbqt"), self.data_root)
@@ -174,7 +172,6 @@ class SelectedTaskExecutor:
                 cost=len(self.seeds) * self.cost_per_seed,
             )
         self._write_audit(root, results)
-        del selected_ligand_ids
         return results
 
     @staticmethod
