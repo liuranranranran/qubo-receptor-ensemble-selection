@@ -1,6 +1,6 @@
 # 量子辅助预算约束主动 ligand-receptor docking 工作流
 
-本文档说明仓库中 `active_docking` 的离线实现。它只使用已有完整 score matrix 做 masked replay，不启动真实 docking、远程任务或量子硬件。
+本文档说明仓库中 `active_docking` 的离线 masked replay 和生产集成实现。离线 replay 只使用已有完整 score matrix；生产流程从旧 full workflow 的 `prepare` 产物切出，按策略选择任务后才启动真实 docking。两者都不默认访问远程任务或量子硬件。
 
 ## 1. 研究边界
 
@@ -30,7 +30,7 @@ $$
 
 `PartialObservationState` 保存 ligand/receptor manifest、候选任务、已观察 score、任务成本、当前轮次、warm-start 审计和 scaffold/cluster 元数据。隐藏 oracle 不属于状态对象。
 
-对任务 $$a=(l,r)$$，只有以下状态转移会使 score 可见：
+对任务 `a=(l,r)`，只有以下状态转移会使 score 可见：
 
 $$
 D_{t+1}=D_t\cup\{(a,s_a):a\text{ 被当前策略选中}\}
@@ -74,7 +74,7 @@ $$
 
 ## 5. 任务价值与 posterior sampling
 
-对候选任务集合 $$S$$，每个 posterior sample 都把假设 score 加入可见矩阵副本，然后按锁定的 mean score fusion 生成 ligand 排名。默认无活性先验，使用排序 score/information utility；如果配置训练期 `activity_prior`，它只能来自训练边界，不能来自当前 hidden 标签。
+对候选任务集合 `S`，每个 posterior sample 都把假设 score 加入可见矩阵副本，然后按锁定的 mean score fusion 生成 ligand 排名。默认无活性先验，使用排序 score/information utility；如果配置训练期 `activity_prior`，它只能来自训练边界，不能来自当前 hidden 标签。
 
 $$
 F_t(S)=\mathbb{E}_m[U(\operatorname{rank}(M_t\cup\tilde{S}^{(m)}))]
@@ -110,13 +110,13 @@ $$
 
 ## 7. 批量 QUBO 与约束
 
-对每个任务定义二值变量 $$z_{lr}$$。目标采用最小化形式：
+对每个任务定义二值变量 `z_lr`。目标采用最小化形式：
 
 $$
 E(z)=-\sum_a v_a z_a-\lambda_{\mathrm{batch}}\sum_{a<b}\Gamma_{ab}z_az_b+P\Phi(z)
 $$
 
-`BatchQUBO.matrix` 是对称矩阵，能量由 $$x^{\mathsf T}Qx+constant$$ 计算。实现支持：
+`BatchQUBO.matrix` 是对称矩阵，能量由 `x^T Q x + constant` 计算。实现支持：
 
 - 总 docking 成本预算；
 - 每个 ligand 每轮最多新增 receptor 数；
@@ -173,7 +173,7 @@ replay 审计记录每轮候选池、可用任务、selected/revealed 任务、s
 最终报告应分开回答：
 
 1. 预测模型是否能预测未完成 score，尤其是误差、排名和区间校准是否优于简单基线；
-2. 带 $$\Gamma_{ab}$$ 的批量策略是否优于 value-greedy，且收益不是候选裁剪产生；
+2. 带 `Gamma_ab` 的批量策略是否优于 value-greedy，且收益不是候选裁剪产生；
 3. QUBO 是否优于 exact/CP-SAT 或其他强经典方法；
 4. 量子后端是否有端到端收益；
 5. 收益是否来自量子优化，而不是 predictor、warm-start、候选预筛选或后处理。
@@ -185,3 +185,121 @@ replay 审计记录每轮候选池、可用任务、selected/revealed 任务、s
 ## 11. 失败停止条件
 
 应在配置或预注册中冻结以下停止门：预算耗尽、连续轮边际效用低于阈值、连续两轮排名变化低于稳定性阈值、不确定性达到目标、预测门失败或 solver 可行性/时间门失败。预测门或批量收益门失败时，不应跳过门控直接申请真实 docking；真实 docking 和硬件实验属于后续独立阶段。
+
+## 12. 从旧 prepare 产物运行生产 active docking
+
+生产入口是 `scripts/run_active_experiment.py`，它与 `scripts/run_active_docking.py` 分离。旧 full workflow 的 canonical 阶段仍然是：
+
+```text
+prepare -> dock -> aggregate -> build_problem -> solve -> evaluate -> persist
+```
+
+主动流程新增的阶段是：
+
+```text
+prepare -> active_initialize -> warm_start -> active_rounds -> active_finalize
+```
+
+`active_initialize` 只读取旧 `prepare` 生成的 `prepared_ligands.csv` 和 `selected_receptors.csv`，通过 `manifest_bridge` 生成脱敏 manifest；它不会读取旧完整 matrix，也不会扩展旧 `receptor_subset` QUBO。生产 active 产物写入旧运行目录下的 `active_docking/`，不会覆盖旧 score tables、matrices、problem 或 evaluation。
+
+### 12.1 MK14 配置与输入
+
+生产配置位于 `configs/active_docking/mk14_active_docking_remote.json`。MK14 的 baseline receptor 是旧 manifest 中真实的 `11OY`，不是抽象的 `r0`。旧 prepare 的 raw 输入仍由 full config 声明：
+
+```text
+data/raw/dude/mk14/actives_final.ism
+data/raw/dude/mk14/decoys_final.ism
+data/raw/external_targets/mk14_dude/mk14/receptor.pdb
+data/raw/external_targets/mk14_dude/mk14/crystal_ligand.sdf
+data/raw/rcsb/mk14/
+```
+
+旧 `prepared_ligands.csv` 中的 `label` 和 `selection_role` 只保留在 evaluation 边界。桥接后的 active ligand manifest 只包含 ligand ID、SMILES、scaffold、RDKit 数值特征和 PDBQT 路径；active receptor manifest 只包含 receptor ID、对齐结构特征、cluster 和结构路径。
+
+每个被选中的 ligand-receptor 任务固定执行三个 Uni-Dock seed：
+
+```text
+20260821, 20260822, 20260823
+```
+
+三个 `pose_rank=1` docking score 使用 median 融合。任务成本为：
+
+$$
+c_{lr}=3\times c_{seed}
+$$
+
+warm-start 成本计入总预算，但在报告中单独列出；warm-start 本身不作为量子优势证据。
+
+### 12.2 远程服务器运行
+
+以下命令适用于远程 Linux 服务器。仓库名为 `qubo-receptor-ensemble-selection`，数据根目录为 `/root/autodl-tmp/qubo_data_root`：
+
+```bash
+REPO_ROOT=/root/qubo-receptor-ensemble-selection
+DATA_ROOT=/root/autodl-tmp/qubo_data_root
+CONFIG="$REPO_ROOT/configs/active_docking/mk14_active_docking_remote.json"
+
+cd "$REPO_ROOT"
+conda activate qubo-receptor-ensemble
+python -m pip install --editable .
+python scripts/run_active_experiment.py validate \
+  --config "$CONFIG" \
+  --data-root "$DATA_ROOT"
+```
+
+如果数据根目录中还没有旧的 `results/runs/mk14_adaptive_remote/prepared_ligands.csv` 和 `selected_receptors.csv`，先只运行旧流程的 `prepare`：
+
+```bash
+python scripts/run_experiment.py run \
+  --config "$REPO_ROOT/configs/experiments/mk14_adaptive_remote.json" \
+  --data-root "$DATA_ROOT" \
+  --from prepare \
+  --to prepare
+```
+
+这一步只生成旧 canonical prepare 产物，不生成旧 receptor-subset problem。已有旧运行目录时，不要对旧目录使用 `--overwrite`；直接把它作为 active 输入运行：
+
+```bash
+PREPARED_RUN="$DATA_ROOT/results/runs/mk14_adaptive_remote"
+
+python scripts/run_active_experiment.py run \
+  --config "$CONFIG" \
+  --data-root "$DATA_ROOT" \
+  --prepared-run-directory "$PREPARED_RUN"
+```
+
+生产 active 输出位于：
+
+```text
+/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/active_docking/
+```
+
+中断后使用相同配置和 prepared 目录恢复。恢复会重新校验 active 配置 fingerprint 和两个旧 manifest 的 fingerprint；不一致时停止，不会混用不同 prepare 产物：
+
+```bash
+python scripts/run_active_experiment.py resume \
+  --config "$CONFIG" \
+  --data-root "$DATA_ROOT" \
+  --prepared-run-directory "$PREPARED_RUN"
+```
+
+active rounds 结束后，只有 `finalize` 才读取旧 ligand manifest 的 hidden active/decoy label 并生成评价指标：
+
+```bash
+python scripts/run_active_experiment.py finalize \
+  --config "$CONFIG" \
+  --data-root "$DATA_ROOT" \
+  --prepared-run-directory "$PREPARED_RUN" \
+  --format markdown \
+  --output "$DATA_ROOT/results/runs/mk14_adaptive_remote/active_docking/evaluation.md"
+```
+
+`validate`、`prepare`、`run`、`resume` 和 `finalize` 的职责分别是配置校验、调用旧 prepare、执行新 active rounds、恢复 checkpoint 和最终评估。生产入口不要求手工创建 `matrix.json`、`ligands.json`、`receptors.json` 或 `labels.json`；这些 JSON 是离线 masked replay 的测试/输入格式，不是从旧 full workflow 切生产 active 的前置条件。
+
+### 12.3 生产审计与研究结论边界
+
+每轮 checkpoint 至少记录 candidate pool、selected/revealed tasks、预测均值和方差、QUBO fingerprint、solver backend、观察任务数量和 docking 成本。state、active manifest、预测器、acquisition、QUBO 和 solver 都不得出现 hidden score 或 hidden label。未被 solver 选中的任务不会传给 docking adapter，也不会自动进入 state。
+
+当 backend 为 `quantum_compatible_simulator` 时，审计必须记录 `quantum_hardware_used=false` 和 `quantum_execution_result=not_run`。模拟退火结果只能作为量子兼容模拟后端结果，不能称为量子结果。
+
+生产 replay 或真实 docking 运行后，报告必须分别回答：预测模型是否预测未完成 score；批量 QUBO 是否优于逐任务 value-greedy；QUBO 是否优于 exact/CP-SAT 或其他强经典方法；量子后端是否产生端到端收益；收益是否来自量子优化而不是候选裁剪、预测模型或 warm-start。当前实现可以证明软件闭环、状态隔离、成本记账和恢复行为，但不能单独证明这些研究结论，也不能由 masked replay 推断真实 docking 一定节省成本。

@@ -364,3 +364,71 @@ git diff --check
 ```
 
 回归测试不会启动 600 个配体乘多受体乘多 seed 的生产 docking。完整运行前应先执行 `validate` 和 `plan`，确认数据根目录、配置、engine 和输出目录。
+
+## 9. 从 canonical prepare 切出 active docking
+
+新的主动 ligand-receptor docking 不改变本文件前面定义的 full workflow，也不复用旧的 receptor-subset problem。它复用本流程的 `prepare` 产物，然后进入独立阶段：
+
+```text
+prepare -> active_initialize -> warm_start -> active_rounds -> active_finalize
+```
+
+主动配置为 `configs/active_docking/mk14_active_docking_remote.json`，生产入口为 `scripts/run_active_experiment.py`。它读取旧运行目录中的：
+
+```text
+prepared_ligands.csv
+selected_receptors.csv
+```
+
+不要求用户手工准备完整 score matrix。旧 ligand manifest 的 label 不会进入 active manifest、预测器、采集器、QUBO 或 solver；只有 `finalize` 才读取 label 计算最终评价。
+
+远程服务器上的路径映射如下：
+
+```text
+本地数据根目录示意：E:\Quant\qubo_receptor_ensemble_experiment_data
+远程数据根目录：/root/autodl-tmp/qubo_data_root
+
+本地旧运行目录示意：E:\Quant\remote_runs\mk14\adaptive_remote
+远程旧运行目录：/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote
+```
+
+远程服务器先按本文件前面的环境说明安装仓库和依赖。若旧 prepare 尚未完成，只生成 prepare：
+
+```bash
+REPO_ROOT=/root/qubo-receptor-ensemble-selection
+DATA_ROOT=/root/autodl-tmp/qubo_data_root
+BASE_CONFIG="$REPO_ROOT/configs/experiments/mk14_adaptive_remote.json"
+ACTIVE_CONFIG="$REPO_ROOT/configs/active_docking/mk14_active_docking_remote.json"
+
+cd "$REPO_ROOT"
+conda activate qubo-receptor-ensemble
+python scripts/run_experiment.py run \
+  --config "$BASE_CONFIG" \
+  --data-root "$DATA_ROOT" \
+  --from prepare \
+  --to prepare
+```
+
+已有旧 prepare 产物时，直接从它切出 active workflow，不要覆盖旧 canonical 运行目录：
+
+```bash
+PREPARED_RUN="$DATA_ROOT/results/runs/mk14_adaptive_remote"
+
+python scripts/run_active_experiment.py validate \
+  --config "$ACTIVE_CONFIG" \
+  --data-root "$DATA_ROOT" \
+  --prepared-run-directory "$PREPARED_RUN"
+
+python scripts/run_active_experiment.py run \
+  --config "$ACTIVE_CONFIG" \
+  --data-root "$DATA_ROOT" \
+  --prepared-run-directory "$PREPARED_RUN"
+```
+
+三个 Uni-Dock seed `20260821`、`20260822`、`20260823` 的 `pose_rank=1` score 使用 median；每个 task 成本按三个 seed 计费。active 结果写到：
+
+```text
+/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/active_docking/
+```
+
+中断后运行 `resume`，完成后运行 `finalize`。旧入口 run_active_docking.py 仍然只负责离线完整矩阵 masked replay；它与上面的生产入口不是同一个输入流程。

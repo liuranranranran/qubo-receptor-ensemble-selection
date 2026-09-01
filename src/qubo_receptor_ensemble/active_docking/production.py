@@ -485,6 +485,7 @@ class ActiveProductionRunner:
         result: dict[str, object] = {
             "workflow": self.config.workflow,
             "status": status,
+            "prepare_stage": "canonical_full_workflow_prepare_output",
             "config_fingerprint": self.config.fingerprint,
             "prepared_run_directory": str(self.config.prepared_run_directory),
             "active_run_directory": str(self.config.active_run_directory),

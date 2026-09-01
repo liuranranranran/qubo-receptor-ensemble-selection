@@ -1,0 +1,101 @@
+{
+  "schema_version": "3.0",
+  "experiment_id": "active-docking-production-fixture",
+  "target_id": "MK14",
+  "workflow_mode": "full",
+  "pipeline": [
+    "prepare",
+    "dock",
+    "aggregate",
+    "build_problem",
+    "solve",
+    "evaluate",
+    "persist"
+  ],
+  "start_stage": "prepare",
+  "end_stage": "persist",
+  "selection": {
+    "receptor_count": 2,
+    "ligand_count": 2,
+    "label_counts": {
+      "active": 1,
+      "decoy": 1
+    },
+    "ordering": "manifest_order"
+  },
+  "sources": {
+    "active_ism": "data/raw/active.ism",
+    "decoy_ism": "data/raw/decoy.ism",
+    "reference_receptor_pdb": "data/raw/reference.pdb",
+    "crystal_ligand": "data/raw/crystal.sdf",
+    "rcsb_directory": "data/raw/rcsb"
+  },
+  "receptor_preparation": {
+    "reference_chain": "auto",
+    "mobile_chain": "auto",
+    "minimum_alignment_ca_count": 3,
+    "allow_bad_res": true
+  },
+  "preparation": {
+    "workers": 1,
+    "base_seed": 1
+  },
+  "docking": {
+    "redock": true,
+    "engine": "unidock",
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "box": {
+      "method": "ligand_bounds",
+      "padding": 5.0,
+      "minimum_size": [
+        22.0,
+        22.0,
+        28.0
+      ]
+    },
+    "parameters": {
+      "scoring": "vina",
+      "exhaustiveness": 8,
+      "max_step": 0,
+      "refine_step": 5,
+      "num_modes": 1,
+      "energy_range": 3,
+      "verbosity": 1
+    }
+  },
+  "problem": {
+    "type": "receptor_subset",
+    "strategy": "qubo",
+    "target_size": 1,
+    "weights": {
+      "redundancy": 0.25,
+      "count": 0.1,
+      "size": 10.0
+    }
+  },
+  "solve": {
+    "backend": "exact"
+  },
+  "evaluate": {
+    "aggregation": "mean_score",
+    "metrics": [
+      "roc_auc"
+    ]
+  },
+  "paths": {
+    "run_directory": "results/active-docking-production-fixture",
+    "prepared_ligand_manifest": "results/active-docking-production-fixture/prepared_ligands.csv",
+    "selected_receptor_manifest": "results/active-docking-production-fixture/selected_receptors.csv",
+    "docking_box": "results/active-docking-production-fixture/docking_box.json",
+    "score_tables": "results/active-docking-production-fixture/score_tables",
+    "matrices": "results/active-docking-production-fixture/matrices",
+    "primary_matrix": "results/active-docking-production-fixture/matrices/primary_median_matrix.csv",
+    "problem": "results/active-docking-production-fixture/problem.json",
+    "selection": "results/active-docking-production-fixture/selection.json",
+    "evaluation": "results/active-docking-production-fixture/evaluation.json"
+  }
+}
