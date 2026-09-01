@@ -278,6 +278,34 @@ def test_replay_is_masked_deterministic_and_reveals_only_selected_tasks() -> Non
     assert len({tuple(tuple(task) for task in round_audit["candidate_pool"]) for round_audit in first.strategies[0].rounds}) == 1
 
 
+def test_replay_reads_hidden_labels_only_when_final_evaluation_starts() -> None:
+    class FinalEvaluationOnlyLabels(dict[str, str]):
+        def values(self):
+            raise AssertionError("hidden labels were read before final evaluation")
+
+    ligands, receptors = _manifests()
+    config = {
+        "random_seed": 2,
+        "warm_start": {"baseline_receptor": "r0", "cluster_fraction": 0.0, "min_ligands_per_cluster": 0},
+        "predictor": {"baseline_receptor": "r0", "posterior_samples": 4},
+        "acquisition": {"top_q": 2, "monte_carlo_samples": 4},
+        "candidate_cap": 4,
+        "budget": {"total_cost": 2.0, "batch_cost": 1.0},
+        "constraints": {"max_per_ligand": 1},
+        "task_cost": 1.0,
+        "strategies": ["value_greedy"],
+        "evaluation": {"metrics": ["pr_auc"]},
+    }
+    result = run_masked_replay(
+        _scores(),
+        ligands,
+        receptors,
+        config,
+        hidden_labels=FinalEvaluationOnlyLabels({"l1": "active", "l2": "decoy", "l3": "active", "l4": "decoy"}),
+    )
+    assert result.strategies[0].evaluation["hidden_labels_used_for_evaluation"] is True
+
+
 def test_config_is_independent_and_rejects_real_docking(tmp_path: Path) -> None:
     config_path = tmp_path / "active.json"
     config_path.write_text(

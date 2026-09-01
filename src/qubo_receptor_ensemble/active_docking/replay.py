@@ -255,9 +255,13 @@ def _final_evaluation(state: PartialObservationState, predictor: ScorePredictor,
         scores_by_ligand.setdefault(ligand_id, []).append(float(score))
     for task, prediction in predictions.items():
         scores_by_ligand.setdefault(task[0], []).append(prediction.mean)
+    if set(labels) != set(scores_by_ligand):
+        raise ValueError("hidden_labels must cover exactly the ligand manifest")
     ranking_rows = []
     for ligand_id in sorted(scores_by_ligand):
         label = str(labels[ligand_id])
+        if label not in {"active", "decoy", "inactive"}:
+            raise ValueError("hidden_labels must contain active, decoy or inactive")
         ranking_rows.append({
             "ligand_id": ligand_id,
             "label": label,
@@ -381,11 +385,6 @@ def run_masked_replay(
 ) -> ReplayResult:
     """Run deterministic strategy comparison; hidden labels are only read at evaluation."""
     runtime = _runtime_config(config)
-    if any(label not in {"active", "decoy", "inactive"} for label in hidden_labels.values()):
-        raise ValueError("hidden_labels must contain active, decoy or inactive")
-    ligand_ids = {str(row["ligand_id"]) for row in ligand_manifest}
-    if set(hidden_labels) != ligand_ids:
-        raise ValueError("hidden_labels must cover exactly the ligand manifest")
     all_tasks = {(str(row["ligand_id"]), str(receptor["receptor_id"])) for row in ligand_manifest for receptor in receptor_manifest}
     if set(score_matrix) != all_tasks:
         missing = sorted(all_tasks - set(score_matrix))
