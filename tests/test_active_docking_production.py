@@ -56,6 +56,16 @@ class FakeAdapter:
         ]
 
 
+class ConfigCaptureAdapter(FakeAdapter):
+    def __init__(self) -> None:
+        super().__init__()
+        self.configs: list[dict[str, object]] = []
+
+    def run_batch(self, *, config: dict[str, object], **kwargs: object) -> list[dict[str, object]]:
+        self.configs.append(config)
+        return super().run_batch(config=config, **kwargs)
+
+
 def _config(tmp_path: Path, *, total_cost: float = 12.0) -> ActiveProductionConfig:
     data = {
         "workflow": "active_ligand_receptor_docking",
@@ -109,7 +119,12 @@ def _config(tmp_path: Path, *, total_cost: float = 12.0) -> ActiveProductionConf
         data_root=tmp_path,
         data={
             "target_id": "MK14",
-            "docking": {"engine": "unidock", "seeds": [1, 2, 3]},
+            "docking": {
+                "engine": "unidock",
+                "executable": "unidock",
+                "seeds": [1, 2, 3],
+                "parameters": {"exhaustiveness": 17},
+            },
         },
         paths={},
         workflow_mode="full",
@@ -144,6 +159,23 @@ def _prepared_inputs(tmp_path: Path) -> None:
             {"conformer_id": "11OY", "receptor_pdb": "prepared/11OY.pdb", "receptor_pdbqt": "11OY.pdbqt"},
             {"conformer_id": "R2", "receptor_pdb": "prepared/R2.pdb", "receptor_pdbqt": "R2.pdbqt"},
         ],
+    )
+    (prepared / "docking_box.json").write_text(
+        json.dumps(
+            {
+                "status": "ok",
+                "method": "ligand_bounds",
+                "box": {
+                    "center_x": 1.0,
+                    "center_y": 2.0,
+                    "center_z": 3.0,
+                    "size_x": 22.0,
+                    "size_y": 23.0,
+                    "size_z": 28.0,
+                },
+            }
+        ),
+        encoding="utf-8",
     )
 
 
@@ -196,6 +228,61 @@ def test_production_runner_reveals_only_selected_tasks_and_resumes(tmp_path: Pat
     resumed = ActiveProductionRunner(config, adapter=adapter).run(resume=True, max_rounds=2)
     assert resumed["task_sequence"] == result["task_sequence"]
     assert len(adapter.calls) == call_count
+
+
+def test_production_runner_passes_prepared_box_to_warm_and_active_docking(
+    tmp_path: Path,
+) -> None:
+    _prepared_inputs(tmp_path)
+    adapter = ConfigCaptureAdapter()
+    runner = ActiveProductionRunner(_config(tmp_path), adapter=adapter)
+
+    runner.initialize()
+    runner.run(max_rounds=1)
+
+    assert adapter.configs
+    for config in adapter.configs:
+        docking = config["docking"]
+        assert isinstance(docking, dict)
+        assert docking["executable"] == "unidock"
+        assert docking["parameters"] == {"exhaustiveness": 17}
+        assert docking["box"] == {
+            "center_x": 1.0,
+            "center_y": 2.0,
+            "center_z": 3.0,
+            "size_x": 22.0,
+            "size_y": 23.0,
+            "size_z": 28.0,
+        }
+
+
+def test_production_runner_rejects_missing_prepared_box_before_docking(
+    tmp_path: Path,
+) -> None:
+    _prepared_inputs(tmp_path)
+    (tmp_path / "prepared" / "docking_box.json").unlink()
+    adapter = FakeAdapter()
+
+    with pytest.raises(ProductionRunError, match="docking_box"):
+        ActiveProductionRunner(_config(tmp_path), adapter=adapter).initialize()
+
+    assert adapter.calls == []
+
+
+def test_production_runner_rejects_invalid_prepared_box_before_docking(
+    tmp_path: Path,
+) -> None:
+    _prepared_inputs(tmp_path)
+    (tmp_path / "prepared" / "docking_box.json").write_text(
+        json.dumps({"box": {"center_x": 1.0}}),
+        encoding="utf-8",
+    )
+    adapter = FakeAdapter()
+
+    with pytest.raises(ProductionRunError, match="docking_box"):
+        ActiveProductionRunner(_config(tmp_path), adapter=adapter).initialize()
+
+    assert adapter.calls == []
 
 
 def test_production_runner_rejects_resume_when_config_fingerprint_changes(tmp_path: Path) -> None:

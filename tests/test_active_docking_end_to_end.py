@@ -104,6 +104,23 @@ def _prepared(root: Path) -> None:
             {"conformer_id": "R2", "receptor_pdb": "prepared/R2.pdb", "receptor_pdbqt": "R2.pdbqt"},
         ],
     )
+    (prepared / "docking_box.json").write_text(
+        json.dumps(
+            {
+                "status": "ok",
+                "method": "ligand_bounds",
+                "box": {
+                    "center_x": 1.0,
+                    "center_y": 2.0,
+                    "center_z": 3.0,
+                    "size_x": 22.0,
+                    "size_y": 23.0,
+                    "size_z": 28.0,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
 
 
 def test_production_smoke_consumes_prepare_outputs_and_replays_deterministically(tmp_path: Path) -> None:

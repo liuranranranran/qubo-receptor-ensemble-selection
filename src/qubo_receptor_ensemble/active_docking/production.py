@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
+from copy import deepcopy
 from pathlib import Path
 from typing import Mapping, Sequence
 
@@ -28,6 +30,102 @@ from .warm_start import WarmStartConfig, plan_warm_start
 
 class ProductionRunError(RuntimeError):
     """Raised when a production active run cannot safely continue or resume."""
+
+
+_DOCKING_BOX_FIELDS = (
+    "center_x",
+    "center_y",
+    "center_z",
+    "size_x",
+    "size_y",
+    "size_z",
+)
+
+
+def _validated_docking_box(value: object, source: Path) -> dict[str, float]:
+    if not isinstance(value, Mapping):
+        raise ProductionRunError(f"prepared docking_box is not an object: {source}")
+    missing = [key for key in _DOCKING_BOX_FIELDS if key not in value]
+    if missing:
+        raise ProductionRunError(
+            f"prepared docking_box is missing {missing}: {source}"
+        )
+    result: dict[str, float] = {}
+    for key in _DOCKING_BOX_FIELDS:
+        raw = value[key]
+        if isinstance(raw, bool):
+            raise ProductionRunError(
+                f"prepared docking_box.{key} must be numeric: {source}"
+            )
+        try:
+            number = float(raw)
+        except (TypeError, ValueError) as exc:
+            raise ProductionRunError(
+                f"prepared docking_box.{key} must be numeric: {source}"
+            ) from exc
+        if not math.isfinite(number) or (key.startswith("size_") and number <= 0.0):
+            raise ProductionRunError(
+                f"prepared docking_box.{key} must be finite"
+                + (" and positive" if key.startswith("size_") else "")
+                + f": {source}"
+            )
+        result[key] = number
+    return result
+
+
+def _prepared_box_path(config: ActiveProductionConfig) -> Path | None:
+    candidates: list[Path] = [config.prepared_run_directory / "docking_box.json"]
+    base_paths = getattr(config.base_config, "paths", {})
+    if isinstance(base_paths, Mapping):
+        configured = base_paths.get("docking_box")
+        if isinstance(configured, Path):
+            candidates.append(configured)
+    for candidate in candidates:
+        if candidate.is_file():
+            return candidate
+    return None
+
+
+def _resolved_docking_config(config: ActiveProductionConfig) -> dict[str, object]:
+    """Resolve the canonical prepare box without mutating the base config."""
+    docking_config = deepcopy(config.base_config.data)
+    docking = docking_config.get("docking")
+    if not isinstance(docking, dict):
+        raise ProductionRunError("canonical docking configuration is not an object")
+    configured_box = docking.get("box", {})
+    if not isinstance(configured_box, Mapping):
+        raise ProductionRunError("canonical docking.box is not an object")
+
+    artifact_path = _prepared_box_path(config)
+    if artifact_path is not None:
+        try:
+            artifact = json.loads(artifact_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ProductionRunError(
+                f"prepared docking_box artifact cannot be read: {artifact_path}"
+            ) from exc
+        if not isinstance(artifact, Mapping) or "box" not in artifact:
+            raise ProductionRunError(
+                f"prepared docking_box artifact has no box object: {artifact_path}"
+            )
+        box = _validated_docking_box(artifact["box"], artifact_path)
+        merged_box = dict(configured_box)
+        merged_box.update(box)
+        docking["box"] = merged_box
+        return docking_config
+
+    if all(key in configured_box for key in _DOCKING_BOX_FIELDS):
+        docking["box"] = {
+            **dict(configured_box),
+            **_validated_docking_box(configured_box, config.base_config.path),
+        }
+        return docking_config
+
+    expected = config.prepared_run_directory / "docking_box.json"
+    raise ProductionRunError(
+        f"prepared docking_box artifact is missing: {expected}; "
+        "run the canonical prepare stage first"
+    )
 
 
 def _atomic_write_json(path: Path, value: object) -> None:
@@ -434,7 +532,7 @@ class ActiveProductionRunner:
             seeds=self.config.docking_seeds,
             score_fusion=self.config.score_fusion,
             cost_per_seed=self.config.cost_per_seed,
-            docking_config=self.config.base_config.data,
+            docking_config=_resolved_docking_config(self.config),
             resume=True,
         )
 
