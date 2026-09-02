@@ -46,6 +46,15 @@ python scripts/run_experiment.py run --config "$CONFIG" --data-root "$DATA_ROOT"
 新实验不要把旧 matrix replay 的输入、seed、box 或运行结果混入完整流程。
 不同 engine 的 score 也不能混在同一次聚合中。
 
+离线 masked active-docking replay 的输入准备、predictor gate、同预算策略比较和泄漏边界见[主动 docking replay 操作与审计](../docs/active_docking_replay_zh.md)。从已有 active 生产结果生成匿名 replay 输入时，使用：
+
+```bash
+python scripts/prepare_active_replay_inputs.py \
+  --active-manifest /path/to/active_docking/active_manifest.json \
+  --matrix /path/to/run/matrices/primary_median_matrix.csv \
+  --output /path/to/run/replay_inputs_anon
+```
+
 ## 旧入口的 Linux 调用
 
 旧 schema 2.0 pipeline 只从已有矩阵开始：

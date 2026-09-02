@@ -393,6 +393,7 @@ def run_masked_prediction_gate(
         "primary_report": primary,
         "baseline_reports": baselines,
         "primary_model_allowed_for_replay": bool(primary["rmse"] <= best_baseline),
+        "passed": bool(primary["rmse"] <= best_baseline),
         "hidden_scores_used_only_after_prediction": True,
         "hidden_labels_used": False,
         "warm_start_observed_task_count": len(state.observed_scores),

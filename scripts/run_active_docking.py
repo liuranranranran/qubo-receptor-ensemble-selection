@@ -30,12 +30,20 @@ def _read_manifests(ligand_path: Path, receptor_path: Path) -> tuple[list[dict[s
     return [dict(row) for row in ligands], [dict(row) for row in receptors]
 
 
-def _read_matrix(path: Path) -> tuple[dict[tuple[str, str], float], dict[str, str]]:
+def _read_matrix(
+    path: Path,
+    *,
+    include_labels: bool = True,
+) -> tuple[dict[tuple[str, str], float], dict[str, str]]:
     if path.suffix.lower() == ".json":
         payload = _read_json(path)
         if isinstance(payload, dict):
             rows = payload.get("scores", payload.get("matrix", payload.get("rows", [])))
-            labels = {str(key): str(value) for key, value in payload.get("labels", {}).items()} if isinstance(payload.get("labels", {}), dict) else {}
+            labels = (
+                {str(key): str(value) for key, value in payload.get("labels", {}).items()}
+                if include_labels and isinstance(payload.get("labels", {}), dict)
+                else {}
+            )
         else:
             rows, labels = payload, {}
         if not isinstance(rows, list):
@@ -49,7 +57,7 @@ def _read_matrix(path: Path) -> tuple[dict[tuple[str, str], float], dict[str, st
                 scores[task] = float(row.get("score", row.get("docking_score")))
             else:
                 ligand_id = str(row["ligand_id"])
-                if "label" in row:
+                if include_labels and "label" in row:
                     labels[ligand_id] = str(row["label"])
                 for receptor_id, value in row.items():
                     if receptor_id not in {"ligand_id", "label", "target_id"} and value not in ("", None):
@@ -65,7 +73,7 @@ def _read_matrix(path: Path) -> tuple[dict[tuple[str, str], float], dict[str, st
         ligand_id = str(row.get("ligand_id", ""))
         if not ligand_id:
             raise ValueError("matrix CSV requires ligand_id")
-        if row.get("label"):
+        if include_labels and row.get("label"):
             labels[ligand_id] = str(row["label"])
         if row.get("receptor_id"):
             scores[(ligand_id, str(row["receptor_id"]))] = float(row.get("score", row.get("docking_score", "")))
@@ -145,7 +153,10 @@ def main(argv: list[str] | None = None) -> int:
         _write_output({"status": "valid", "workflow": config.workflow, "strategies": list(config.strategies), "real_docking_executed": False}, None, args.format)
         return 0
     ligands, receptors = _read_manifests(args.ligand_manifest, args.receptor_manifest)
-    scores, labels_from_matrix = _read_matrix(args.matrix)
+    scores, labels_from_matrix = _read_matrix(
+        args.matrix,
+        include_labels=args.command != "predict",
+    )
     if args.command == "predict":
         result = run_masked_prediction_gate(scores, ligands, receptors, config.data)
     else:

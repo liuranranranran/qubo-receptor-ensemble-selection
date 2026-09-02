@@ -256,6 +256,58 @@ def test_production_runner_passes_prepared_box_to_warm_and_active_docking(
         }
 
 
+def test_production_runner_reports_round_stages_and_pair_progress(
+    tmp_path: Path,
+) -> None:
+    _prepared_inputs(tmp_path)
+    messages: list[str] = []
+    runner = ActiveProductionRunner(
+        _config(tmp_path),
+        adapter=FakeAdapter(),
+        progress=messages.append,
+    )
+
+    runner.run(max_rounds=1)
+
+    expected_stages = (
+        "predictor",
+        "candidate_pool",
+        "acquisition",
+        "batch_interaction",
+        "qubo",
+        "solver",
+        "docking",
+        "checkpoint",
+    )
+    for stage in expected_stages:
+        assert f"[active][round=000][stage={stage}] start" in messages
+        assert any(
+            message.startswith(f"[active][round=000][stage={stage}] done elapsed=")
+            for message in messages
+        )
+    assert any(
+        message.startswith("[active][round=000][stage=batch_interaction] progress pairs=1/1")
+        for message in messages
+    )
+
+
+def test_production_runner_persists_completed_run_summary(
+    tmp_path: Path,
+) -> None:
+    _prepared_inputs(tmp_path)
+    runner = ActiveProductionRunner(_config(tmp_path), adapter=FakeAdapter())
+
+    result = runner.run(max_rounds=1)
+
+    persisted = json.loads(
+        (runner.config.active_run_directory / "run_summary.json").read_text(encoding="utf-8")
+    )
+    assert result["status"] == "completed"
+    assert result["stop_reason"] == "round_limit"
+    assert persisted["status"] == "completed"
+    assert persisted["stop_reason"] == "round_limit"
+
+
 def test_production_runner_rejects_missing_prepared_box_before_docking(
     tmp_path: Path,
 ) -> None:

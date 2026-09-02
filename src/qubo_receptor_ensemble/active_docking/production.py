@@ -6,9 +6,10 @@ import hashlib
 import json
 import math
 import os
+import time
 from copy import deepcopy
 from pathlib import Path
-from typing import Mapping, Sequence
+from typing import Callable, Mapping, Sequence
 
 from ..docking_adapters import get_docking_adapter
 from ..experiment import prepare_experiment_inputs
@@ -196,9 +197,16 @@ def _active_constraints(
 class ActiveProductionRunner:
     """Run prepare, warm-start, active rounds, and final evaluation independently."""
 
-    def __init__(self, config: ActiveProductionConfig, *, adapter: object | None = None) -> None:
+    def __init__(
+        self,
+        config: ActiveProductionConfig,
+        *,
+        adapter: object | None = None,
+        progress: Callable[[str], None] | None = None,
+    ) -> None:
         self.config = config
         self.adapter = adapter or get_docking_adapter(config.base_config.data)
+        self._progress = progress
         self._state: PartialObservationState | None = None
         self._manifests: ActiveManifestBridgeResult | None = None
         self._prepared_paths: tuple[Path, Path] | None = None
@@ -264,9 +272,11 @@ class ActiveProductionRunner:
         overwrite: bool = False,
     ) -> dict[str, object]:
         """Load prepared inputs, execute deterministic warm-start, and checkpoint."""
+        initialize_started = self._stage_start("init", "initialize")
         self._ensure_prediction_gate()
         if resume:
             self._load_checkpoint()
+            self._stage_done("init", "initialize", initialize_started)
             return self._summary(status="initialized")
         if self.config.active_run_directory.exists() and any(
             (self.config.active_run_directory / name).is_file()
@@ -357,6 +367,7 @@ class ActiveProductionRunner:
         )
         if not set(warm_tasks).issubset(all_tasks):
             raise ProductionRunError("warm-start selected a task outside the candidate set")
+        warm_started = self._stage_start("init", "warm_start")
         warm_results = self._executor().execute(
             tasks=warm_tasks,
             ligand_manifest=self.manifests.ligands,
@@ -381,6 +392,8 @@ class ActiveProductionRunner:
         metadata["real_docking_executed"] = True
         _atomic_write_json(metadata_path, metadata)
         self._save_state()
+        self._stage_done("init", "warm_start", warm_started, selected=len(warm_tasks))
+        self._stage_done("init", "initialize", initialize_started)
         return self._summary(status="initialized")
 
     def run(
@@ -412,6 +425,8 @@ class ActiveProductionRunner:
             if not available:
                 stop_reason = "candidate_exhausted"
                 break
+            round_index = len(self._rounds)
+            predictor_started = self._stage_start(round_index, "predictor")
             predictor = _make_predictor(self.config.data, self.state)
             acquisition = self.config.data["acquisition"]
             assert isinstance(acquisition, Mapping)
@@ -426,8 +441,16 @@ class ActiveProductionRunner:
                     random_seed=self._round_seed(),
                 ),
             )
+            self._stage_done(round_index, "predictor", predictor_started)
+            candidate_started = self._stage_start(round_index, "candidate_pool")
             pool = _candidate_pool(self.state, predictor, self.config.data)
             available_pool = tuple(task for task in pool if task in available)
+            self._stage_done(
+                round_index,
+                "candidate_pool",
+                candidate_started,
+                candidates=len(available_pool),
+            )
             if not available_pool:
                 stop_reason = "candidate_pool_exhausted"
                 break
@@ -438,8 +461,23 @@ class ActiveProductionRunner:
             constraints = _active_constraints(
                 available_pool, self.state, self.config.data, remaining_budget
             )
+            acquisition_started = self._stage_start(round_index, "acquisition")
             values = evaluator.all_task_values(available_pool)
-            interactions = evaluator.interaction_matrix(available_pool)
+            self._stage_done(round_index, "acquisition", acquisition_started, tasks=len(values))
+            interaction_started = self._stage_start(round_index, "batch_interaction")
+            interactions = evaluator.interaction_matrix(
+                available_pool,
+                progress=lambda completed, total: self._emit_pair_progress(
+                    round_index, completed, total
+                ),
+            )
+            self._stage_done(
+                round_index,
+                "batch_interaction",
+                interaction_started,
+                pairs=len(interactions),
+            )
+            qubo_started = self._stage_start(round_index, "qubo")
             qubo = build_batch_qubo(
                 available_pool,
                 values,
@@ -447,9 +485,11 @@ class ActiveProductionRunner:
                 constraints,
                 batch_interaction_weight=float(acquisition["batch_interaction_weight"]),
             )
+            self._stage_done(round_index, "qubo", qubo_started, variables=len(qubo.tasks))
             solver_config = self.config.data["solver"]
             assert isinstance(solver_config, Mapping)
             backend = str(self.config.data["strategy"])
+            solver_started = self._stage_start(round_index, "solver")
             solver_result = solve_batch_qubo(
                 qubo,
                 backend=backend,
@@ -457,12 +497,13 @@ class ActiveProductionRunner:
                 time_budget_seconds=float(solver_config["time_budget_seconds"]),
             )
             selected = tuple(task for task in solver_result.tasks if task in available_pool)
+            self._stage_done(round_index, "solver", solver_started, selected=len(selected))
             if not selected:
                 stop_reason = "no_feasible_or_positive_batch"
                 break
             if not qubo.validate_tasks(selected).is_feasible:
                 raise ProductionRunError("solver returned an infeasible selected task set")
-            round_index = len(self._rounds)
+            docking_started = self._stage_start(round_index, "docking")
             execution = self._executor().execute(
                 tasks=selected,
                 ligand_manifest=self.manifests.ligands,
@@ -471,6 +512,7 @@ class ActiveProductionRunner:
             )
             self.state.reveal({task: result.fused_score for task, result in execution.items()})
             self._task_sequence.extend(selected)
+            self._stage_done(round_index, "docking", docking_started, revealed=len(selected))
             solver_audit = solver_result.as_dict()
             solver_audit["metadata"] = {
                 key: value
@@ -495,11 +537,15 @@ class ActiveProductionRunner:
                 "real_docking_executed": True,
             }
             self._rounds.append(audit)
+            checkpoint_started = self._stage_start(round_index, "checkpoint")
             self._write_round_and_checkpoint(round_index, audit)
+            self._stage_done(round_index, "checkpoint", checkpoint_started)
             active_rounds += 1
         else:
             stop_reason = "round_limit"
-        return self._summary(status="completed", stop_reason=stop_reason)
+        result = self._summary(status="completed", stop_reason=stop_reason)
+        _atomic_write_json(self.config.active_run_directory / "run_summary.json", result)
+        return result
 
     def finalize(self) -> dict[str, object]:
         """Evaluate the final ranking; this is the only production label boundary."""
@@ -534,6 +580,34 @@ class ActiveProductionRunner:
             cost_per_seed=self.config.cost_per_seed,
             docking_config=_resolved_docking_config(self.config),
             resume=True,
+        )
+
+    def _stage_start(self, round_index: int | str, stage: str) -> float:
+        self._emit_progress(round_index, stage, "start")
+        return time.monotonic()
+
+    def _stage_done(
+        self,
+        round_index: int | str,
+        stage: str,
+        started: float,
+        **details: object,
+    ) -> None:
+        elapsed = time.monotonic() - started
+        suffix = "".join(f" {key}={value}" for key, value in details.items())
+        self._emit_progress(round_index, stage, f"done elapsed={elapsed:.3f}s{suffix}")
+
+    def _emit_progress(self, round_index: int | str, stage: str, event: str) -> None:
+        if self._progress is None:
+            return
+        label = f"{round_index:03d}" if isinstance(round_index, int) else str(round_index)
+        self._progress(f"[active][round={label}][stage={stage}] {event}")
+
+    def _emit_pair_progress(self, round_index: int, completed: int, total: int) -> None:
+        self._emit_progress(
+            round_index,
+            "batch_interaction",
+            f"progress pairs={completed}/{total}",
         )
 
     def _round_seed(self) -> int:

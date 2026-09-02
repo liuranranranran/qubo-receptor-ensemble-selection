@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import math
 from dataclasses import dataclass
-from typing import Mapping, Sequence
+from typing import Callable, Mapping, Sequence
 
 import numpy as np
 
@@ -139,13 +139,26 @@ class PosteriorAcquisitionEvaluator:
             raise ValueError("pairwise interaction requires distinct tasks")
         return self.set_value((first, second)) - self.set_value((first,)) - self.set_value((second,))
 
-    def interaction_matrix(self, tasks: Sequence[Task]) -> dict[tuple[Task, Task], float]:
+    def interaction_matrix(
+        self,
+        tasks: Sequence[Task],
+        *,
+        progress: Callable[[int, int], None] | None = None,
+    ) -> dict[tuple[Task, Task], float]:
         ordered = tuple(sorted(tuple(task) for task in tasks))
-        return {
-            (first, second): self.pairwise_interaction(first, second)
-            for index, first in enumerate(ordered)
-            for second in ordered[index + 1 :]
-        }
+        total = len(ordered) * (len(ordered) - 1) // 2
+        report_interval = max(1, math.ceil(total / 20)) if total else 1
+        interactions: dict[tuple[Task, Task], float] = {}
+        completed = 0
+        for index, first in enumerate(ordered):
+            for second in ordered[index + 1 :]:
+                interactions[(first, second)] = self.pairwise_interaction(first, second)
+                completed += 1
+                if progress is not None and (
+                    completed == 1 or completed == total or completed % report_interval == 0
+                ):
+                    progress(completed, total)
+        return interactions
 
     def all_task_values(self, tasks: Sequence[Task] | None = None) -> dict[Task, float]:
         candidates = self.state.unfinished_tasks() if tasks is None else tuple(tasks)

@@ -48,8 +48,9 @@ def test_prepared_run_directory_override_is_forwarded(
 
     monkeypatch.setattr(cli, "load_active_production_config", fake_load)
     class FakeRunner:
-        def __init__(self, config: object) -> None:
+        def __init__(self, config: object, *, progress: object) -> None:
             del config
+            del progress
 
         def prepare(self, **kwargs: object) -> dict[str, object]:
             assert kwargs == {"overwrite": False}
@@ -102,8 +103,9 @@ def test_run_resume_and_finalize_route_to_separate_runner_methods(
     calls: list[tuple[str, dict[str, object]]] = []
 
     class FakeRunner:
-        def __init__(self, config: object) -> None:
+        def __init__(self, config: object, *, progress: object) -> None:
             del config
+            del progress
 
         def run(self, **kwargs: object) -> dict[str, object]:
             calls.append(("run", kwargs))
@@ -121,3 +123,31 @@ def test_run_resume_and_finalize_route_to_separate_runner_methods(
     assert calls[0] == ("run", {"resume": False, "overwrite": False, "max_rounds": 2})
     assert calls[1] == ("run", {"resume": True, "overwrite": False, "max_rounds": None})
     assert calls[2] == ("finalize", {})
+
+
+def test_production_cli_writes_progress_to_stderr_without_polluting_json_stdout(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    tmp_path: Path,
+) -> None:
+    from scripts import run_active_experiment as cli
+
+    monkeypatch.setattr(cli, "load_active_production_config", lambda *args, **kwargs: _fake_config())
+
+    class FakeRunner:
+        def __init__(self, config: object, *, progress: object) -> None:
+            del config
+            self.progress = progress
+
+        def run(self, **kwargs: object) -> dict[str, object]:
+            del kwargs
+            assert callable(self.progress)
+            self.progress("[active][round=002][stage=solver] done selected=3")
+            return {"status": "completed"}
+
+    monkeypatch.setattr(cli, "ActiveProductionRunner", FakeRunner)
+    assert cli.main(["run", "--config", str(tmp_path / "active.json")]) == 0
+
+    captured = capsys.readouterr()
+    assert json.loads(captured.out)["status"] == "completed"
+    assert "[active][round=002][stage=solver] done selected=3" in captured.err

@@ -25,6 +25,7 @@ from qubo_receptor_ensemble.active_docking.qubo import (
     build_batch_qubo,
 )
 from qubo_receptor_ensemble.active_docking.replay import (
+    run_masked_prediction_gate,
     run_masked_replay,
 )
 from qubo_receptor_ensemble.active_docking.solvers import solve_batch_qubo
@@ -205,6 +206,13 @@ def test_acquisition_computes_unit_value_pair_gamma_and_uncertainty_effect() -> 
     assert gamma == pytest.approx(expected)
     assert evaluator.predictions[("l1", "r1")].variance != evaluator.predictions[("l2", "r1")].variance
 
+    progress: list[tuple[int, int]] = []
+    evaluator.interaction_matrix(
+        (("l1", "r1"), ("l2", "r1")),
+        progress=lambda completed, total: progress.append((completed, total)),
+    )
+    assert progress == [(1, 1)]
+
 
 def test_batch_qubo_contains_symmetric_matrix_and_constraint_diagnostics() -> None:
     tasks = (("l1", "r1"), ("l1", "r2"), ("l2", "r1"))
@@ -327,6 +335,27 @@ def test_replay_reads_hidden_labels_only_when_final_evaluation_starts() -> None:
         hidden_labels=FinalEvaluationOnlyLabels({"l1": "active", "l2": "decoy", "l3": "active", "l4": "decoy"}),
     )
     assert result.strategies[0].evaluation["hidden_labels_used_for_evaluation"] is True
+
+
+def test_prediction_gate_report_has_production_consumable_pass_flag() -> None:
+    ligands, receptors = _manifests()
+    report = run_masked_prediction_gate(
+        _scores(),
+        ligands,
+        receptors,
+        {
+            "random_seed": 11,
+            "warm_start": {"baseline_receptor": "r0", "cluster_fraction": 0.0},
+            "predictor": {"baseline_receptor": "r0", "posterior_samples": 4},
+            "acquisition": {"top_q": 2, "monte_carlo_samples": 4},
+            "candidate_cap": 4,
+            "budget": {"total_cost": 4.0, "batch_cost": 1.0},
+            "evaluation": {"metrics": ["rmse"]},
+            "strategies": ["value_greedy"],
+        },
+    )
+
+    assert report["passed"] is report["primary_model_allowed_for_replay"]
 
 
 def test_config_is_independent_and_rejects_real_docking(tmp_path: Path) -> None:

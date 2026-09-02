@@ -80,6 +80,11 @@ def _write(value: object, args: argparse.Namespace) -> None:
     print(json.dumps({"status": "written", "output": str(args.output)}, ensure_ascii=True))
 
 
+def _progress(message: str) -> None:
+    """Keep live progress on stderr so stdout remains machine-readable."""
+    print(message, file=sys.stderr, flush=True)
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     config = _load_config(args)
@@ -98,7 +103,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
         return 0
 
-    runner = ActiveProductionRunner(config)
+    runner = ActiveProductionRunner(config, progress=_progress)
     if args.command == "prepare":
         result = runner.prepare(overwrite=args.overwrite)
         result["real_docking_executed"] = False
