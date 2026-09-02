@@ -74,6 +74,25 @@ def test_prepared_run_directory_override_is_forwarded(
     assert json.loads(capsys.readouterr().out)["status"] == "prepared"
 
 
+def test_empty_prepared_run_directory_argument_is_rejected(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    from scripts import run_active_experiment as cli
+
+    monkeypatch.setattr(cli, "load_active_production_config", lambda *args, **kwargs: _fake_config())
+
+    with pytest.raises(SystemExit) as error:
+        cli.main([
+            "validate",
+            "--config",
+            str(tmp_path / "active.json"),
+            "--prepared-run-directory",
+            "",
+        ])
+
+    assert error.value.code == 2
+
+
 def test_run_resume_and_finalize_route_to_separate_runner_methods(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:

@@ -20,10 +20,16 @@ from qubo_receptor_ensemble.active_docking.production_config import (
 )
 
 
+def _non_empty_path(value: str) -> Path:
+    if not value.strip():
+        raise argparse.ArgumentTypeError("path must be non-empty")
+    return Path(value)
+
+
 def _add_common_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--data-root", type=Path, default=None)
-    parser.add_argument("--prepared-run-directory", type=Path, default=None)
+    parser.add_argument("--prepared-run-directory", type=_non_empty_path, default=None)
     parser.add_argument("--output", type=Path, default=None)
     parser.add_argument("--format", choices=("json", "csv", "markdown"), default="json")
 

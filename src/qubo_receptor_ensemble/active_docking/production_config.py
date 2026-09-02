@@ -95,9 +95,12 @@ def _positive_int(value: object, name: str) -> int:
 
 
 def _resolve_path(value: object, root: Path, name: str) -> Path:
-    if not isinstance(value, str) or not value.strip():
+    if isinstance(value, Path):
+        path = value
+    elif isinstance(value, str) and value.strip():
+        path = Path(value)
+    else:
         raise ActiveProductionConfigError(f"{name} must be a non-empty path")
-    path = Path(value)
     return (path if path.is_absolute() else root / path).resolve()
 
 

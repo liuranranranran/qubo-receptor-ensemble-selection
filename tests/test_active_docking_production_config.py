@@ -90,6 +90,18 @@ def test_production_config_resolves_old_full_config_and_separate_run_directory(t
     assert len(config.fingerprint) == 64
 
 
+def test_production_config_accepts_path_override_for_prepared_run_directory(tmp_path: Path) -> None:
+    override = tmp_path / "prepared-override"
+
+    config = load_active_production_config(
+        _write_config(tmp_path),
+        data_root=tmp_path,
+        prepared_run_directory=override,
+    )
+
+    assert config.prepared_run_directory == override.resolve()
+
+
 def test_production_config_rejects_seed_or_fusion_drift(tmp_path: Path) -> None:
     payload = json.loads(_write_config(tmp_path).read_text(encoding="utf-8"))
     payload["docking"] = {
