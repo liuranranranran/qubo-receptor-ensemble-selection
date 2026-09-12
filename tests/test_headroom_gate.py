@@ -64,10 +64,13 @@ def test_all_cells_failing_is_no_go() -> None:
 
 
 def test_grey_zone_between_thresholds() -> None:
-    keys = all_keys()
-    passed = set(list(keys)[: int(len(keys) * 0.2)])
+    # sorted(): set iteration order depends on PYTHONHASHSEED, which made this
+    # assertion flaky across machines
+    keys = sorted(all_keys())
+    passed = set(keys[: int(len(keys) * 0.2)])
     gate = evaluate_gate(build_cells(passed), PREREG)
     assert gate["decision"] == "GREY_ZONE"
+    assert 0.10 <= gate["fraction_cells_go_per_phi_cell"] < 0.30
     assert "k*" in gate["tie_break_trace"]["rule"]
 
 
@@ -96,8 +99,8 @@ def test_strict_lower_bound_is_required() -> None:
 
 
 def test_k_star_displacement_is_reported_in_tie_break() -> None:
-    keys = all_keys()
-    passed = set(list(keys)[: int(len(keys) * 0.2)])
+    keys = sorted(all_keys())
+    passed = set(keys[: int(len(keys) * 0.2)])
     displacement = {
         "T1": {"displacement_best_vs_mean": 2},
         "T2": {"displacement_best_vs_mean": 3},
