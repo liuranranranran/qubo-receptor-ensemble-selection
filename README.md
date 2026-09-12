@@ -82,6 +82,24 @@ tests/                自动化测试
 大规模新数据、原始 `.ism`、准备好的受体和运行结果位于 `--data-root` 指定
 的数据包。运行器自动记录配置快照、数量、引擎、seed、阶段状态和输出位置。
 
+## E1 headroom 扫描（离线诊断）
+
+`scripts/headroom_scan.py` 实现 `E:\Quant\docs\qubo\E1实现计划_headroom扫描_20260911.md`
+的预注册诊断：8 条融合规则 φ × 精确子集枚举 × 三层 headroom（`H_raw` /
+`H_nested` / `H_perm`）+ scaffold 聚类 bootstrap 噪声地板 + G1 判定。
+不新增任何 docking，只重算已有稠密矩阵。
+
+```bash
+python scripts/headroom_scan.py run \
+  --prereg configs/experiments/e1_headroom_preregistration.json \
+  --assets configs/e1_assets.json \
+  --output-dir results/headroom/e1_20260911 --jobs 24 --resume
+```
+
+输入资产表见 `configs/e1_assets.json`；产物与结果摘要见
+[docs/headroom_scan_zh.md](docs/headroom_scan_zh.md)。E1 的运行结论是
+G1 = NO-GO（"选构象子集"以上界告负收口），细节与限制在该文档 §6–§8。
+
 ## 验证
 
 ```bash

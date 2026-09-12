@@ -52,6 +52,8 @@ ligands/prepared/
 *.hdf5
 
 # Generated docking and experiment output
+# E1 headroom shard checkpoints (regenerable intermediates; products stay tracked)
+results/headroom/*/cells/
 results/docking/
 results/metrics/
 results/pose_inspection/
