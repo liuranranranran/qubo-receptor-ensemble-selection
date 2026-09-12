@@ -22,7 +22,7 @@
     "with_train_oracle": true
   },
   "config_hash": "5FA7596C90543DF8CFFA6C1A2F0E0CB888F63FAD0C51F8D3B18038D5D6ADD4A1",
-  "created_utc": "2026-09-12T08:51:20Z",
+  "created_utc": "2026-09-12T08:54:25Z",
   "environment": {
     "cpu_count": 28,
     "machine": "AMD64",
@@ -37,8 +37,96 @@
     "fraction_cells_go_fold_oracle_phi": 0.18,
     "fraction_cells_go_train_selected_phi": 0.02
   },
-  "git_commit": "d3e381efaa7e311e701e9fccf4346179ba7eeb31",
+  "git_commit": "0810ece6f9b0e6f6f3bfae931cc83dbc37314f89",
+  "k_coverage": {
+    "BACE1": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "CDK2": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "EGFR": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "ESR1": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "FA10": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "MK14": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "MK14_min": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "PPARA": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "PPARA_pool30": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "PPARG": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
   "mode": "assemble",
+  "notes": [
+    "E1 is an exploratory re-analysis of already-seen matrices (parent plan section 5.1).",
+    "Evaluation unit is the outer test fold as in scripts/nested_outer_k_evaluation.py (about 120 ligands per fold).",
+    "The four remote adaptive runs are read through their problem.json carriers; D1 re-verifies them and records the substitution.",
+    "pool30 runs at k<=4 (pre-registered contingency in the E1 plan section 10)",
+    "H_perm as pre-registered is dominated by the absolute metric level; G1 uses H_nested only (see docs/headroom_scan_zh.md section 6.4)",
+    "sensitivity: only the MK14 min-aggregation matrix is available locally; independent seed matrices and alternative scaffold splits were not run"
+  ],
   "permutation_cells": 784,
   "phi_records": 7,
   "preregistration": {

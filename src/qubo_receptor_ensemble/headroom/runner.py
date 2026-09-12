@@ -1368,6 +1368,16 @@ def assemble_products(
             "shard_count": len(shards),
             "permutation_cells": len(permutations_map),
             "phi_records": len(phi_selection),
+            "k_coverage": {
+                str(target): sorted({int(cell["k"]) for shard in shards if str(shard["target_id"]) == str(target) for cell in shard["cells"]})
+                for target in sorted({str(shard["target_id"]) for shard in shards})
+            },
+            "notes": list(prereg.get("notes", []))
+            + [
+                "pool30 runs at k<=4 (pre-registered contingency in the E1 plan section 10)",
+                "H_perm as pre-registered is dominated by the absolute metric level; G1 uses H_nested only (see docs/headroom_scan_zh.md section 6.4)",
+                "sensitivity: only the MK14 min-aggregation matrix is available locally; independent seed matrices and alternative scaffold splits were not run",
+            ],
             "targets": {
                 str(entry.get("asset_key") or entry.get("target_id")): {
                     "role": entry.get("role"),

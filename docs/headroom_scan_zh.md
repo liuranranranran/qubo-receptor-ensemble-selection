@@ -54,7 +54,7 @@ src/qubo_receptor_ensemble/headroom/
 scripts/headroom_scan.py        CLI：verify / run / report（rebuild+补齐）
 configs/experiments/e1_headroom_preregistration.json   冻结配置
 configs/e1_assets.json         输入资产表（{repo}/{quant}/{data_root} 占位符）
-tests/test_headroom_*.py       T1–T6 与实现单测（51 项）
+tests/test_headroom_*.py       T1–T6 与实现单测（52 项）
 ```
 
 CLI：
