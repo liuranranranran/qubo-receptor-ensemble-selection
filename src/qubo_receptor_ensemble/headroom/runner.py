@@ -27,7 +27,7 @@ import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Mapping, Sequence
+from typing import Iterable, Iterator, Mapping, Sequence
 
 import numpy as np
 
@@ -173,8 +173,13 @@ def parallel_map(
     function,
     items: Sequence[Mapping[str, object]],
     verbose: bool = True,
-) -> list[object]:
-    """Process-pool map with a serial fallback.
+) -> Iterator[object]:
+    """Lazily yield worker results, with a serial fallback.
+
+    Results are yielded as soon as each shard finishes (``as_completed``) or,
+    in the serial fallback, one by one.  This matters for ``--resume``: the
+    caller writes a checkpoint per yielded payload, so an interrupted run only
+    loses the shard that was still in flight instead of the whole battery.
 
     Some sandboxes forbid the anonymous pipes used by
     ``ProcessPoolExecutor`` on Windows (``PermissionError: [WinError 5]``);
@@ -184,11 +189,15 @@ def parallel_map(
     if jobs and jobs > 1 and len(payloads) > 1:
         try:
             with ProcessPoolExecutor(max_workers=int(jobs)) as pool:
-                return list(pool.map(function, payloads))
+                futures = [pool.submit(function, payload) for payload in payloads]
+                for future in as_completed(futures):
+                    yield future.result()
+            return
         except (OSError, PermissionError, RuntimeError, ImportError) as exc:  # pragma: no cover
             if verbose:
                 print(f"[parallel] process pool unavailable ({exc}); running serially", flush=True)
-    return [function(item) for item in payloads]
+    for payload in payloads:
+        yield function(payload)
 
 
 def run_shard_task(task: Mapping[str, object]) -> dict[str, object]:

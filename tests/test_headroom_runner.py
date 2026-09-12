@@ -187,3 +187,20 @@ def test_cli_parses_the_documented_invocation() -> None:
     assert args.command == "run" and args.jobs == 24 and args.resume
     assert module._parse_targets(args.targets) == ("MK14", "PPARA")
     assert module._parse_ints("2,3") == (2, 3)
+
+def test_parallel_map_is_lazy_so_checkpoints_stay_incremental() -> None:
+    """Regression: an eager map would defer every checkpoint until the end."""
+
+    produced: list[int] = []
+
+    def worker(item):
+        produced.append(int(item["index"]))
+        return item["index"]
+
+    items = [{"index": index} for index in range(4)]
+    generator = runner.parallel_map(1, worker, items, verbose=False)
+    first = next(generator)
+    assert first == 0
+    assert produced == [0]  # only the first shard ran: it can be checkpointed now
+    assert list(generator) == [1, 2, 3]
+    assert produced == [0, 1, 2, 3]

@@ -18,7 +18,14 @@ JOBS=32 bash scripts/run_e1_headroom_remote.sh             # JOBS=$(nproc) 亦�
 ```
 
 > **`JOBS` 不要用 1**：pool30 的 40 个分片单核各需 ≈85 s，串行光这一项就 ≈1 小时；
-> 32 并行整轮 10–20 分钟。分片会写 checkpoint，中途改 `JOBS` 重跑 == 续跑。
+> 32 并行整轮 10–20 分钟；JOBS=1 单进程约 3–3.5 小时（pool30 的 40 片占 ≈77 min）。
+> 分片 checkpoint 是**逐个**落盘到 `<OUT>/cells/` 的，任何时刻中断、重跑同一条命令加 `--resume`
+> 只重算未完成分片（不会丢整轮）；中途改 `JOBS` 重跑同样只是续跑。
+>
+> 日志位置：`nohup` 命令里的 `$LOG` 依赖启动 shell 的 `$DATA_ROOT`；没 export 时会落到
+> `/results/headroom/<RUN_ID>.log`。找不到就用
+> `ls -t /root/autodl-tmp/qubo_data_root/results/headroom/*.log /results/headroom/*.log 2>/dev/null`。
+> 查看进度：`echo "shards: $(ls <OUT>/cells | wc -l)"` 与 `tail -5 <日志>`。
 
 预计墙钟 **10–20 分钟**（32 并行分片；主运行 3–5 min、敏感性 2–3 min、组装/图 1–2 min），
 零 docking、零 GPU。产物默认写到
