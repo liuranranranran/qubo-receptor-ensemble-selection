@@ -217,7 +217,11 @@ PPARA 6、PPARG 6、EGFR 10、FA10 3、PPARA_pool30 3、CDK2 3、MK14_min 1、
 5. **四个远程靶点用 problem.json 载体**：与 V5 报告 §7 一致，D1 复核了受体顺序、
    折覆盖与 scaffold 完整率；但矩阵文件本身仍是"未下载"状态，写论文时应改为
    直接使用 `matrices/primary_median_matrix.csv` 并复跑一次作交叉验证。
-6. **探索性定位**：E1 是对已被看过的矩阵的重分析（父计划 §5.1），结论只能作为
+6. **选择器范围**：E1 的单元格只用 `S_ref = {greedy, single}`（训练折）与
+   精确枚举 oracle / A 折 oracle；V5 的 `linear` 是方法比较基线，不参与任何
+   headroom 定义，故未进入 E1 产物。V5 口径本身由 T2 锚定（
+   `nested_outer_k_evaluation.py` 的 exact-QUBO 选择 + BEDROC20 评价）。
+7. **探索性定位**：E1 是对已被看过的矩阵的重分析（父计划 §5.1），结论只能作为
    假设生成；G1 的 NO-GO 是"上界结论"，不是对某个新方法的判决。
 
 ## 8. G1 之后的直接衔接
