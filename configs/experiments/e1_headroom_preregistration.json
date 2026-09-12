@@ -1,0 +1,53 @@
+{
+  "schema": "e1_headroom_v1",
+  "frozen_at": "2026-09-11T00:00:00Z",
+  "parent_plan": "E:/Quant/docs/qubo/E1实现计划_headroom扫描_20260911.md",
+  "protocol_doc": "E:/Quant/docs/qubo/下一步实验计划_20260911.md#E1",
+  "targets": ["MK14", "PPARG", "BACE1", "ESR1", "PPARA"],
+  "k_range": [1, 6],
+  "fusion_family": ["mean", "min", "max", "zmean", "gmean", "hmean", "ranksum", "rrf"],
+  "fusion_params": {
+    "rrf_k": 60,
+    "gmean_shift_rule": "1.0 - min(train_scores)",
+    "rank_reference": "sorted training-fold scores per receptor; test scores are mapped through that frozen frame"
+  },
+  "primary_cells": {"k": [2, 3], "phi": "all"},
+  "primary_metric": "pr_auc",
+  "secondary_metrics": ["bedroc20", "roc_auc", "ef1", "ef5", "ef10"],
+  "bedroc_alpha": 20.0,
+  "bootstrap": {
+    "unit": "scaffold_cluster",
+    "iterations": 2000,
+    "seed": 0,
+    "paired_unit": "greedy_vs_single on the same (target, fold, phi, k)",
+    "noise_floor": "se",
+    "nested_lower_bound": "2.5% quantile of the cluster bootstrap of H_nested (selection fixed on A/B)"
+  },
+  "mde_rule": "t975 * se * sqrt(2)",
+  "gate_g1": {
+    "no_go_below": 0.10,
+    "go_above": 0.30,
+    "require_lower_bound": true,
+    "pass_rule": "h_nested_lower95 > noise_floor and ratio > 1"
+  },
+  "phi_selection": {
+    "report": ["fold_oracle", "train_selected"],
+    "inner_fold_count": 3,
+    "rule": "inner-CV over 3 scaffold folds of the training fold; subset oracle on inner-train; utility on inner-held; ties keep the frozen fusion order"
+  },
+  "headroom_definitions": {
+    "h_raw": "max_{|S|=k} U_test(S) - U_test(S_ref)",
+    "h_nested": "mean over the A/B split of U_eval(S*_select) - U_eval(S_ref); selection on one half, evaluation on the other",
+    "h_perm": "h_raw - q95(max_{S in TopM} U_test(S^perm)), 200 label permutations",
+    "reference": "S_ref = better of {greedy, single} on the training fold, by the primary metric",
+    "oracle": "exact enumeration of every subset of size k (no approximation)"
+  },
+  "permutation": {"top_m": 2000, "iterations": 200},
+  "inputs_sha256": {},
+  "inputs_sha256_note": "D1 writes the authoritative hash manifest to results/headroom/<run_id>/input_manifest.json; this file stays frozen.",
+  "notes": [
+    "E1 is an exploratory re-analysis of already-seen matrices (parent plan section 5.1).",
+    "Evaluation unit is the outer test fold as in scripts/nested_outer_k_evaluation.py (about 120 ligands per fold).",
+    "The four remote adaptive runs are read through their problem.json carriers; D1 re-verifies them and records the substitution."
+  ]
+}
