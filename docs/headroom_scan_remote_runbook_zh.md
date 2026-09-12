@@ -157,7 +157,8 @@ python scripts/headroom_scan.py run \
   --assets  configs/e1_assets_remote_sensitivity.json \
   --root "run_root=$OUT" \
   --output-dir "$SENSITIVITY_OUT" \
-  --jobs 32 --resume --skip-perm --skip-phi-selection --skip-figures
+  --jobs 32 --resume --skip-perm --skip-phi-selection --skip-figures \
+  --allow-missing-primary   # 敏感性资产不是预注册主靶点 id
 
 python scripts/headroom_scan.py report \
   --prereg configs/experiments/e1_headroom_preregistration.json \
@@ -243,6 +244,7 @@ git add results/headroom/$RUN_ID && git commit -m "results(headroom): E1 远程�
 | 某靶点 `matrices/` 不存在 | 自动回退 `problem.json` 载体（`input_manifest.source=problem_json`，D1 已复核）；或先重跑该 run 的 `aggregate` 阶段 |
 | FA10/EGFR 报 missing | 输入已随仓库分发（`data/processed/stage102a_*`）；若仍缺，可从其 run 的 score_tables 重建中位聚合矩阵：`python scripts/headroom_scan.py extract-seeds --run-dir $DATA_ROOT/results/runs/stage102a_fa10_full_local --output-dir /tmp/fa10_rebuild --aggregation median`，再把 `seed_median_matrix.csv` 拷成 `data/processed/stage102a_fa10_phase_a_primary_median_score_matrix.csv` |
 | CDK2 报 missing | 控制面板（不进 G1）：矩阵与 fold 分配已在 `data/processed/stage04_cdk2_expanded16_development_*`；确实要跳过就从资产表删掉该条目并标注 |
+| 敏感性 run 报 `pre-registered primary targets are unavailable` | 敏感性资产 id 是 `MK14_min` / `MK14_seed*`，不是预注册主靶点；给敏感性的 `run` 加 `--allow-missing-primary`（脚本已内置） |
 | 想先只跑主判定 | `--targets MK14,PPARG,BACE1,ESR1,PPARA,PPARA_pool30`（6 资产 = 240 分片）；敏感性资产只依赖这 5 个靶点，可独立跑满 |
 | `gate = NOT_EVALUATED` | 主格不完整：查 `input_manifest.primary_targets_missing` 与 `cells/` 是否 352 |
 | 想改 `RUN_ID` | `RUN_ID=e1_x bash scripts/run_e1_headroom_remote.sh`；若手工跑敏感性，`--root run_root=<主目录>` 必须指对 |

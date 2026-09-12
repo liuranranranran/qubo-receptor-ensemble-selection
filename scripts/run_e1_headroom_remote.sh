@@ -114,7 +114,8 @@ echo "[e1] step 5/6: sensitivity scan (min aggregation + single seeds)"
   --resume \
   --skip-perm \
   --skip-phi-selection \
-  --skip-figures
+  --skip-figures \
+  --allow-missing-primary
 "$python_bin" scripts/headroom_scan.py report \
   --prereg "$prereg" \
   --assets "$assets_sensitivity" \

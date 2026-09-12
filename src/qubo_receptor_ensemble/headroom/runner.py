@@ -1094,7 +1094,10 @@ def run_e1(
     primary_targets = [str(value) for value in prereg["targets"]]
     missing = [target for target in primary_targets if target not in panels]
     if missing and not allow_missing_primary:
-        raise RunnerError(f"pre-registered primary targets are unavailable: {missing}")
+        raise RunnerError(
+            f"pre-registered primary targets are unavailable: {missing}; "
+            "pass --allow-missing-primary for a sensitivity-only battery"
+        )
 
     config = headroom_config_from_prereg(
         prereg,
