@@ -17,6 +17,7 @@ criterion is the re-run, not the rounding.
 from __future__ import annotations
 
 import csv
+import os
 from pathlib import Path
 
 import numpy as np
@@ -27,12 +28,35 @@ from qubo_receptor_ensemble.headroom.metrics_fast import metric_value
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 FIXTURE = REPO_ROOT / "tests" / "fixtures" / "e1" / "mk14_v5_fixed_k.csv"
-MK14_MATRIX = Path(r"E:\Quant\remote_runs\mk14_adaptive_remote\matrices\primary_median_matrix.csv")
-MK14_MANIFEST = Path(r"E:\Quant\remote_runs\mk14_adaptive_remote\prepared_ligands.csv")
+
+
+def first_file(env_name: str, *candidates: str) -> Path | None:
+    """First existing path, honouring an explicit environment override."""
+    override = os.environ.get(env_name, "").strip()
+    if override:
+        path = Path(override)
+        return path if path.is_file() else None
+    for value in candidates:
+        path = Path(value)
+        if path.is_file():
+            return path
+    return None
+
+
+MK14_MATRIX = first_file(
+    "E1_MK14_MATRIX",
+    r"E:\Quant\remote_runs\mk14_adaptive_remote\matrices\primary_median_matrix.csv",
+    "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/matrices/primary_median_matrix.csv",
+)
+MK14_MANIFEST = first_file(
+    "E1_MK14_MANIFEST",
+    r"E:\Quant\remote_runs\mk14_adaptive_remote\prepared_ligands.csv",
+    "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv",
+)
 
 pytestmark = pytest.mark.skipif(
-    not (MK14_MATRIX.is_file() and MK14_MANIFEST.is_file()),
-    reason="MK14 local carrier is not available on this machine",
+    MK14_MATRIX is None or MK14_MANIFEST is None,
+    reason="MK14 canonical carrier not found (set E1_MK14_MATRIX / E1_MK14_MANIFEST)",
 )
 
 
@@ -50,6 +74,7 @@ def load_fixture() -> dict[tuple[int, int], dict[str, object]]:
 def test_fixed_k_values_match_the_current_golden_protocol() -> None:
     from scripts.nested_outer_k_evaluation import load_rows, solve_subset, subset_metrics
 
+    assert MK14_MATRIX is not None and MK14_MANIFEST is not None
     rows, receptors = load_rows(str(MK14_MATRIX), str(MK14_MANIFEST))
     fixture = load_fixture()
     worst_golden = 0.0

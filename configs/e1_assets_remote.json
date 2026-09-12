@@ -68,10 +68,10 @@
       "target_id": "CDK2",
       "role": "control",
       "matrix": "{repo}/data/processed/stage04_cdk2_expanded16_development_median_score_matrix.csv",
-      "manifest": "{runs}/stage04_cdk2_expanded16_development_scaffold_cv_gate/fold_assignments.csv",
+      "manifest": "{repo}/data/processed/stage04_cdk2_expanded16_development_fold_assignments.csv",
       "manifest_scaffold_column": "scaffold_smiles",
       "manifest_fold_column": "development_fold",
-      "note": "160-ligand / 4-fold development control panel, not part of gate G1"
+      "note": "160-ligand / 4-fold development control panel, not part of gate G1; fold assignments now ship with the repo"
     }
   ]
 }

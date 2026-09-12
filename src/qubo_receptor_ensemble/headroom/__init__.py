@@ -1,4 +1,4 @@
-"""E1 headroom diagnostic: fusion rules, exhaustive subset oracles, noise floor.
+r"""E1 headroom diagnostic: fusion rules, exhaustive subset oracles, noise floor.
 
 The package implements the pre-registered E1 protocol from
 ``E:\Quant\docs\qubo\E1实现计划_headroom扫描_20260911.md``:

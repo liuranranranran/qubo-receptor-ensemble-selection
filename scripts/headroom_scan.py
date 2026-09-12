@@ -271,12 +271,14 @@ def command_extract_seeds(args: argparse.Namespace) -> int:
             f"-> {record['path']}"
         )
     if len(matrices) > 1:
-        aggregated = aggregate_seed_matrices(matrices, aggregation="min")
-        record = write_seed_matrix(aggregated, output_dir / "seed_min_matrix.csv")
-        record["ligand_count"] = aggregated.n_ligands
-        record["receptor_count"] = aggregated.n_receptors
-        audit["aggregated_min"] = record
-        print(f"[seed] min-aggregated -> {record['path']}")
+        aggregations = ("min", "median") if args.aggregation == "both" else (args.aggregation,)
+        for aggregation in aggregations:
+            aggregated = aggregate_seed_matrices(matrices, aggregation=aggregation)
+            record = write_seed_matrix(aggregated, output_dir / f"seed_{aggregation}_matrix.csv")
+            record["ligand_count"] = aggregated.n_ligands
+            record["receptor_count"] = aggregated.n_receptors
+            audit[f"aggregated_{aggregation}"] = record
+            print(f"[seed] {aggregation}-aggregated -> {record['path']}")
     write_json(output_dir / "seed_extraction_audit.json", audit)
     print(f"[seed] audit -> {(output_dir / 'seed_extraction_audit.json').as_posix()}")
     return 0
@@ -304,6 +306,12 @@ def build_parser() -> argparse.ArgumentParser:
     seeds.add_argument("--output-dir", default=None, help="defaults to <run-dir>/matrices/seed_matrices")
     seeds.add_argument("--seeds", default=None, help="comma-separated seeds; defaults to auto-discovery")
     seeds.add_argument("--target-id", default=None, help="override the target id written into the matrix")
+    seeds.add_argument(
+        "--aggregation",
+        choices=("min", "median", "both"),
+        default="both",
+        help="aggregated matrix over the seeds (default: both)",
+    )
     seeds.add_argument(
         "--reference-matrix",
         default=None,

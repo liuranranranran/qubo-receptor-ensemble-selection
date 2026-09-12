@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import os
 from pathlib import Path
 
 import numpy as np
@@ -176,17 +177,36 @@ def test_written_matrix_round_trips_through_the_asset_loader(headroom_workspace:
     assert report["ligand_count"] == 3
 
 
-MK14_RUN = Path(r"E:\Quant\remote_runs\mk14_adaptive_remote")
-MK14_SCORE_TABLES = MK14_RUN / "score_tables"
-MK14_MIN_MATRIX = MK14_RUN / "matrices" / "sensitivity_minimum_matrix.csv"
-MK14_PRIMARY = MK14_RUN / "matrices" / "primary_median_matrix.csv"
+def first_dir(env_name: str, *candidates: str) -> Path | None:
+    """First existing directory, honouring an explicit environment override."""
+    override = os.environ.get(env_name, "").strip()
+    if override:
+        path = Path(override)
+        return path if path.is_dir() else None
+    for value in candidates:
+        path = Path(value)
+        if path.is_dir():
+            return path
+    return None
+
+
+MK14_RUN = first_dir(
+    "E1_MK14_RUN_DIR",
+    r"E:\Quant\remote_runs\mk14_adaptive_remote",
+    "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote",
+)
+MK14_SCORE_TABLES = MK14_RUN / "score_tables" if MK14_RUN else None
+MK14_MIN_MATRIX = MK14_RUN / "matrices" / "sensitivity_minimum_matrix.csv" if MK14_RUN else None
+MK14_PRIMARY = MK14_RUN / "matrices" / "primary_median_matrix.csv" if MK14_RUN else None
 
 
 @pytest.mark.skipif(
-    not (MK14_SCORE_TABLES.is_dir() and MK14_MIN_MATRIX.is_file() and MK14_PRIMARY.is_file()),
-    reason="MK14 canonical score tables are not available on this machine",
+    MK14_RUN is None
+    or not (MK14_SCORE_TABLES.is_dir() and MK14_MIN_MATRIX.is_file() and MK14_PRIMARY.is_file()),
+    reason="MK14 canonical run not found (set E1_MK14_RUN_DIR)",
 )
 def test_extracted_min_matrix_matches_the_canonical_file() -> None:
+    assert MK14_SCORE_TABLES is not None and MK14_MIN_MATRIX is not None and MK14_PRIMARY is not None
     seeds = discover_seeds(MK14_SCORE_TABLES)
     order = reference_receptor_order(MK14_PRIMARY)
     matrices = {
