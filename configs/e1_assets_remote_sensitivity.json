@@ -1,0 +1,152 @@
+{
+  "schema": "e1_assets_v1",
+  "description": "E1 敏感性资产表（计划 §7.1 min 聚合 + §7.2 三 seed 独立）。run_root 由 --root run_root=<主运行目录> 覆盖；seed 矩阵由 extract-seeds 生成。",
+  "roots": {
+    "repo": "/root/qubo-receptor-ensemble-selection",
+    "data_root": "/root/autodl-tmp/qubo_data_root",
+    "runs": "{data_root}/results/runs",
+    "run_root": "{data_root}/results/headroom/e1_20260915"
+  },
+  "targets": [
+    {
+      "target_id": "MK14_min",
+      "role": "sensitivity",
+      "matrix": "{runs}/mk14_adaptive_remote/matrices/sensitivity_minimum_matrix.csv",
+      "manifest": "{runs}/mk14_adaptive_remote/prepared_ligands.csv",
+      "note": "canonical min-over-seeds aggregation; regenerate with extract-seeds if the file is missing"
+    },
+    {
+      "target_id": "PPARA_min",
+      "role": "sensitivity",
+      "matrix": "{runs}/ppara_adaptive_remote/matrices/sensitivity_minimum_matrix.csv",
+      "manifest": "{runs}/ppara_adaptive_remote/prepared_ligands.csv",
+      "note": "canonical min-over-seeds aggregation; regenerate with extract-seeds if the file is missing"
+    },
+    {
+      "target_id": "PPARG_min",
+      "role": "sensitivity",
+      "matrix": "{runs}/pparg_adaptive_remote/matrices/sensitivity_minimum_matrix.csv",
+      "manifest": "{runs}/pparg_adaptive_remote/prepared_ligands.csv",
+      "note": "canonical min-over-seeds aggregation; regenerate with extract-seeds if the file is missing"
+    },
+    {
+      "target_id": "BACE1_min",
+      "role": "sensitivity",
+      "matrix": "{runs}/bace1_adaptive_remote/matrices/sensitivity_minimum_matrix.csv",
+      "manifest": "{runs}/bace1_adaptive_remote/prepared_ligands.csv",
+      "note": "canonical min-over-seeds aggregation; regenerate with extract-seeds if the file is missing"
+    },
+    {
+      "target_id": "ESR1_min",
+      "role": "sensitivity",
+      "matrix": "{runs}/esr1_adaptive_remote/matrices/sensitivity_minimum_matrix.csv",
+      "manifest": "{runs}/esr1_adaptive_remote/prepared_ligands.csv",
+      "note": "canonical min-over-seeds aggregation; regenerate with extract-seeds if the file is missing"
+    },
+    {
+      "target_id": "MK14_seed20260821",
+      "role": "sensitivity",
+      "matrix": "{run_root}/seed_matrices/mk14/seed_20260821_matrix.csv",
+      "manifest": "{runs}/mk14_adaptive_remote/prepared_ligands.csv",
+      "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds"
+    },
+    {
+      "target_id": "MK14_seed20260822",
+      "role": "sensitivity",
+      "matrix": "{run_root}/seed_matrices/mk14/seed_20260822_matrix.csv",
+      "manifest": "{runs}/mk14_adaptive_remote/prepared_ligands.csv",
+      "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds"
+    },
+    {
+      "target_id": "MK14_seed20260823",
+      "role": "sensitivity",
+      "matrix": "{run_root}/seed_matrices/mk14/seed_20260823_matrix.csv",
+      "manifest": "{runs}/mk14_adaptive_remote/prepared_ligands.csv",
+      "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds"
+    },
+    {
+      "target_id": "PPARA_seed20260821",
+      "role": "sensitivity",
+      "matrix": "{run_root}/seed_matrices/ppara/seed_20260821_matrix.csv",
+      "manifest": "{runs}/ppara_adaptive_remote/prepared_ligands.csv",
+      "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds"
+    },
+    {
+      "target_id": "PPARA_seed20260822",
+      "role": "sensitivity",
+      "matrix": "{run_root}/seed_matrices/ppara/seed_20260822_matrix.csv",
+      "manifest": "{runs}/ppara_adaptive_remote/prepared_ligands.csv",
+      "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds"
+    },
+    {
+      "target_id": "PPARA_seed20260823",
+      "role": "sensitivity",
+      "matrix": "{run_root}/seed_matrices/ppara/seed_20260823_matrix.csv",
+      "manifest": "{runs}/ppara_adaptive_remote/prepared_ligands.csv",
+      "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds"
+    },
+    {
+      "target_id": "PPARG_seed20260821",
+      "role": "sensitivity",
+      "matrix": "{run_root}/seed_matrices/pparg/seed_20260821_matrix.csv",
+      "manifest": "{runs}/pparg_adaptive_remote/prepared_ligands.csv",
+      "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds"
+    },
+    {
+      "target_id": "PPARG_seed20260822",
+      "role": "sensitivity",
+      "matrix": "{run_root}/seed_matrices/pparg/seed_20260822_matrix.csv",
+      "manifest": "{runs}/pparg_adaptive_remote/prepared_ligands.csv",
+      "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds"
+    },
+    {
+      "target_id": "PPARG_seed20260823",
+      "role": "sensitivity",
+      "matrix": "{run_root}/seed_matrices/pparg/seed_20260823_matrix.csv",
+      "manifest": "{runs}/pparg_adaptive_remote/prepared_ligands.csv",
+      "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds"
+    },
+    {
+      "target_id": "BACE1_seed20260821",
+      "role": "sensitivity",
+      "matrix": "{run_root}/seed_matrices/bace1/seed_20260821_matrix.csv",
+      "manifest": "{runs}/bace1_adaptive_remote/prepared_ligands.csv",
+      "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds"
+    },
+    {
+      "target_id": "BACE1_seed20260822",
+      "role": "sensitivity",
+      "matrix": "{run_root}/seed_matrices/bace1/seed_20260822_matrix.csv",
+      "manifest": "{runs}/bace1_adaptive_remote/prepared_ligands.csv",
+      "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds"
+    },
+    {
+      "target_id": "BACE1_seed20260823",
+      "role": "sensitivity",
+      "matrix": "{run_root}/seed_matrices/bace1/seed_20260823_matrix.csv",
+      "manifest": "{runs}/bace1_adaptive_remote/prepared_ligands.csv",
+      "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds"
+    },
+    {
+      "target_id": "ESR1_seed20260821",
+      "role": "sensitivity",
+      "matrix": "{run_root}/seed_matrices/esr1/seed_20260821_matrix.csv",
+      "manifest": "{runs}/esr1_adaptive_remote/prepared_ligands.csv",
+      "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds"
+    },
+    {
+      "target_id": "ESR1_seed20260822",
+      "role": "sensitivity",
+      "matrix": "{run_root}/seed_matrices/esr1/seed_20260822_matrix.csv",
+      "manifest": "{runs}/esr1_adaptive_remote/prepared_ligands.csv",
+      "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds"
+    },
+    {
+      "target_id": "ESR1_seed20260823",
+      "role": "sensitivity",
+      "matrix": "{run_root}/seed_matrices/esr1/seed_20260823_matrix.csv",
+      "manifest": "{runs}/esr1_adaptive_remote/prepared_ligands.csv",
+      "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds"
+    }
+  ]
+}

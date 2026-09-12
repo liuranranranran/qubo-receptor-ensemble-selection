@@ -1,0 +1,77 @@
+{
+  "schema": "e1_assets_v1",
+  "description": "E1 主判定资产表（远程 Linux：REPO_ROOT=/root/qubo-receptor-ensemble-selection, DATA_ROOT=/root/autodl-tmp/qubo_data_root）。只读既有 run 产物，不新增 docking。",
+  "roots": {
+    "repo": "/root/qubo-receptor-ensemble-selection",
+    "data_root": "/root/autodl-tmp/qubo_data_root",
+    "runs": "{data_root}/results/runs"
+  },
+  "targets": [
+    {
+      "target_id": "MK14",
+      "role": "primary",
+      "matrix": "{runs}/mk14_adaptive_remote/matrices/primary_median_matrix.csv",
+      "manifest": "{runs}/mk14_adaptive_remote/prepared_ligands.csv",
+      "problem_json": "{runs}/mk14_adaptive_remote/problem.json",
+      "note": "canonical primary matrix + prepared manifest"
+    },
+    {
+      "target_id": "PPARG",
+      "role": "primary",
+      "matrix": "{runs}/pparg_adaptive_remote/matrices/primary_median_matrix.csv",
+      "manifest": "{runs}/pparg_adaptive_remote/prepared_ligands.csv",
+      "problem_json": "{runs}/pparg_adaptive_remote/problem.json"
+    },
+    {
+      "target_id": "BACE1",
+      "role": "primary",
+      "matrix": "{runs}/bace1_adaptive_remote/matrices/primary_median_matrix.csv",
+      "manifest": "{runs}/bace1_adaptive_remote/prepared_ligands.csv",
+      "problem_json": "{runs}/bace1_adaptive_remote/problem.json"
+    },
+    {
+      "target_id": "ESR1",
+      "role": "primary",
+      "matrix": "{runs}/esr1_adaptive_remote/matrices/primary_median_matrix.csv",
+      "manifest": "{runs}/esr1_adaptive_remote/prepared_ligands.csv",
+      "problem_json": "{runs}/esr1_adaptive_remote/problem.json"
+    },
+    {
+      "target_id": "PPARA",
+      "role": "primary",
+      "matrix": "{runs}/ppara_adaptive_remote/matrices/primary_median_matrix.csv",
+      "manifest": "{runs}/ppara_adaptive_remote/prepared_ligands.csv",
+      "problem_json": "{runs}/ppara_adaptive_remote/problem.json"
+    },
+    {
+      "target_id": "FA10",
+      "role": "secondary",
+      "matrix": "{repo}/data/processed/stage102a_fa10_phase_a_primary_median_score_matrix.csv",
+      "manifest": "{repo}/data/processed/stage102a_fa10_phase_a_ligand_manifest.csv",
+      "note": "stage102a phase-A panel, 13 receptors (committed in the repo)"
+    },
+    {
+      "target_id": "EGFR",
+      "role": "secondary",
+      "matrix": "{repo}/data/processed/stage102a_egfr_phase_a_primary_median_score_matrix.csv",
+      "manifest": "{repo}/data/processed/stage102a_egfr_phase_a_ligand_manifest.csv",
+      "note": "stage102a phase-A panel, 12 receptors (committed in the repo)"
+    },
+    {
+      "target_id": "PPARA_pool30",
+      "role": "pool",
+      "problem_json": "{runs}/ppara_pool30_fixed_k4_remote/problem.json",
+      "backfill_problem_json": "{runs}/ppara_adaptive_remote/problem.json",
+      "note": "30-receptor pool; scaffold/outer_fold backfilled from the PPARA adaptive carrier and counted"
+    },
+    {
+      "target_id": "CDK2",
+      "role": "control",
+      "matrix": "{repo}/data/processed/stage04_cdk2_expanded16_development_median_score_matrix.csv",
+      "manifest": "{runs}/stage04_cdk2_expanded16_development_scaffold_cv_gate/fold_assignments.csv",
+      "manifest_scaffold_column": "scaffold_smiles",
+      "manifest_fold_column": "development_fold",
+      "note": "160-ligand / 4-fold development control panel, not part of gate G1"
+    }
+  ]
+}

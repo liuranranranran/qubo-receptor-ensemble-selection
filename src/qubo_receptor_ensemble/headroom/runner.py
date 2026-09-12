@@ -1050,6 +1050,7 @@ def run_e1(
     prereg_path: Path,
     assets_path: Path,
     output_dir: Path,
+    root_overrides: Mapping[str, str] | None = None,
     jobs: int = 1,
     resume: bool = False,
     targets: Sequence[str] | None = None,
@@ -1073,7 +1074,7 @@ def run_e1(
     paths = build_run_paths(Path(output_dir))
     run_id = paths.root.name
     paths.root.mkdir(parents=True, exist_ok=True)
-    roots, specs = load_asset_specs(Path(assets_path))
+    roots, specs = load_asset_specs(Path(assets_path), root_overrides)
     if targets:
         wanted = {str(value) for value in targets}
         specs = [spec for spec in specs if spec.target_id in wanted]
@@ -1240,6 +1241,7 @@ def assemble_products(
     prereg_path: Path,
     assets_path: Path,
     output_dir: Path,
+    root_overrides: Mapping[str, str] | None = None,
     jobs: int = 1,
     inner_fold_count: int | None = None,
     skip_figures: bool = False,
@@ -1256,7 +1258,7 @@ def assemble_products(
     prereg = load_preregistration(Path(prereg_path))
     paths = build_run_paths(Path(output_dir))
     run_id = paths.root.name
-    roots, specs = load_asset_specs(Path(assets_path))
+    roots, specs = load_asset_specs(Path(assets_path), root_overrides)
     selected = {
         str(value) for value in (targets or ())
     }

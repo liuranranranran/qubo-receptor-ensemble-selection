@@ -125,9 +125,24 @@ def resolve_placeholders(value: str, roots: Mapping[str, str]) -> str:
     return resolved
 
 
-def load_asset_specs(config_path: Path) -> tuple[dict[str, str], list[AssetSpec]]:
+def load_asset_specs(
+    config_path: Path,
+    root_overrides: Mapping[str, str] | None = None,
+) -> tuple[dict[str, str], list[AssetSpec]]:
     payload = read_json_file(config_path)
     roots = {str(key): str(value) for key, value in dict(payload.get("roots", {})).items()}
+    for key, value in dict(root_overrides or {}).items():
+        roots[str(key)] = str(value)
+    # roots may reference each other (e.g. {data_root}/results/headroom/{run_id})
+    for _ in range(4):
+        changed = False
+        for key in list(roots):
+            resolved = resolve_placeholders(roots[key], roots)
+            if resolved != roots[key]:
+                roots[key] = resolved
+                changed = True
+        if not changed:
+            break
     entries = payload.get("targets")
     if not isinstance(entries, list) or not entries:
         raise AssetError("e1_assets.json needs a non-empty targets list")

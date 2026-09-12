@@ -36,6 +36,13 @@ def _add_common(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--prereg", required=True, help="frozen pre-registration JSON")
     parser.add_argument("--assets", required=True, help="E1 asset table JSON")
     parser.add_argument("--output-dir", required=True, help="run directory under results/headroom/")
+    parser.add_argument(
+        "--root",
+        action="append",
+        default=None,
+        metavar="NAME=PATH",
+        help="override an asset root, e.g. --root run_root=$DATA_ROOT/results/headroom/e1_x",
+    )
 
 
 def _add_scan_options(parser: argparse.ArgumentParser) -> None:
@@ -62,6 +69,21 @@ def _add_scan_options(parser: argparse.ArgumentParser) -> None:
     )
 
 
+def _parse_roots(values: list[str] | None) -> dict[str, str] | None:
+    if not values:
+        return None
+    roots: dict[str, str] = {}
+    for item in values:
+        if "=" not in item:
+            raise SystemExit(f"--root expects NAME=PATH, got: {item}")
+        name, path = item.split("=", 1)
+        name = name.strip()
+        if not name or not path.strip():
+            raise SystemExit(f"--root expects NAME=PATH, got: {item}")
+        roots[name] = path.strip()
+    return roots
+
+
 def _parse_targets(value: str | None) -> tuple[str, ...] | None:
     if not value:
         return None
@@ -85,7 +107,7 @@ def command_verify(args: argparse.Namespace) -> int:
     from qubo_receptor_ensemble.io import write_json
 
     prereg = load_preregistration(Path(args.prereg))
-    roots, specs = asset_module.load_asset_specs(Path(args.assets))
+    roots, specs = asset_module.load_asset_specs(Path(args.assets), _parse_roots(args.root))
     targets = _parse_targets(args.targets)
     if targets:
         specs = [spec for spec in specs if spec.target_id in set(targets)]
@@ -150,6 +172,7 @@ def command_run(args: argparse.Namespace) -> int:
         output_dir=Path(args.output_dir),
         jobs=args.jobs,
         resume=args.resume,
+        root_overrides=_parse_roots(args.root),
         targets=_parse_targets(args.targets),
         k_list=k_list,
         bootstrap_iterations=bootstrap_iterations,
@@ -184,6 +207,7 @@ def command_report(args: argparse.Namespace) -> int:
         assets_path=Path(args.assets),
         output_dir=Path(args.output_dir),
         jobs=int(args.jobs),
+        root_overrides=_parse_roots(args.root),
         inner_fold_count=args.inner_fold_count,
         skip_figures=args.skip_figures,
         targets=_parse_targets(args.targets),
@@ -191,6 +215,70 @@ def command_report(args: argparse.Namespace) -> int:
     gate = result["gate"]
     print(f"rebuilt {result['shard_count']} shards | gate={gate.get('decision')}")
     print(f"products -> {args.output_dir}")
+    return 0
+
+
+def command_extract_seeds(args: argparse.Namespace) -> int:
+    """Rebuild per-seed / min-aggregated matrices from a run's score_tables."""
+    from qubo_receptor_ensemble.headroom.seed_matrices import (
+        aggregate_seed_matrices,
+        discover_seeds,
+        extract_seed_matrix,
+        reference_receptor_order,
+        write_seed_matrix,
+    )
+    from qubo_receptor_ensemble.io import write_json
+
+    run_dir = Path(args.run_dir)
+    score_tables = run_dir / "score_tables"
+    if not score_tables.is_dir():
+        raise SystemExit(f"score_tables directory not found: {score_tables}")
+    reference = (
+        Path(args.reference_matrix)
+        if args.reference_matrix
+        else run_dir / "matrices" / "primary_median_matrix.csv"
+    )
+    receptor_order = (
+        reference_receptor_order(reference) if reference.is_file() else None
+    )
+    seeds = _parse_ints(args.seeds) or discover_seeds(score_tables)
+    output_dir = Path(args.output_dir) if args.output_dir else run_dir / "matrices" / "seed_matrices"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    audit: dict[str, object] = {
+        "schema": "e1_seed_extraction_v1",
+        "run_dir": run_dir.as_posix(),
+        "score_tables": score_tables.as_posix(),
+        "reference_matrix": reference.as_posix() if reference.is_file() else None,
+        "receptor_order": list(receptor_order) if receptor_order else None,
+        "seeds": list(seeds),
+        "outputs": {},
+    }
+    matrices = {}
+    for seed in seeds:
+        seed_matrix = extract_seed_matrix(
+            score_tables,
+            seed,
+            target_id=args.target_id,
+            receptor_order=receptor_order,
+        )
+        record = write_seed_matrix(seed_matrix, output_dir / f"seed_{seed}_matrix.csv")
+        record["ligand_count"] = seed_matrix.n_ligands
+        record["receptor_count"] = seed_matrix.n_receptors
+        audit["outputs"][str(seed)] = record  # type: ignore[index]
+        matrices[seed] = seed_matrix
+        print(
+            f"[seed] {seed}: {seed_matrix.n_ligands} ligands x {seed_matrix.n_receptors} receptors "
+            f"-> {record['path']}"
+        )
+    if len(matrices) > 1:
+        aggregated = aggregate_seed_matrices(matrices, aggregation="min")
+        record = write_seed_matrix(aggregated, output_dir / "seed_min_matrix.csv")
+        record["ligand_count"] = aggregated.n_ligands
+        record["receptor_count"] = aggregated.n_receptors
+        audit["aggregated_min"] = record
+        print(f"[seed] min-aggregated -> {record['path']}")
+    write_json(output_dir / "seed_extraction_audit.json", audit)
+    print(f"[seed] audit -> {(output_dir / 'seed_extraction_audit.json').as_posix()}")
     return 0
 
 
@@ -207,6 +295,21 @@ def build_parser() -> argparse.ArgumentParser:
     _add_common(run)
     _add_scan_options(run)
     run.set_defaults(handler=command_run)
+
+    seeds = subparsers.add_parser(
+        "extract-seeds",
+        help="rebuild per-seed and min-aggregated matrices from a run's score_tables",
+    )
+    seeds.add_argument("--run-dir", required=True, help="canonical run directory containing score_tables/")
+    seeds.add_argument("--output-dir", default=None, help="defaults to <run-dir>/matrices/seed_matrices")
+    seeds.add_argument("--seeds", default=None, help="comma-separated seeds; defaults to auto-discovery")
+    seeds.add_argument("--target-id", default=None, help="override the target id written into the matrix")
+    seeds.add_argument(
+        "--reference-matrix",
+        default=None,
+        help="canonical primary matrix used to freeze the receptor column order",
+    )
+    seeds.set_defaults(handler=command_extract_seeds)
 
     report = subparsers.add_parser("report", help="rebuild products from checkpoints")
     _add_common(report)
