@@ -94,13 +94,13 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def run_small(root: Path, prereg: Path, assets: Path):
+def run_small(root: Path, prereg: Path, assets: Path, resume: bool = False):
     return runner.run_e1(
         prereg_path=prereg,
         assets_path=assets,
         output_dir=root / "results" / "headroom" / "e1_synth",
         jobs=1,
-        resume=False,
+        resume=resume,
         k_list=(1, 2),
         bootstrap_iterations=25,
         top_m=25,
@@ -204,3 +204,33 @@ def test_parallel_map_is_lazy_so_checkpoints_stay_incremental() -> None:
     assert produced == [0]  # only the first shard ran: it can be checkpointed now
     assert list(generator) == [1, 2, 3]
     assert produced == [0, 1, 2, 3]
+
+
+def test_resume_reuses_shard_checkpoints(headroom_workspace: Path) -> None:
+    """Regression: an empty payload run_id used to defeat --resume completely."""
+
+    import os
+    import time
+
+    matrix, manifest = write_dataset(headroom_workspace)
+    assets = write_assets_config(headroom_workspace, matrix, manifest)
+    prereg = write_prereg(headroom_workspace)
+    first = run_small(headroom_workspace, prereg, assets)
+    run_dir = Path(first["paths"]["root"])
+    checkpoints = sorted((run_dir / "cells").glob("*.json"))
+    assert checkpoints
+    before = {path.name: path.stat().st_mtime_ns for path in checkpoints}
+
+    time.sleep(1.1)  # filesystem mtime resolution guard
+    second = run_small(headroom_workspace, prereg, assets, resume=True)
+    after = {path.name: path.stat().st_mtime_ns for path in checkpoints}
+    assert before == after, "resume recomputed finished shards"
+    assert second["gate"]["decision"] == first["gate"]["decision"]
+
+
+def test_checkpoint_with_empty_run_id_is_still_compatible() -> None:
+    base = runner.HeadroomConfig(k_list=(1, 2), bootstrap_iterations=10)
+    payload = {"run_id": "", "config": base.as_dict(), "config_hash": "nope"}
+    assert runner.checkpoint_compatible(payload, base, "any-run")
+    payload["run_id"] = "other-run"
+    assert not runner.checkpoint_compatible(payload, base, "any-run")

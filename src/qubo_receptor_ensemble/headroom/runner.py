@@ -699,6 +699,7 @@ def _shard_tasks(
     specs: Sequence[AssetSpec],
     config: HeadroomConfig,
     prereg: Mapping[str, object],
+    run_id: str = "",
 ) -> list[dict[str, object]]:
     roles = {spec.target_id: spec.role for spec in specs}
     tasks: list[dict[str, object]] = []
@@ -712,6 +713,7 @@ def _shard_tasks(
                 tasks.append(
                     {
                         "target_id": target_id,
+                        "run_id": run_id,
                         "role": roles.get(target_id, "primary"),
                         "fold": int(fold),
                         "phi": str(phi),
@@ -729,8 +731,14 @@ def checkpoint_compatible(
     config: HeadroomConfig,
     run_id: str,
 ) -> bool:
-    """A checkpoint is reusable when its frozen knobs match and its k_list covers ours."""
-    if payload.get("run_id") != run_id:
+    """A checkpoint is reusable when its frozen knobs match and its k_list covers ours.
+
+    ``run_id`` is checked only when the checkpoint actually recorded one:
+    shard payloads written before the run_id plumbing fix carry an empty string
+    and must still be reusable (their config_hash is authoritative).
+    """
+    stored_run_id = str(payload.get("run_id") or "")
+    if stored_run_id and stored_run_id != run_id:
         return False
     stored = payload.get("config")
     if not isinstance(stored, Mapping):
@@ -1131,7 +1139,7 @@ def run_e1(
             else:
                 print(f"[assets] {report['target_id']}: {report['status']} {report.get('error', '')}", flush=True)
 
-    tasks = _shard_tasks(panels, specs, config, prereg)
+    tasks = _shard_tasks(panels, specs, config, prereg, run_id)
     shards = _run_shards(tasks, paths, config, jobs, resume, run_id, verbose=verbose)
     ordered_shards = [shards[key] for key in sorted(shards)]
     permutations_path = paths.root / "permutations.json"

@@ -248,7 +248,7 @@ git add results/headroom/$RUN_ID && git commit -m "results(headroom): E1 远程�
 | 想先只跑主判定 | `--targets MK14,PPARG,BACE1,ESR1,PPARA,PPARA_pool30`（6 资产 = 240 分片）；敏感性资产只依赖这 5 个靶点，可独立跑满 |
 | `gate = NOT_EVALUATED` | 主格不完整：查 `input_manifest.primary_targets_missing` 与 `cells/` 是否 352 |
 | 想改 `RUN_ID` | `RUN_ID=e1_x bash scripts/run_e1_headroom_remote.sh`；若手工跑敏感性，`--root run_root=<主目录>` 必须指对 |
-| 中断/超时 | 同一命令加 `--resume`；分片粒度 = (target, fold, phi)，重跑代价极小 |
+| 中断/超时 | 同一命令加 `--resume`；分片粒度 = (target, fold, phi)，重跑代价极小。**重跑时 step 2 应在秒级完成**（352 个 checkpoint 全部命中）；如果日志又出现成片的 `[scan]` 行，说明 checkpoint 被判为不兼容，把 `cells/` 里任一 json 的 `run_id`/`config` 贴出来排查 |
 | 内存 | 单分片峰值 < 300 MB（只保存 top-M 掩码，不存全部子集分数）；pool30 k=6 也安全 |
 | 想快速冒烟 | `--k-max 3 --no-train-oracle --bootstrap-iterations 100 --permutations 20`（**必须标注为偏离预注册**，不能用于 G1） |
 | 图报错 | `pip install matplotlib` 或 `--skip-figures`（图不影响 G1） |

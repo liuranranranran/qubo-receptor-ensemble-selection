@@ -284,6 +284,26 @@ def command_extract_seeds(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_summarize(args: argparse.Namespace) -> int:
+    """Compact summary of a finished run (gate + headline numbers + optional sensitivity)."""
+    from qubo_receptor_ensemble.headroom.summary import build_summary, format_summary_text
+    from qubo_receptor_ensemble.io import write_json
+
+    summary = build_summary(
+        Path(args.run_dir),
+        Path(args.sensitivity_dir) if args.sensitivity_dir else None,
+    )
+    text = format_summary_text(summary)
+    print(text, end="")
+    if args.output_json:
+        write_json(Path(args.output_json), summary)
+        print(f"[summarize] json -> {args.output_json}")
+    if args.output_text:
+        Path(args.output_text).write_text(text, encoding="utf-8")
+        print(f"[summarize] text -> {args.output_text}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -318,6 +338,15 @@ def build_parser() -> argparse.ArgumentParser:
         help="canonical primary matrix used to freeze the receptor column order",
     )
     seeds.set_defaults(handler=command_extract_seeds)
+
+    summarize = subparsers.add_parser(
+        "summarize", help="compact summary of a finished run (for watch/archive)"
+    )
+    summarize.add_argument("--run-dir", required=True)
+    summarize.add_argument("--sensitivity-dir", default=None)
+    summarize.add_argument("--output-json", default=None)
+    summarize.add_argument("--output-text", default=None)
+    summarize.set_defaults(handler=command_summarize)
 
     report = subparsers.add_parser("report", help="rebuild products from checkpoints")
     _add_common(report)
