@@ -14,8 +14,11 @@ git fetch origin && git checkout feat/e1-headroom-scan     # 或已合并的目�
 pip install -e .                                            # 首次才需要
 
 # 全流程（T1-T6 测试 → D1 → 主扫描 → 置换/φ选择/图 → seed 矩阵 → 敏感性 → 产物审计）
-JOBS=32 bash scripts/run_e1_headroom_remote.sh
+JOBS=32 bash scripts/run_e1_headroom_remote.sh             # JOBS=$(nproc) 亦可
 ```
+
+> **`JOBS` 不要用 1**：pool30 的 40 个分片单核各需 ≈85 s，串行光这一项就 ≈1 小时；
+> 32 并行整轮 10–20 分钟。分片会写 checkpoint，中途改 `JOBS` 重跑 == 续跑。
 
 预计墙钟 **10–20 分钟**（32 并行分片；主运行 3–5 min、敏感性 2–3 min、组装/图 1–2 min），
 零 docking、零 GPU。产物默认写到
@@ -37,6 +40,12 @@ python -m pip install --editable .
 python -c "import numpy, pandas, sklearn; print('deps ok')"
 python -c "import matplotlib; print('matplotlib', matplotlib.__version__)" || pip install matplotlib
 ```
+
+输入文件随仓库分发：FA10/EGFR 的矩阵与配体 manifest、CDK2 的矩阵与 fold 分配都在
+`data/processed/`（`git add -f` 跟踪），所以 `git clone` 即可跑全部 9 个资产；
+MK14 的 canonical 矩阵仍以 `$DATA_ROOT/results/runs/mk14_adaptive_remote/` 为准。
+测试的 MK14 路径支持环境变量覆盖：`E1_MK14_MATRIX`、`E1_MK14_MANIFEST`、`E1_MK14_RUN_DIR`
+（默认同时探测 Windows 本地路径与 `/root/autodl-tmp/...` 远程路径，远程无需设置）。
 
 **BLAS 线程必须收敛**（否则 32 个分片进程 × 每进程多线程 = 过度订阅，反而变慢）：
 
@@ -74,7 +83,8 @@ python -m pytest -q tests/test_headroom_fusion.py tests/test_headroom_metrics_pa
   tests/test_headroom_seed_matrices.py tests/test_headroom_runner.py
 ```
 
-预期 **59 passed**（其中 T2 需要 MK14 载体；远程 canonical run 存在，必然通过）。
+预期 **59 passed**（远程 canonical run 在位时，T2 与 min 矩阵校准都会真正执行；
+若看到 `2 skipped`，说明 MK14 载体没探测到，用上面的 `E1_MK14_*` 变量指向它）。
 
 ### 3.2 D1 输入核验（硬门，先跑）
 
@@ -224,6 +234,9 @@ git add results/headroom/$RUN_ID && git commit -m "results(headroom): E1 远程�
 | 症状 | 处理 |
 |---|---|
 | 某靶点 `matrices/` 不存在 | 自动回退 `problem.json` 载体（`input_manifest.source=problem_json`，D1 已复核）；或先重跑该 run 的 `aggregate` 阶段 |
+| FA10/EGFR 报 missing | 输入已随仓库分发（`data/processed/stage102a_*`）；若仍缺，可从其 run 的 score_tables 重建中位聚合矩阵：`python scripts/headroom_scan.py extract-seeds --run-dir $DATA_ROOT/results/runs/stage102a_fa10_full_local --output-dir /tmp/fa10_rebuild --aggregation median`，再把 `seed_median_matrix.csv` 拷成 `data/processed/stage102a_fa10_phase_a_primary_median_score_matrix.csv` |
+| CDK2 报 missing | 控制面板（不进 G1）：矩阵与 fold 分配已在 `data/processed/stage04_cdk2_expanded16_development_*`；确实要跳过就从资产表删掉该条目并标注 |
+| 想先只跑主判定 | `--targets MK14,PPARG,BACE1,ESR1,PPARA,PPARA_pool30`（6 资产 = 240 分片）；敏感性资产只依赖这 5 个靶点，可独立跑满 |
 | `gate = NOT_EVALUATED` | 主格不完整：查 `input_manifest.primary_targets_missing` 与 `cells/` 是否 352 |
 | 想改 `RUN_ID` | `RUN_ID=e1_x bash scripts/run_e1_headroom_remote.sh`；若手工跑敏感性，`--root run_root=<主目录>` 必须指对 |
 | 中断/超时 | 同一命令加 `--resume`；分片粒度 = (target, fold, phi)，重跑代价极小 |
