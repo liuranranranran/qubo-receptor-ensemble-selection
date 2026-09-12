@@ -1,6 +1,6 @@
 {
   "assets_config": "configs/e1_assets.json",
-  "created_utc": "2026-09-12T08:54:23Z",
+  "created_utc": "2026-09-12T09:04:31Z",
   "files_sha256": {
     "E:/Quant/qubo-receptor-ensemble-selection/data/processed/stage04_cdk2_expanded16_development_median_score_matrix.csv": {
       "sha256": "CAB398C59AC49088ABE6065A58E216D46DC205BE862F0D0A8E57050CC45D96E4",
@@ -94,7 +94,7 @@
     "quant": "E:/Quant",
     "repo": "E:/Quant/qubo-receptor-ensemble-selection"
   },
-  "run_id": "e1_20260911",
+  "run_id": "e1_local_validation_20260911",
   "schema": "e1_input_manifest_v1",
   "targets": [
     {

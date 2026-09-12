@@ -2,15 +2,15 @@
   "branch": "headline GO fraction < no_go_below: close the subset-selection line with an upper-bound conclusion; move to E2 + E5 arm A",
   "decision": "NO_GO",
   "evidence_paths": {
-    "bootstrap_report": "results/headroom/e1_20260911/bootstrap_report.json",
-    "cell_metrics": "results/headroom/e1_20260911/cell_metrics.csv",
+    "bootstrap_report": "results/headroom/e1_local_validation_20260911/bootstrap_report.json",
+    "cell_metrics": "results/headroom/e1_local_validation_20260911/cell_metrics.csv",
     "figures": [
-      "results/headroom/e1_20260911/figures/fig_headroom_map.png",
-      "results/headroom/e1_20260911/figures/fig_phi_ranking.png"
+      "results/headroom/e1_local_validation_20260911/figures/fig_headroom_map.png",
+      "results/headroom/e1_local_validation_20260911/figures/fig_phi_ranking.png"
     ],
-    "headroom_map": "results/headroom/e1_20260911/headroom_map.csv",
-    "phi_selection": "results/headroom/e1_20260911/phi_selection.json",
-    "run_manifest": "results/headroom/e1_20260911/run_manifest.json"
+    "headroom_map": "results/headroom/e1_local_validation_20260911/headroom_map.csv",
+    "phi_selection": "results/headroom/e1_local_validation_20260911/phi_selection.json",
+    "run_manifest": "results/headroom/e1_local_validation_20260911/run_manifest.json"
   },
   "fold_oracle_choices": [
     {
@@ -438,7 +438,7 @@
     2,
     3
   ],
-  "run_id": "e1_20260911",
+  "run_id": "e1_local_validation_20260911",
   "schema": "e1_gate_g1_v1",
   "targets": [
     "MK14",

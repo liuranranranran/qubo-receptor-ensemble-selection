@@ -1,12 +1,14 @@
 # E1 Headroom 扫描：实现与结果
 
-> 运行 ID：`e1_20260911`　|　产物：`results/headroom/e1_20260911/`
+> 运行 ID：`e1_local_validation_20260911`　|　产物：`results/headroom/e1_local_validation_20260911/`
 > 计划依据：`E:\Quant\docs\qubo\E1实现计划_headroom扫描_20260911.md`（父计划 §3 E1）
-> 状态：已实现、已全量运行、G1 = **NO-GO**
+> 状态：已实现并完成**本地验证运行**（非权威）：本地缺 4 个远程矩阵、pool30 只跑到 k≤4，
+> 因此本文数字只用于验证流水线与量级参考，**正式结论必须用远程运行**
+> （见 [`headroom_scan_remote_runbook_zh.md`](headroom_scan_remote_runbook_zh.md)，32 vCPU 约 10–20 分钟）。
 
 ## 0. 一句话结论
 
-在预注册主格（5 靶点 × 5 折 × 8 融合规则 × k∈{2,3} = 400 格）上：
+**本地验证运行**在预注册主格（5 靶点 × 5 折 × 8 融合规则 × k∈{2,3} = 400 格）上：
 偷看测试标签的 oracle 上界 `H_raw` 平均 **+0.062**（92% 为正、52% 超过噪声地板），
 但"一半选、另一半评"的可落地 `H_nested` 平均 **−0.017**（仅 4.0% 格子通过
 `H_nested_lower95 > 噪声地板 且 ratio > 1`）。折内 oracle-φ 通过率 18%、
@@ -107,7 +109,7 @@ python scripts/headroom_scan.py report --prereg ... --assets ... --output-dir ..
 ## 5. 运行与产物
 
 ```text
-results/headroom/e1_20260911/
+results/headroom/e1_local_validation_20260911/
   input_manifest.json      D1 核验 + SHA-256
   cell_metrics.csv         长表：target/fold/phi/k/method（oracle/ref/greedy/single/train_selected）
   headroom_map.csv         target × phi × k 的 h_nested / lower95 / noise / ratio / verdict
@@ -121,6 +123,20 @@ results/headroom/e1_20260911/
 ```
 
 规模：10 个资产 × (5 折或 4 折) × 8 φ = **392 分片**；主格 400 格；全量 cell 行 12k+。
+
+### 5.5 远程正式运行与敏感性补强
+
+- 正式运行走 `docs/headroom_scan_remote_runbook_zh.md` + `scripts/run_e1_headroom_remote.sh`：
+  `REPO_ROOT=/root/qubo-receptor-ensemble-selection`、`DATA_ROOT=/root/autodl-tmp/qubo_data_root`，
+  资产表 `configs/e1_assets_remote.json`（9 个资产 = 5 主判定 + FA10/EGFR + pool30 + CDK2）。
+- 敏感性资产表 `configs/e1_assets_remote_sensitivity.json`（20 个资产 = 5 个 canonical min 矩阵
+  + 15 个单 seed 矩阵），`--root run_root=<主运行目录>` 覆盖路径。
+- 单 seed 矩阵由 `scripts/headroom_scan.py extract-seeds` 从既有
+  `<run>/score_tables/seed_<seed>__<receptor>.csv` 重建（pose_rank=1、status=ok，逐格取 min 折叠重复）；
+  已用 MK14 真数据校准：重建的 `seed_min_matrix.csv` 与 canonical `sensitivity_minimum_matrix.csv`
+  **逐值相等（max |Δ| = 0）**，审计写入 `seed_extraction_audit.json`。
+- 这样计划 §7.1（min 聚合）与 §7.2（三 seed 独立）在远程都可以按预注册跑满，无需新增 docking；
+  本地验证运行只覆盖了 §7.1（MK14）。
 
 ## 6. 结果
 
@@ -203,6 +219,9 @@ PPARA 6、PPARG 6、EGFR 10、FA10 3、PPARA_pool30 3、CDK2 3、MK14_min 1、
 
 ## 7. 限制与解释（写结论时必须带上）
 
+0. **本地验证运行的性质**：4 个远程靶点用 `problem.json` 载体（远程有矩阵文件）、
+   pool30 只跑到 k≤4、敏感性只做了 MK14 min 矩阵；正式运行必须用
+   `configs/e1_assets_remote.json` + `configs/e1_assets_remote_sensitivity.json` 在服务器重跑。
 1. **统计功效**：每个留出折约 120 配体（~24 active），PR-AUC 的 bootstrap
    SE ≈ 0.05；`min` 在 PPARA 上的 +0.15 是少数几个超过 MDE 的效应。
    EF1% 只基于 ~2 个分子，一律只作参考（计划 §G5 已冻结）。
@@ -245,12 +264,12 @@ PY="C:/Users/18089/.conda/envs/qubo-receptor-ensemble/python.exe"
 # D1
 $PY scripts/headroom_scan.py verify \
   --prereg configs/experiments/e1_headroom_preregistration.json \
-  --assets configs/e1_assets.json --output-dir results/headroom/e1_20260911
+  --assets configs/e1_assets.json --output-dir results/headroom/e1_local_validation_20260911
 
 # 扫描（分片可切分，--resume 幂等）
 for T in MK14 BACE1 ESR1 PPARA PPARG FA10 EGFR CDK2 MK14_min; do
   $PY scripts/headroom_scan.py run --prereg ... --assets ... \
-      --output-dir results/headroom/e1_20260911 --targets $T --jobs 1 --resume \
+      --output-dir results/headroom/e1_local_validation_20260911 --targets $T --jobs 1 --resume \
       --skip-perm --skip-phi-selection --skip-figures --allow-missing-primary
 done
 $PY scripts/headroom_scan.py run --prereg ... --assets ... --output-dir ... \
@@ -259,7 +278,7 @@ $PY scripts/headroom_scan.py run --prereg ... --assets ... --output-dir ... \
 
 # 补齐置换校正 + train-only φ 选择，重建全部产物与图
 $PY scripts/headroom_scan.py report --prereg ... --assets ... \
-    --output-dir results/headroom/e1_20260911 --jobs 1
+    --output-dir results/headroom/e1_local_validation_20260911 --jobs 1
 
 # 验证
 $PY -m pytest -q tests/test_headroom_fusion.py tests/test_headroom_metrics_parity.py \

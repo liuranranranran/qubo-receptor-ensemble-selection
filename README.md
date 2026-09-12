@@ -96,9 +96,12 @@ python scripts/headroom_scan.py run \
   --output-dir results/headroom/e1_20260911 --jobs 24 --resume
 ```
 
-输入资产表见 `configs/e1_assets.json`；产物与结果摘要见
-[docs/headroom_scan_zh.md](docs/headroom_scan_zh.md)。E1 的运行结论是
-G1 = NO-GO（"选构象子集"以上界告负收口），细节与限制在该文档 §6–§8。
+资产表：本地 `configs/e1_assets.json`，远程服务器 `configs/e1_assets_remote.json`
+（主判定）与 `configs/e1_assets_remote_sensitivity.json`（min 聚合 + 三 seed 独立）。
+远程正式运行看 [远程运行手册](docs/headroom_scan_remote_runbook_zh.md)：
+`JOBS=32 bash scripts/run_e1_headroom_remote.sh`。
+实现与产物说明见 [docs/headroom_scan_zh.md](docs/headroom_scan_zh.md)；
+本地验证运行（非权威）的结论是 G1 = NO-GO，细节与限制在该文档 §6–§8。
 
 ## 验证
 
