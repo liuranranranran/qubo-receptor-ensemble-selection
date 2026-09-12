@@ -1,0 +1,29 @@
+Traceback (most recent call last):
+  File "E:\Quant\qubo-receptor-ensemble-selection\scripts\headroom_scan.py", line 221, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "E:\Quant\qubo-receptor-ensemble-selection\scripts\headroom_scan.py", line 217, in main
+    return int(args.handler(args))
+               ^^^^^^^^^^^^^^^^^^
+  File "E:\Quant\qubo-receptor-ensemble-selection\scripts\headroom_scan.py", line 147, in command_run
+    result = runner.run_e1(
+             ^^^^^^^^^^^^^^
+  File "E:\Quant\qubo-receptor-ensemble-selection\src\qubo_receptor_ensemble\headroom\runner.py", line 1051, in run_e1
+    permutations_map = _run_permutations(ordered_shards, panels, config, prereg, jobs, verbose=verbose)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Quant\qubo-receptor-ensemble-selection\src\qubo_receptor_ensemble\headroom\runner.py", line 805, in _run_permutations
+    for payload in parallel_map(jobs, run_permutation_task, tasks, verbose=verbose):
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Quant\qubo-receptor-ensemble-selection\src\qubo_receptor_ensemble\headroom\runner.py", line 191, in parallel_map
+    return [function(item) for item in payloads]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Quant\qubo-receptor-ensemble-selection\src\qubo_receptor_ensemble\headroom\runner.py", line 191, in <listcomp>
+    return [function(item) for item in payloads]
+            ^^^^^^^^^^^^^^
+  File "E:\Quant\qubo-receptor-ensemble-selection\src\qubo_receptor_ensemble\headroom\runner.py", line 242, in run_permutation_task
+    [int(mask) for mask in task["top_masks"]],  # type: ignore[index]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Quant\qubo-receptor-ensemble-selection\src\qubo_receptor_ensemble\headroom\runner.py", line 242, in <listcomp>
+    [int(mask) for mask in task["top_masks"]],  # type: ignore[index]
+     ^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'tuple'

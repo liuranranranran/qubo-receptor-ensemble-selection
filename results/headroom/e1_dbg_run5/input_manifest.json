@@ -1,0 +1,124 @@
+{
+  "assets_config": "configs/e1_assets.json",
+  "created_utc": "2026-09-12T08:08:53Z",
+  "files_sha256": {
+    "E:/Quant/remote_runs/mk14_adaptive_remote/matrices/primary_median_matrix.csv": {
+      "sha256": "BE9C2DB64BC85B8038BD3D1E261D3D6762496A9B7BB9AF06B7DEE33932D4F799",
+      "size_bytes": 92224
+    },
+    "E:/Quant/remote_runs/mk14_adaptive_remote/prepared_ligands.csv": {
+      "sha256": "28DCA1608C9F36FC6084CCABE9107279DA3960175236A2A912AF9790FD320BB1",
+      "size_bytes": 340475
+    },
+    "E:/Quant/remote_runs/mk14_adaptive_remote/problem.json": {
+      "sha256": "7F9550065852A611932B631196819096345049BCDABF3CDFFA02A50F9A2BD30C",
+      "size_bytes": 996946
+    },
+    "configs/e1_assets.json": {
+      "sha256": "704D14D043615EB256C9F4EC6DDFFFD1E22A13B29B651A5B03A61CAE975AEDEC",
+      "size_bytes": 4178
+    },
+    "configs/experiments/e1_headroom_preregistration.json": {
+      "sha256": "E704E56DAEFE1985F3DD0AD9674644DB8B1396726558A03B109858CBC4BFE30E",
+      "size_bytes": 2588
+    }
+  },
+  "preregistration": {
+    "path": "configs/experiments/e1_headroom_preregistration.json",
+    "schema": "e1_headroom_v1",
+    "sha256": "E704E56DAEFE1985F3DD0AD9674644DB8B1396726558A03B109858CBC4BFE30E"
+  },
+  "primary_targets_available": [
+    "MK14"
+  ],
+  "primary_targets_missing": [
+    "PPARG",
+    "BACE1",
+    "ESR1",
+    "PPARA"
+  ],
+  "roots": {
+    "data_root": "E:/Quant/qubo_receptor_ensemble_experiment_data",
+    "quant": "E:/Quant",
+    "repo": "E:/Quant/qubo-receptor-ensemble-selection"
+  },
+  "run_id": "e1_dbg_run5",
+  "schema": "e1_input_manifest_v1",
+  "targets": [
+    {
+      "active_count": 120,
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 81
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 82
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 83
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 84
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 84
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "11OY",
+        "1A9U",
+        "1BL6",
+        "1BL7",
+        "1BMK",
+        "1DI9",
+        "1KV1",
+        "1KV2",
+        "1M7Q",
+        "1OUK",
+        "1OUY",
+        "1R39",
+        "1W7H",
+        "1W82",
+        "1W83"
+      ],
+      "role": "primary",
+      "scaffold_count": 414,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "E:/Quant/remote_runs/mk14_adaptive_remote/prepared_ligands.csv",
+        "matrix": "E:/Quant/remote_runs/mk14_adaptive_remote/matrices/primary_median_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "E:/Quant/remote_runs/mk14_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "E:/Quant/remote_runs/mk14_adaptive_remote/matrices/primary_median_matrix.csv",
+        "note": "matrix + prepared manifest available locally",
+        "problem_json": "E:/Quant/remote_runs/mk14_adaptive_remote/problem.json",
+        "role": "primary",
+        "target_id": "MK14"
+      },
+      "status": "ok",
+      "target_id": "MK14"
+    }
+  ]
+}

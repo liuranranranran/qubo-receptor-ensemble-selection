@@ -1,0 +1,51 @@
+{
+  "k_star": {
+    "MK14": {
+      "best_phi": "rrf",
+      "displacement_best_vs_mean": 0,
+      "displacement_train_best_vs_mean": 0,
+      "folds": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "k_star_oracle_best_phi": 3,
+      "k_star_oracle_by_phi": {
+        "gmean": 3,
+        "hmean": 3,
+        "max": 3,
+        "mean": 3,
+        "min": 3,
+        "ranksum": 3,
+        "rrf": 3,
+        "zmean": 3
+      },
+      "k_star_oracle_mean_phi": 3,
+      "k_star_train_selected_by_phi": {
+        "gmean": 2,
+        "hmean": 3,
+        "max": 3,
+        "mean": 2,
+        "min": 2,
+        "ranksum": 2,
+        "rrf": 2,
+        "zmean": 2
+      },
+      "phi_mean_nested": {
+        "gmean": -0.012253164287651445,
+        "hmean": 0.011088909411542763,
+        "max": -0.04223001231947822,
+        "mean": -0.007002662672592,
+        "min": 0.01367393687947931,
+        "ranksum": -0.05977983527521967,
+        "rrf": 0.013754220708043713,
+        "zmean": -0.01576804554567871
+      }
+    }
+  },
+  "method": "inner-CV (3 scaffold folds of the training fold), oracle subset on inner-train, utility on inner-held",
+  "schema": "e1_phi_selection_v1",
+  "targets": {}
+}
