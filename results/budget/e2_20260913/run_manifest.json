@@ -1,0 +1,121 @@
+{
+  "assembly_elapsed_seconds": 550.22,
+  "assets_config": {
+    "path": "configs/e1_assets.json",
+    "sha256": "505A7B818AC1135783492C4FF1CA85F5D835B9F09B9694DF10C5EB2B1D676897"
+  },
+  "cell_rows": 3920,
+  "comparisons": 700,
+  "config": {
+    "alpha": 20.0,
+    "baseline": "s1_width",
+    "bootstrap_iterations": 2000,
+    "bootstrap_seed": 0,
+    "budgets": [
+      600,
+      1200,
+      2400,
+      3600,
+      4800
+    ],
+    "fusions": [
+      "mean",
+      "min"
+    ],
+    "oracle_greedy_budgets": [
+      4800
+    ],
+    "oracle_greedy_max_steps": null,
+    "primary_metric": "pr_auc"
+  },
+  "config_matches_preregistration": true,
+  "created_utc": "2026-09-13T08:51:56Z",
+  "elapsed_seconds": 550.593,
+  "environment": {
+    "cpu_count": 28,
+    "machine": "AMD64",
+    "numpy": "2.4.6",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "python": "3.11.15"
+  },
+  "gate": {
+    "decision": "NONTRIVIAL_REGION",
+    "fraction_width_locked": 0.1
+  },
+  "git_commit": "a29d8650ee87da79280252d54778c157aa6c280a",
+  "policies": [
+    "s1_width",
+    "s2_uniform",
+    "s3_top10",
+    "s3_top25",
+    "s3_top50",
+    "s4_scaffold25",
+    "s4_scaffold50",
+    "s5_score_oracle"
+  ],
+  "preregistration": {
+    "path": "configs/experiments/e2_budget_preregistration.json",
+    "sha256": "BD5700E2DE11D8BDB0274583FDFD7F4B5F9188EFE68953887AD872CCBB1377AC"
+  },
+  "products": {
+    "b_star": "results/budget/e2_20260913/b_star.json",
+    "budget_cells": "results/budget/e2_20260913/budget_cells.csv",
+    "budget_curves": "results/budget/e2_20260913/budget_curves.csv",
+    "figures": [
+      "results/budget/e2_20260913/figures/fig_budget_curves.png",
+      "results/budget/e2_20260913/figures/fig_b_star.png",
+      "results/budget/e2_20260913/figures/fig_law.png"
+    ],
+    "gate_g2": "results/budget/e2_20260913/gate_g2.json",
+    "law_features": "results/budget/e2_20260913/law_features.csv",
+    "law_summary": "results/budget/e2_20260913/law_summary.json",
+    "policy_comparisons": "results/budget/e2_20260913/policy_comparisons.csv"
+  },
+  "run_id": "e2_20260913",
+  "schema": "e2_run_v1",
+  "shard_count": 98,
+  "shard_elapsed_seconds": 0.373,
+  "targets": {
+    "BACE1": {
+      "role": "primary",
+      "status": "ok"
+    },
+    "CDK2": {
+      "role": "control",
+      "status": "ok"
+    },
+    "EGFR": {
+      "role": "secondary",
+      "status": "ok"
+    },
+    "ESR1": {
+      "role": "primary",
+      "status": "ok"
+    },
+    "FA10": {
+      "role": "secondary",
+      "status": "ok"
+    },
+    "MK14": {
+      "role": "primary",
+      "status": "ok"
+    },
+    "MK14_min": {
+      "role": "sensitivity",
+      "status": "ok"
+    },
+    "PPARA": {
+      "role": "primary",
+      "status": "ok"
+    },
+    "PPARA_pool30": {
+      "role": "pool",
+      "status": "ok"
+    },
+    "PPARG": {
+      "role": "primary",
+      "status": "ok"
+    }
+  }
+}

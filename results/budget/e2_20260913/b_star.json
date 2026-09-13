@@ -1,0 +1,267 @@
+{
+  "baseline": "s1_width",
+  "primary_metric": "pr_auc",
+  "schema": "e2_b_star_v1",
+  "targets": {
+    "BACE1|mean": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s4_scaffold25",
+        "2400": "s4_scaffold50",
+        "3600": "s4_scaffold25",
+        "4800": "s4_scaffold25",
+        "600": "s4_scaffold25"
+      },
+      "phi": "mean",
+      "target_id": "BACE1",
+      "width_locked": false
+    },
+    "BACE1|min": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s4_scaffold25",
+        "2400": "s4_scaffold25",
+        "3600": "s4_scaffold25",
+        "4800": "s4_scaffold25",
+        "600": "s4_scaffold25"
+      },
+      "phi": "min",
+      "target_id": "BACE1",
+      "width_locked": false
+    },
+    "CDK2|mean": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s2_uniform",
+        "2400": "s2_uniform",
+        "3600": "s2_uniform",
+        "4800": "s2_uniform",
+        "600": "s5_score_oracle"
+      },
+      "phi": "mean",
+      "target_id": "CDK2",
+      "width_locked": false
+    },
+    "CDK2|min": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s5_score_oracle",
+        "2400": "s2_uniform",
+        "3600": "s2_uniform",
+        "4800": "s2_uniform",
+        "600": "s5_score_oracle"
+      },
+      "phi": "min",
+      "target_id": "CDK2",
+      "width_locked": false
+    },
+    "EGFR|mean": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s4_scaffold25",
+        "2400": "s2_uniform",
+        "3600": "s2_uniform",
+        "4800": "s4_scaffold25",
+        "600": "s4_scaffold25"
+      },
+      "phi": "mean",
+      "target_id": "EGFR",
+      "width_locked": false
+    },
+    "EGFR|min": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s4_scaffold25",
+        "2400": "s4_scaffold25",
+        "3600": "s4_scaffold25",
+        "4800": "s4_scaffold25",
+        "600": "s4_scaffold25"
+      },
+      "phi": "min",
+      "target_id": "EGFR",
+      "width_locked": false
+    },
+    "ESR1|mean": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s4_scaffold25",
+        "2400": "s1_width",
+        "3600": "s1_width",
+        "4800": "s1_width",
+        "600": "s4_scaffold25"
+      },
+      "phi": "mean",
+      "target_id": "ESR1",
+      "width_locked": false
+    },
+    "ESR1|min": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s4_scaffold25",
+        "2400": "s4_scaffold25",
+        "3600": "s4_scaffold25",
+        "4800": "s4_scaffold25",
+        "600": "s4_scaffold25"
+      },
+      "phi": "min",
+      "target_id": "ESR1",
+      "width_locked": false
+    },
+    "FA10|mean": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s4_scaffold25",
+        "2400": "s2_uniform",
+        "3600": "s4_scaffold25",
+        "4800": "s4_scaffold25",
+        "600": "s4_scaffold25"
+      },
+      "phi": "mean",
+      "target_id": "FA10",
+      "width_locked": false
+    },
+    "FA10|min": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s4_scaffold50",
+        "2400": "s2_uniform",
+        "3600": "s4_scaffold25",
+        "4800": "s4_scaffold25",
+        "600": "s4_scaffold25"
+      },
+      "phi": "min",
+      "target_id": "FA10",
+      "width_locked": false
+    },
+    "MK14_min|mean": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s2_uniform",
+        "2400": "s5_score_oracle",
+        "3600": "s2_uniform",
+        "4800": "s2_uniform",
+        "600": "s4_scaffold50"
+      },
+      "phi": "mean",
+      "target_id": "MK14_min",
+      "width_locked": false
+    },
+    "MK14_min|min": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s4_scaffold50",
+        "2400": "s4_scaffold50",
+        "3600": "s4_scaffold50",
+        "4800": "s4_scaffold50",
+        "600": "s5_score_oracle"
+      },
+      "phi": "min",
+      "target_id": "MK14_min",
+      "width_locked": false
+    },
+    "MK14|mean": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s2_uniform",
+        "2400": "s4_scaffold50",
+        "3600": "s2_uniform",
+        "4800": "s2_uniform",
+        "600": "s4_scaffold50"
+      },
+      "phi": "mean",
+      "target_id": "MK14",
+      "width_locked": false
+    },
+    "MK14|min": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s4_scaffold50",
+        "2400": "s4_scaffold50",
+        "3600": "s4_scaffold50",
+        "4800": "s4_scaffold50",
+        "600": "s4_scaffold50"
+      },
+      "phi": "min",
+      "target_id": "MK14",
+      "width_locked": false
+    },
+    "PPARA_pool30|mean": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s4_scaffold25",
+        "2400": "s2_uniform",
+        "3600": "s2_uniform",
+        "4800": "s2_uniform",
+        "600": "s4_scaffold25"
+      },
+      "phi": "mean",
+      "target_id": "PPARA_pool30",
+      "width_locked": false
+    },
+    "PPARA_pool30|min": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s4_scaffold25",
+        "2400": "s1_width",
+        "3600": "s1_width",
+        "4800": "s1_width",
+        "600": "s4_scaffold25"
+      },
+      "phi": "min",
+      "target_id": "PPARA_pool30",
+      "width_locked": false
+    },
+    "PPARA|mean": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s4_scaffold50",
+        "2400": "s2_uniform",
+        "3600": "s2_uniform",
+        "4800": "s4_scaffold25",
+        "600": "s4_scaffold50"
+      },
+      "phi": "mean",
+      "target_id": "PPARA",
+      "width_locked": false
+    },
+    "PPARA|min": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s4_scaffold50",
+        "2400": "s4_scaffold25",
+        "3600": "s4_scaffold25",
+        "4800": "s4_scaffold25",
+        "600": "s4_scaffold50"
+      },
+      "phi": "min",
+      "target_id": "PPARA",
+      "width_locked": false
+    },
+    "PPARG|mean": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s4_scaffold50",
+        "2400": "s4_scaffold25",
+        "3600": "s4_scaffold25",
+        "4800": "s4_scaffold25",
+        "600": "s4_scaffold25"
+      },
+      "phi": "mean",
+      "target_id": "PPARG",
+      "width_locked": false
+    },
+    "PPARG|min": {
+      "b_star": 600,
+      "best_policy_by_budget": {
+        "1200": "s4_scaffold25",
+        "2400": "s4_scaffold25",
+        "3600": "s4_scaffold25",
+        "4800": "s4_scaffold25",
+        "600": "s4_scaffold25"
+      },
+      "phi": "min",
+      "target_id": "PPARG",
+      "width_locked": false
+    }
+  }
+}

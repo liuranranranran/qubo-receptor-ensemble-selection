@@ -1,0 +1,70 @@
+{
+  "b_star_convention": "None (width-locked) counted as max_budget + 600 for rank correlations",
+  "group_means": {
+    "switching": {
+      "best_gain_first_budget": 0.06888275366205956,
+      "best_gain_max_budget": 0.04668929749951458,
+      "best_pair_train_pr_auc": 0.5881672151311567,
+      "best_single_train_pr_auc": 0.5706356670935195,
+      "ligand_count": 556.0,
+      "mean_scaffold_size": 1.7002018074067529,
+      "pair_gain_train_pr_auc": 0.01753154803763709,
+      "receptor_count": 16.2,
+      "receptor_diversity_spearman": 0.6806381633320807,
+      "scaffold_count": 332.2,
+      "train_activity_rate": 0.23000000000000004
+    },
+    "width_locked": {
+      "best_gain_first_budget": NaN,
+      "best_gain_max_budget": NaN,
+      "best_pair_train_pr_auc": NaN,
+      "best_single_train_pr_auc": NaN,
+      "ligand_count": NaN,
+      "mean_scaffold_size": NaN,
+      "pair_gain_train_pr_auc": NaN,
+      "receptor_count": NaN,
+      "receptor_diversity_spearman": NaN,
+      "scaffold_count": NaN,
+      "train_activity_rate": NaN
+    }
+  },
+  "n_distinct_b_star": 1,
+  "n_rows": 20,
+  "n_switching": 20,
+  "n_width_locked": 0,
+  "note": "exploratory descriptive summary of parent-plan section 3 E2 (law); features are train-fold only and do not enter gate G2",
+  "schema": "e2_law_summary_v1",
+  "spearman_feature_vs_b_star_rank": {
+    "best_gain_first_budget": NaN,
+    "best_gain_max_budget": NaN,
+    "best_pair_train_pr_auc": NaN,
+    "best_single_train_pr_auc": NaN,
+    "ligand_count": NaN,
+    "mean_scaffold_size": NaN,
+    "pair_gain_train_pr_auc": NaN,
+    "receptor_count": NaN,
+    "receptor_diversity_spearman": NaN,
+    "scaffold_count": NaN,
+    "train_activity_rate": NaN
+  },
+  "spearman_gain_vs_feature": {
+    "best_gain_first_budget~best_pair_train_pr_auc": -0.3578947368421052,
+    "best_gain_first_budget~best_single_train_pr_auc": -0.4437767445946917,
+    "best_gain_first_budget~ligand_count": 0.26013299085723596,
+    "best_gain_first_budget~mean_scaffold_size": 0.2748805140702865,
+    "best_gain_first_budget~pair_gain_train_pr_auc": 0.32481203007518794,
+    "best_gain_first_budget~receptor_count": -0.04039410074632715,
+    "best_gain_first_budget~receptor_diversity_spearman": 0.0784911248942992,
+    "best_gain_first_budget~scaffold_count": -0.0015186768733165001,
+    "best_gain_first_budget~train_activity_rate": -0.26013299085723596,
+    "best_gain_max_budget~best_pair_train_pr_auc": -0.22857142857142856,
+    "best_gain_max_budget~best_single_train_pr_auc": -0.3079267207391738,
+    "best_gain_max_budget~ligand_count": -0.028903665650803996,
+    "best_gain_max_budget~mean_scaffold_size": 0.08656458177904051,
+    "best_gain_max_budget~pair_gain_train_pr_auc": 0.4586466165413533,
+    "best_gain_max_budget~receptor_count": 0.13572417850765922,
+    "best_gain_max_budget~receptor_diversity_spearman": -0.04830223070418413,
+    "best_gain_max_budget~scaffold_count": -0.11693811924537052,
+    "best_gain_max_budget~train_activity_rate": 0.028903665650803996
+  }
+}
