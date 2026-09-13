@@ -52,8 +52,9 @@ ligands/prepared/
 *.hdf5
 
 # Generated docking and experiment output
-# E1 headroom shard checkpoints (regenerable intermediates; products stay tracked)
+# E1 headroom / E2 budget shard checkpoints (regenerable intermediates; products stay tracked)
 results/headroom/*/cells/
+results/budget/*/cells/
 results/docking/
 results/metrics/
 results/pose_inspection/

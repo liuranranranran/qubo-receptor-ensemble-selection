@@ -1,0 +1,102 @@
+{
+  "schema": "e2_budget_v1",
+  "frozen_at": "2026-09-13T08:15:00Z",
+  "parent_plan": "E:/Quant/docs/qubo/下一步实验计划_20260911.md#E2",
+  "implementation_doc": "docs/budget_scan_zh.md",
+  "targets": [
+    "MK14",
+    "PPARG",
+    "BACE1",
+    "ESR1",
+    "PPARA"
+  ],
+  "budgets": [
+    600,
+    1200,
+    2400,
+    3600,
+    4800
+  ],
+  "fusion_family": [
+    "mean",
+    "min"
+  ],
+  "primary_metric": "pr_auc",
+  "secondary_metrics": [
+    "bedroc20",
+    "recall1",
+    "recall5",
+    "recall10",
+    "ef1",
+    "ef5",
+    "ef10"
+  ],
+  "bedroc_alpha": 20.0,
+  "policies": [
+    "s1_width",
+    "s2_uniform",
+    "s3_top10",
+    "s3_top25",
+    "s3_top50",
+    "s4_scaffold25",
+    "s4_scaffold50",
+    "s5_score_oracle"
+  ],
+  "baseline": "s1_width",
+  "ranking_convention": "docked ligands are fused by the frozen phi; ligands that never received a cell are ranked last (you cannot find what you did not dock)",
+  "policy_definitions": {
+    "s1_width": "one (train-best) receptor for min(B, N) ligands: the width limit",
+    "s2_uniform": "floor(B/N) receptors (train order) for every ligand; slack stays unspent",
+    "s3_top*": "stage 1: best receptor for all ligands; stage 2: extra receptor rounds on the top x% of stage-1 scores",
+    "s4_scaffold*": "stage 1: one representative per scaffold; stage 2: all receptors for the best x% of scaffolds by representative score",
+    "s5_score_oracle": "per-ligand upper bound: every ligand keeps its own best-k receptors (hidden matrix, no labels)",
+    "s5_metric_oracle": "cell-greedy oracle that maximises the held-out-fold metric (hidden matrix + fold labels; upper bound, computed only at greedy_budgets to bound the compute)"
+  },
+  "bootstrap": {
+    "unit": "scaffold_cluster",
+    "iterations": 2000,
+    "seed": 0
+  },
+  "mde_rule": "t975 * se * sqrt(2)",
+  "oracle": {
+    "greedy_budgets": [
+      4800
+    ],
+    "greedy_max_steps": null,
+    "note": "s5_metric_oracle is optional and NOT part of the default family: with the evaluation restricted to the held-out fold it degenerates to 'dock every cell of the fold' and costs ~0.37 s per greedy step; run it explicitly with --policies if a metric upper bound is wanted"
+  },
+  "gate_g2": {
+    "depth_budgets": [
+      2400,
+      3600,
+      4800
+    ],
+    "min_targets": 4,
+    "width_locked_rule": "at every depth budget the best policy is s1_width in all primary targets (fraction_width_locked = 1.0) -> the practical ceiling of ensemble docking is pinned",
+    "nontrivial_rule": "some non-baseline policy, at the same budget and the same frozen phi, beats s1_width with mean_delta>0 and ci95_low>0 in >= min_targets primary targets"
+  },
+  "notes": [
+    "E2 is an exploratory re-analysis of already-seen matrices (parent plan section 5.1).",
+    "Budget = docking jobs = (ligand, receptor) cells; the 600-ligand panel x 15-16 receptors is the library.",
+    "Policy parameters (receptor order, stage-1 ranking) use the training fold and revealed scores only; only s5_* may read the hidden matrix and are reported as upper bounds.",
+    "No new docking: every cell is a lookup in the existing dense primary matrix."
+  ],
+  "exploratory_analysis": {
+    "law_features": [
+      "best_single_train_pr_auc",
+      "best_pair_train_pr_auc",
+      "pair_gain_train_pr_auc",
+      "receptor_diversity_spearman",
+      "receptor_count",
+      "ligand_count",
+      "scaffold_count",
+      "mean_scaffold_size",
+      "train_activity_rate"
+    ],
+    "note": "descriptive deliverable of parent plan section 3 E2 (the allocation law); computed from the training fold only, reported as hypothesis generation, and excluded from the G2 decision"
+  },
+  "revision_notes": [
+    "2026-09-13 freeze before the full battery: G2 stability is evaluated per (policy, budget, phi) across primary targets only (no family-max mixing); fold pairing is by outer_fold id, not row order.",
+    "s5_metric_oracle stays optional and outside the default policy family (degenerate under the held-out-fold evaluation convention)."
+  ]
+}

@@ -105,6 +105,32 @@ python scripts/headroom_scan.py run \
 （逐格 4.0% / 折内 oracle-φ 18.0% / train-selected φ 2.0%）；唯一通过三 seed 检验的灰区线索
 是 `PPARA × min`（BEmin），按计划交棒 E4。产物在 `results/headroom/e1_20260912/`。
 
+## E2 预算分配律（离线诊断）
+
+`scripts/budget_scan.py` 实现 `E:\Quant\docs\qubo\下一步实验计划_20260911.md` §3 E2 的预注册电池：
+固定 B 次 docking（B ∈ {600, 1200, 2400, 3600, 4800}），在既有稠密矩阵上遮蔽模拟 8 条分配策略
+（宽度极限 / 均匀深度 / top-x% 两阶段 / scaffold 两阶段 / 逐配体分数 oracle），按冻结 φ
+（mean、min）做 V5 五折外评、scaffold 聚类 bootstrap 与 MDE，输出收益–预算曲线、B*、G2 判定
+和训练折特征表（探索性分配律）。零新增 docking。
+
+```bash
+python scripts/budget_scan.py run \
+  --prereg configs/experiments/e2_budget_preregistration.json \
+  --assets configs/e1_assets.json \
+  --output-dir results/budget/e2_20260913 --jobs 16 --resume
+```
+
+远程一键：`JOBS=32 bash scripts/run_e2_budget_remote.sh`（canonical 矩阵用
+`configs/e1_assets_remote.json`）。实现与产物说明见 [docs/budget_scan_zh.md](docs/budget_scan_zh.md)。
+
+**本地全量运行 `e2_20260913`（10 资产 / 98 分片 / 3920 格）判定 G2 = `NONTRIVIAL_REGION`**：
+在同一 600 次 docking 预算下，"scaffold 代表 + 前 25% 组补测"（`s4_scaffold25`）比
+"全库 × 单受体"宽度基线宏平均 PR-AUC 高 +0.086（mean）/ +0.075（min），bootstrap CI>0 覆盖
+4/5 与 5/5 主判定靶点（min 下 25/25 折为正）；深度预算（1200–4800）不再增加宏平均收益，
+宽度基线只在 ESR1(mean) 的深度预算上胜出（3/30 格）。边界：多格低于 MDE、30 受体池不显著、
+开发对照 CDK2(mean) 为负 → 只作假设生成。结论见
+`E:\Quant\docs\qubo\E2结论总结_20260913.md`。
+
 ## 验证
 
 ```bash
