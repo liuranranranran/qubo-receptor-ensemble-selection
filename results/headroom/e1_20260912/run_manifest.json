@@ -1,0 +1,456 @@
+{
+  "config": {
+    "alpha": 20.0,
+    "bootstrap_iterations": 2000,
+    "bootstrap_seed": 0,
+    "k_list": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "max_subsets_per_k": null,
+    "metric": "pr_auc",
+    "perm_ks": [
+      2,
+      3
+    ],
+    "permutations": 200,
+    "top_m": 2000,
+    "with_train_oracle": true
+  },
+  "config_hash": "5FA7596C90543DF8CFFA6C1A2F0E0CB888F63FAD0C51F8D3B18038D5D6ADD4A1",
+  "created_utc": "2026-09-12T18:27:10Z",
+  "environment": {
+    "cpu_count": 128,
+    "machine": "x86_64",
+    "numpy": "1.26.4",
+    "platform": "Linux-5.15.0-94-generic-x86_64-with-glibc2.35",
+    "processor": "x86_64",
+    "python": "3.11.15"
+  },
+  "gate": {
+    "decision": "NO_GO",
+    "fraction_cells_go": 0.02,
+    "fraction_cells_go_fold_oracle_phi": 0.18,
+    "fraction_cells_go_train_selected_phi": 0.02
+  },
+  "git_commit": "acbb5825233899fe2d62eba4d0aea845aa4d8ee3",
+  "k_coverage": {
+    "BACE1": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "CDK2": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "EGFR": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "ESR1": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "FA10": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "MK14": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "PPARA": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "PPARA_pool30": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "PPARG": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "mode": "assemble",
+  "notes": [
+    "E1 is an exploratory re-analysis of already-seen matrices (parent plan section 5.1).",
+    "Evaluation unit is the outer test fold as in scripts/nested_outer_k_evaluation.py (about 120 ligands per fold).",
+    "The four remote adaptive runs are read through their problem.json carriers; D1 re-verifies them and records the substitution.",
+    "pool30 runs at k<=4 (pre-registered contingency in the E1 plan section 10)",
+    "H_perm as pre-registered is dominated by the absolute metric level; G1 uses H_nested only (see docs/headroom_scan_zh.md section 6.4)",
+    "sensitivity: only the MK14 min-aggregation matrix is available locally; independent seed matrices and alternative scaffold splits were not run"
+  ],
+  "permutation_cells": 704,
+  "phi_records": 7,
+  "preregistration": {
+    "path": "configs/experiments/e1_headroom_preregistration.json",
+    "schema": "e1_headroom_v1",
+    "sha256": "E704E56DAEFE1985F3DD0AD9674644DB8B1396726558A03B109858CBC4BFE30E"
+  },
+  "products": {
+    "bootstrap_report": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/bootstrap_report.json",
+    "cell_metrics": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/cell_metrics.csv",
+    "figures": [
+      "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/figures/fig_headroom_map.png",
+      "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/figures/fig_phi_ranking.png"
+    ],
+    "gate_g1": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/gate_g1.json",
+    "headroom_map": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/headroom_map.csv",
+    "input_manifest": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/input_manifest.json",
+    "phi_selection": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/phi_selection.json"
+  },
+  "run_id": "e1_20260912",
+  "schema": "e1_run_v1",
+  "shard_count": 352,
+  "targets": {
+    "BACE1": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "2F3E",
+        "2F3F",
+        "2FDP",
+        "2G94",
+        "2HM1",
+        "2IQG",
+        "2P4J",
+        "2P8H",
+        "2QK5",
+        "2QMD",
+        "2QMF",
+        "2QMG",
+        "2QP8",
+        "2QU3",
+        "2VKM"
+      ],
+      "role": "primary",
+      "scaffold_count": 358,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/matrices/primary_median_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "CDK2": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 4,
+      "ligand_count": 160,
+      "problems": [],
+      "receptor_count": 16,
+      "receptor_order": [
+        "CDK2_1AQ1_reference",
+        "CDK2_1HCL_aligned",
+        "CDK2_1JVP_aligned",
+        "CDK2_1Y8Y_aligned",
+        "CDK2_2C68_aligned",
+        "CDK2_2C69_aligned",
+        "CDK2_3RKB_aligned",
+        "CDK2_AF2_MD2NS_C00_F001",
+        "CDK2_AF2_MD2NS_C01_F005",
+        "CDK2_AF2_MD2NS_C02_F031",
+        "CDK2_AF2_MD2NS_C03_F041",
+        "CDK2_AF2_MD2NS_C04_F066",
+        "CDK2_AF2_MD2NS_C05_F074",
+        "CDK2_AF2_MD2NS_C06_F077",
+        "CDK2_AF2_MD2NS_C07_F095",
+        "CDK2_AF_P24941_F1_v6"
+      ],
+      "role": "control",
+      "scaffold_count": 160,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/qubo-receptor-ensemble-selection/data/processed/stage04_cdk2_expanded16_development_fold_assignments.csv",
+        "matrix": "/root/qubo-receptor-ensemble-selection/data/processed/stage04_cdk2_expanded16_development_median_score_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "EGFR": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 12,
+      "receptor_order": [
+        "EGFR_9KL4_aligned",
+        "EGFR_7KXZ_aligned",
+        "EGFR_9FRD_aligned",
+        "EGFR_4I23_aligned",
+        "EGFR_3W2S_aligned",
+        "EGFR_5CAV_aligned",
+        "EGFR_3W32_aligned",
+        "EGFR_8F1Z_aligned",
+        "EGFR_3POZ_aligned",
+        "EGFR_7U9A_aligned",
+        "EGFR_3W33_aligned",
+        "EGFR_9QXN_aligned"
+      ],
+      "role": "secondary",
+      "scaffold_count": 437,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/qubo-receptor-ensemble-selection/data/processed/stage102a_egfr_phase_a_ligand_manifest.csv",
+        "matrix": "/root/qubo-receptor-ensemble-selection/data/processed/stage102a_egfr_phase_a_primary_median_score_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "ESR1": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1GWQ",
+        "1GWR",
+        "1SJ0",
+        "1X7R",
+        "1XP1",
+        "1XP6",
+        "1XP9",
+        "1XPC",
+        "1YIM",
+        "1YIN",
+        "2BJ4",
+        "2IOG",
+        "2IOK",
+        "2JF9",
+        "2OUZ"
+      ],
+      "role": "primary",
+      "scaffold_count": 379,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/matrices/primary_median_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "FA10": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 13,
+      "receptor_order": [
+        "FA10_3KL6_reference",
+        "FA10_1LPK_aligned",
+        "FA10_1KSN_aligned",
+        "FA10_2WYJ_aligned",
+        "FA10_2PHB_aligned",
+        "FA10_1EZQ_aligned",
+        "FA10_5K0H_aligned",
+        "FA10_4A7I_aligned",
+        "FA10_2W3K_aligned",
+        "FA10_1NFU_aligned",
+        "FA10_1F0R_aligned",
+        "FA10_2Y81_aligned",
+        "FA10_1LPZ_aligned"
+      ],
+      "role": "secondary",
+      "scaffold_count": 330,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/qubo-receptor-ensemble-selection/data/processed/stage102a_fa10_phase_a_ligand_manifest.csv",
+        "matrix": "/root/qubo-receptor-ensemble-selection/data/processed/stage102a_fa10_phase_a_primary_median_score_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "MK14": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "11OY",
+        "1A9U",
+        "1BL6",
+        "1BL7",
+        "1BMK",
+        "1DI9",
+        "1KV1",
+        "1KV2",
+        "1M7Q",
+        "1OUK",
+        "1OUY",
+        "1R39",
+        "1W7H",
+        "1W82",
+        "1W83"
+      ],
+      "role": "primary",
+      "scaffold_count": 414,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/matrices/primary_median_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "PPARA": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1I7G",
+        "1K7L",
+        "1KKQ",
+        "2NPA",
+        "2P54",
+        "2REW",
+        "2ZNN",
+        "3ET1",
+        "3FEI",
+        "3G8I",
+        "3KDT",
+        "3KDU",
+        "3SP6",
+        "3VI8",
+        "4BCR"
+      ],
+      "role": "primary",
+      "scaffold_count": 246,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/matrices/primary_median_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "PPARA_pool30": {
+      "backfilled_fold_rows": 600,
+      "backfilled_scaffold_rows": 600,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 30,
+      "receptor_order": [
+        "1I7G",
+        "1K7L",
+        "1KKQ",
+        "2NPA",
+        "2P54",
+        "2REW",
+        "2ZNN",
+        "3ET1",
+        "3FEI",
+        "3G8I",
+        "3KDT",
+        "3KDU",
+        "3SP6",
+        "3VI8",
+        "4BCR",
+        "4CI4",
+        "5HYK",
+        "6KAX",
+        "6KAY",
+        "6KAZ",
+        "6KB0",
+        "6KB1",
+        "6KB2",
+        "6KB3",
+        "6KB4",
+        "6KB5",
+        "6KB6",
+        "6KB7",
+        "6KB8",
+        "6KB9"
+      ],
+      "role": "pool",
+      "scaffold_count": 246,
+      "source": "problem_json",
+      "source_paths": {
+        "problem_json": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_pool30_fixed_k4_remote/problem.json"
+      },
+      "status": "ok"
+    },
+    "PPARG": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 16,
+      "receptor_order": [
+        "1FM6",
+        "1FM9",
+        "1I7I",
+        "1K74",
+        "1KNU",
+        "1RDT",
+        "1ZEO",
+        "1ZGY",
+        "2ATH",
+        "2F4B",
+        "2FVJ",
+        "2G0H",
+        "2GTK",
+        "2HFP",
+        "2HWQ",
+        "2HWR"
+      ],
+      "role": "primary",
+      "scaffold_count": 338,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/matrices/primary_median_matrix.csv"
+      },
+      "status": "ok"
+    }
+  }
+}

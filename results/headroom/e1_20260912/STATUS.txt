@@ -1,0 +1,6 @@
+run_id: e1_20260912
+finished_at: 2026-09-13 04:22:31
+gate: NO_GO (gate_file=1)
+sensitivity_shards: 800 (ok=1, expected 800)
+summary: /root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912_summary.json
+archive: /root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912_products_20260913_042229.tar.gz

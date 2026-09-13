@@ -1,0 +1,66 @@
+{
+  "branch": "no primary-grid cells were available for this scan (partial run); run the frozen primary targets before reading G1",
+  "decision": "NOT_EVALUATED",
+  "evidence_paths": {
+    "bootstrap_report": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912_sensitivity/bootstrap_report.json",
+    "cell_metrics": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912_sensitivity/cell_metrics.csv",
+    "figures": [
+      "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912_sensitivity/figures/fig_headroom_map.png",
+      "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912_sensitivity/figures/fig_phi_ranking.png"
+    ],
+    "headroom_map": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912_sensitivity/headroom_map.csv",
+    "phi_selection": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912_sensitivity/phi_selection.json",
+    "run_manifest": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912_sensitivity/run_manifest.json"
+  },
+  "fold_oracle_choices": [],
+  "fraction_cells_go": NaN,
+  "fraction_cells_go_fold_oracle_phi": NaN,
+  "fraction_cells_go_per_phi_cell": NaN,
+  "fraction_cells_go_train_selected_phi": NaN,
+  "fusion_family": [
+    "mean",
+    "min",
+    "max",
+    "zmean",
+    "gmean",
+    "hmean",
+    "ranksum",
+    "rrf"
+  ],
+  "n_cells_considered_per_phi_cell": 0,
+  "n_cells_go_per_phi_cell": 0,
+  "n_units": 0,
+  "n_units_fold_oracle": 0,
+  "n_units_train_selected": 0,
+  "pass_rule": "h_nested_lower95 > noise_floor and ratio > 1",
+  "primary_ks": [
+    2,
+    3
+  ],
+  "run_id": "e1_20260912_sensitivity",
+  "schema": "e1_gate_g1_v1",
+  "targets": [
+    "MK14",
+    "PPARG",
+    "BACE1",
+    "ESR1",
+    "PPARA"
+  ],
+  "thresholds": {
+    "go_above": 0.3,
+    "no_go_below": 0.1,
+    "require_lower_bound": true
+  },
+  "tie_break_trace": {
+    "k_star_displacement": {
+      "all_targets_shift_right_ge_2": false,
+      "targets": 0,
+      "targets_shift_right_ge_2": 0,
+      "values": []
+    },
+    "oracle_minus_train_fraction": null,
+    "rule": "1) is the fold-oracle phi level significantly better than the train-selected phi level; 2) is k* shifted right by >= 2 consistently across all five targets"
+  },
+  "train_selected_choices": [],
+  "unit_count": 0
+}

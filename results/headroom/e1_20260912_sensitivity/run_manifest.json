@@ -1,0 +1,900 @@
+{
+  "config": {
+    "alpha": 20.0,
+    "bootstrap_iterations": 2000,
+    "bootstrap_seed": 0,
+    "k_list": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "max_subsets_per_k": null,
+    "metric": "pr_auc",
+    "perm_ks": [
+      2,
+      3
+    ],
+    "permutations": 200,
+    "top_m": 2000,
+    "with_train_oracle": true
+  },
+  "config_hash": "5FA7596C90543DF8CFFA6C1A2F0E0CB888F63FAD0C51F8D3B18038D5D6ADD4A1",
+  "created_utc": "2026-09-12T20:21:30Z",
+  "environment": {
+    "cpu_count": 128,
+    "machine": "x86_64",
+    "numpy": "1.26.4",
+    "platform": "Linux-5.15.0-94-generic-x86_64-with-glibc2.35",
+    "processor": "x86_64",
+    "python": "3.11.15"
+  },
+  "gate": {
+    "decision": "NOT_EVALUATED",
+    "fraction_cells_go": NaN,
+    "fraction_cells_go_fold_oracle_phi": NaN,
+    "fraction_cells_go_train_selected_phi": NaN
+  },
+  "git_commit": "acbb5825233899fe2d62eba4d0aea845aa4d8ee3",
+  "k_coverage": {
+    "BACE1_min": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "BACE1_seed20260821": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "BACE1_seed20260822": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "BACE1_seed20260823": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "ESR1_min": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "ESR1_seed20260821": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "ESR1_seed20260822": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "ESR1_seed20260823": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "MK14_min": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "MK14_seed20260821": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "MK14_seed20260822": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "MK14_seed20260823": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "PPARA_min": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "PPARA_seed20260821": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "PPARA_seed20260822": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "PPARA_seed20260823": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "PPARG_min": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "PPARG_seed20260821": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "PPARG_seed20260822": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "PPARG_seed20260823": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "mode": "assemble",
+  "notes": [
+    "E1 is an exploratory re-analysis of already-seen matrices (parent plan section 5.1).",
+    "Evaluation unit is the outer test fold as in scripts/nested_outer_k_evaluation.py (about 120 ligands per fold).",
+    "The four remote adaptive runs are read through their problem.json carriers; D1 re-verifies them and records the substitution.",
+    "pool30 runs at k<=4 (pre-registered contingency in the E1 plan section 10)",
+    "H_perm as pre-registered is dominated by the absolute metric level; G1 uses H_nested only (see docs/headroom_scan_zh.md section 6.4)",
+    "sensitivity: only the MK14 min-aggregation matrix is available locally; independent seed matrices and alternative scaffold splits were not run"
+  ],
+  "permutation_cells": 1600,
+  "phi_records": 0,
+  "preregistration": {
+    "path": "configs/experiments/e1_headroom_preregistration.json",
+    "schema": "e1_headroom_v1",
+    "sha256": "E704E56DAEFE1985F3DD0AD9674644DB8B1396726558A03B109858CBC4BFE30E"
+  },
+  "products": {
+    "bootstrap_report": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912_sensitivity/bootstrap_report.json",
+    "cell_metrics": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912_sensitivity/cell_metrics.csv",
+    "figures": [
+      "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912_sensitivity/figures/fig_headroom_map.png",
+      "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912_sensitivity/figures/fig_phi_ranking.png"
+    ],
+    "gate_g1": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912_sensitivity/gate_g1.json",
+    "headroom_map": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912_sensitivity/headroom_map.csv",
+    "input_manifest": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912_sensitivity/input_manifest.json",
+    "phi_selection": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912_sensitivity/phi_selection.json"
+  },
+  "run_id": "e1_20260912_sensitivity",
+  "schema": "e1_run_v1",
+  "shard_count": 800,
+  "targets": {
+    "BACE1_min": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "2F3E",
+        "2F3F",
+        "2FDP",
+        "2G94",
+        "2HM1",
+        "2IQG",
+        "2P4J",
+        "2P8H",
+        "2QK5",
+        "2QMD",
+        "2QMF",
+        "2QMG",
+        "2QP8",
+        "2QU3",
+        "2VKM"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 358,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/matrices/sensitivity_minimum_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "BACE1_seed20260821": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "2F3E",
+        "2F3F",
+        "2FDP",
+        "2G94",
+        "2HM1",
+        "2IQG",
+        "2P4J",
+        "2P8H",
+        "2QK5",
+        "2QMD",
+        "2QMF",
+        "2QMG",
+        "2QP8",
+        "2QU3",
+        "2VKM"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 358,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/bace1/seed_20260821_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "BACE1_seed20260822": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "2F3E",
+        "2F3F",
+        "2FDP",
+        "2G94",
+        "2HM1",
+        "2IQG",
+        "2P4J",
+        "2P8H",
+        "2QK5",
+        "2QMD",
+        "2QMF",
+        "2QMG",
+        "2QP8",
+        "2QU3",
+        "2VKM"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 358,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/bace1/seed_20260822_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "BACE1_seed20260823": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "2F3E",
+        "2F3F",
+        "2FDP",
+        "2G94",
+        "2HM1",
+        "2IQG",
+        "2P4J",
+        "2P8H",
+        "2QK5",
+        "2QMD",
+        "2QMF",
+        "2QMG",
+        "2QP8",
+        "2QU3",
+        "2VKM"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 358,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/bace1/seed_20260823_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "ESR1_min": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1GWQ",
+        "1GWR",
+        "1SJ0",
+        "1X7R",
+        "1XP1",
+        "1XP6",
+        "1XP9",
+        "1XPC",
+        "1YIM",
+        "1YIN",
+        "2BJ4",
+        "2IOG",
+        "2IOK",
+        "2JF9",
+        "2OUZ"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 379,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/matrices/sensitivity_minimum_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "ESR1_seed20260821": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1GWQ",
+        "1GWR",
+        "1SJ0",
+        "1X7R",
+        "1XP1",
+        "1XP6",
+        "1XP9",
+        "1XPC",
+        "1YIM",
+        "1YIN",
+        "2BJ4",
+        "2IOG",
+        "2IOK",
+        "2JF9",
+        "2OUZ"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 379,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/esr1/seed_20260821_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "ESR1_seed20260822": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1GWQ",
+        "1GWR",
+        "1SJ0",
+        "1X7R",
+        "1XP1",
+        "1XP6",
+        "1XP9",
+        "1XPC",
+        "1YIM",
+        "1YIN",
+        "2BJ4",
+        "2IOG",
+        "2IOK",
+        "2JF9",
+        "2OUZ"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 379,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/esr1/seed_20260822_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "ESR1_seed20260823": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1GWQ",
+        "1GWR",
+        "1SJ0",
+        "1X7R",
+        "1XP1",
+        "1XP6",
+        "1XP9",
+        "1XPC",
+        "1YIM",
+        "1YIN",
+        "2BJ4",
+        "2IOG",
+        "2IOK",
+        "2JF9",
+        "2OUZ"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 379,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/esr1/seed_20260823_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "MK14_min": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "11OY",
+        "1A9U",
+        "1BL6",
+        "1BL7",
+        "1BMK",
+        "1DI9",
+        "1KV1",
+        "1KV2",
+        "1M7Q",
+        "1OUK",
+        "1OUY",
+        "1R39",
+        "1W7H",
+        "1W82",
+        "1W83"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 414,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/matrices/sensitivity_minimum_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "MK14_seed20260821": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "11OY",
+        "1A9U",
+        "1BL6",
+        "1BL7",
+        "1BMK",
+        "1DI9",
+        "1KV1",
+        "1KV2",
+        "1M7Q",
+        "1OUK",
+        "1OUY",
+        "1R39",
+        "1W7H",
+        "1W82",
+        "1W83"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 414,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/mk14/seed_20260821_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "MK14_seed20260822": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "11OY",
+        "1A9U",
+        "1BL6",
+        "1BL7",
+        "1BMK",
+        "1DI9",
+        "1KV1",
+        "1KV2",
+        "1M7Q",
+        "1OUK",
+        "1OUY",
+        "1R39",
+        "1W7H",
+        "1W82",
+        "1W83"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 414,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/mk14/seed_20260822_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "MK14_seed20260823": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "11OY",
+        "1A9U",
+        "1BL6",
+        "1BL7",
+        "1BMK",
+        "1DI9",
+        "1KV1",
+        "1KV2",
+        "1M7Q",
+        "1OUK",
+        "1OUY",
+        "1R39",
+        "1W7H",
+        "1W82",
+        "1W83"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 414,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/mk14/seed_20260823_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "PPARA_min": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1I7G",
+        "1K7L",
+        "1KKQ",
+        "2NPA",
+        "2P54",
+        "2REW",
+        "2ZNN",
+        "3ET1",
+        "3FEI",
+        "3G8I",
+        "3KDT",
+        "3KDU",
+        "3SP6",
+        "3VI8",
+        "4BCR"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 246,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/matrices/sensitivity_minimum_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "PPARA_seed20260821": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1I7G",
+        "1K7L",
+        "1KKQ",
+        "2NPA",
+        "2P54",
+        "2REW",
+        "2ZNN",
+        "3ET1",
+        "3FEI",
+        "3G8I",
+        "3KDT",
+        "3KDU",
+        "3SP6",
+        "3VI8",
+        "4BCR"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 246,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/ppara/seed_20260821_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "PPARA_seed20260822": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1I7G",
+        "1K7L",
+        "1KKQ",
+        "2NPA",
+        "2P54",
+        "2REW",
+        "2ZNN",
+        "3ET1",
+        "3FEI",
+        "3G8I",
+        "3KDT",
+        "3KDU",
+        "3SP6",
+        "3VI8",
+        "4BCR"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 246,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/ppara/seed_20260822_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "PPARA_seed20260823": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1I7G",
+        "1K7L",
+        "1KKQ",
+        "2NPA",
+        "2P54",
+        "2REW",
+        "2ZNN",
+        "3ET1",
+        "3FEI",
+        "3G8I",
+        "3KDT",
+        "3KDU",
+        "3SP6",
+        "3VI8",
+        "4BCR"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 246,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/ppara/seed_20260823_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "PPARG_min": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 16,
+      "receptor_order": [
+        "1FM6",
+        "1FM9",
+        "1I7I",
+        "1K74",
+        "1KNU",
+        "1RDT",
+        "1ZEO",
+        "1ZGY",
+        "2ATH",
+        "2F4B",
+        "2FVJ",
+        "2G0H",
+        "2GTK",
+        "2HFP",
+        "2HWQ",
+        "2HWR"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 338,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/matrices/sensitivity_minimum_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "PPARG_seed20260821": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 16,
+      "receptor_order": [
+        "1FM6",
+        "1FM9",
+        "1I7I",
+        "1K74",
+        "1KNU",
+        "1RDT",
+        "1ZEO",
+        "1ZGY",
+        "2ATH",
+        "2F4B",
+        "2FVJ",
+        "2G0H",
+        "2GTK",
+        "2HFP",
+        "2HWQ",
+        "2HWR"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 338,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/pparg/seed_20260821_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "PPARG_seed20260822": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 16,
+      "receptor_order": [
+        "1FM6",
+        "1FM9",
+        "1I7I",
+        "1K74",
+        "1KNU",
+        "1RDT",
+        "1ZEO",
+        "1ZGY",
+        "2ATH",
+        "2F4B",
+        "2FVJ",
+        "2G0H",
+        "2GTK",
+        "2HFP",
+        "2HWQ",
+        "2HWR"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 338,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/pparg/seed_20260822_matrix.csv"
+      },
+      "status": "ok"
+    },
+    "PPARG_seed20260823": {
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "problems": [],
+      "receptor_count": 16,
+      "receptor_order": [
+        "1FM6",
+        "1FM9",
+        "1I7I",
+        "1K74",
+        "1KNU",
+        "1RDT",
+        "1ZEO",
+        "1ZGY",
+        "2ATH",
+        "2F4B",
+        "2FVJ",
+        "2G0H",
+        "2GTK",
+        "2HFP",
+        "2HWQ",
+        "2HWR"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 338,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/pparg/seed_20260823_matrix.csv"
+      },
+      "status": "ok"
+    }
+  }
+}

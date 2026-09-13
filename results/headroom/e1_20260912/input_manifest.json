@@ -1,0 +1,818 @@
+{
+  "assets_config": "configs/e1_assets_remote.json",
+  "created_utc": "2026-09-12T18:27:05Z",
+  "files_sha256": {
+    "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/matrices/primary_median_matrix.csv": {
+      "sha256": "4FDD002D1BA994436A2FC068ECAE7304FB437888B71C23A06DB184EB8D771F2E",
+      "size_bytes": 93796
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/prepared_ligands.csv": {
+      "sha256": "C0FD0FE0CCA7201A945CE91441151BE43DD29B85A98DE4F29A0DEFDDB503C359",
+      "size_bytes": 357954
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/problem.json": {
+      "sha256": "568C5D5DA9093C0EAA20BE8982708C207303403AC39126CB2B45FFFC6CF058E1",
+      "size_bytes": 1110862
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/matrices/primary_median_matrix.csv": {
+      "sha256": "24DA6862C9C4CE5F5A372F2317A48C75B656C332FA310BDF3AE0AFB099C9C3FC",
+      "size_bytes": 92372
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/prepared_ligands.csv": {
+      "sha256": "19212C5A46933C6E6F7DB7CC673296889E3169ED7DEAEC8E62B2ABFA2AB29C69",
+      "size_bytes": 328918
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/problem.json": {
+      "sha256": "A10FE50D43993F8F5BC6EBA34C2046644256A94F0DC3530CB5238B995A32E8AC",
+      "size_bytes": 1172613
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/matrices/primary_median_matrix.csv": {
+      "sha256": "BE9C2DB64BC85B8038BD3D1E261D3D6762496A9B7BB9AF06B7DEE33932D4F799",
+      "size_bytes": 92224
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv": {
+      "sha256": "28DCA1608C9F36FC6084CCABE9107279DA3960175236A2A912AF9790FD320BB1",
+      "size_bytes": 340475
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/problem.json": {
+      "sha256": "7F9550065852A611932B631196819096345049BCDABF3CDFFA02A50F9A2BD30C",
+      "size_bytes": 996946
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/matrices/primary_median_matrix.csv": {
+      "sha256": "B073D73DBE5933E6E4D26580F43E8A098D5B83F672F612D7E8B5EB95607AC568",
+      "size_bytes": 93609
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/prepared_ligands.csv": {
+      "sha256": "3C3462D54D6912EAE372D13770CC89838DE976DD868C7717442B693BF2B2349D",
+      "size_bytes": 346265
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/problem.json": {
+      "sha256": "A72EF3182FC2C18C3A9283F23DA86A9CC5A68EC42FB43618372020A1E2F3036C",
+      "size_bytes": 1344272
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/ppara_pool30_fixed_k4_remote/problem.json": {
+      "sha256": "49282C42C80344CEC019179978FC12952511C7447B5DC2B229F7CE26C27DF47D",
+      "size_bytes": 568967
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/matrices/primary_median_matrix.csv": {
+      "sha256": "D75B1FDB9B76431CC59022B0CA507B5CC44E4DB13AC0808DD8DA975B6DB5E5CB",
+      "size_bytes": 98525
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/prepared_ligands.csv": {
+      "sha256": "B4405B2ACAD08FBE0981BA26A39A0B4B5A218671F5278081F93047A2AB366769",
+      "size_bytes": 344545
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/problem.json": {
+      "sha256": "16D3D09DE080684FC152F09DCDF9BA9856A5857054DCA42D0E7601425E1E7E8F",
+      "size_bytes": 1387635
+    },
+    "/root/qubo-receptor-ensemble-selection/data/processed/stage04_cdk2_expanded16_development_fold_assignments.csv": {
+      "sha256": "99D9BFEEB89D4A6F99E752A91550016794C539843D4C05FA87621B8D8E79E4F0",
+      "size_bytes": 9342
+    },
+    "/root/qubo-receptor-ensemble-selection/data/processed/stage04_cdk2_expanded16_development_median_score_matrix.csv": {
+      "sha256": "5D76F8924CEB265241E38654B673A9912B63FA7B35C9AB5E9373A42ADFD54B22",
+      "size_bytes": 21618
+    },
+    "/root/qubo-receptor-ensemble-selection/data/processed/stage102a_egfr_phase_a_ligand_manifest.csv": {
+      "sha256": "CEDC12B24BB9F5E64D74CF0C38C8D6DE2DDC1989454ADA10F2D9986F02165E21",
+      "size_bytes": 234751
+    },
+    "/root/qubo-receptor-ensemble-selection/data/processed/stage102a_egfr_phase_a_primary_median_score_matrix.csv": {
+      "sha256": "26966DA0B51B76BE22B60F1DFC210CEB7075170D695E6D898F6E23C67B4B9AED",
+      "size_bytes": 76758
+    },
+    "/root/qubo-receptor-ensemble-selection/data/processed/stage102a_fa10_phase_a_ligand_manifest.csv": {
+      "sha256": "FB9B147374B84EF9952214EEEF658829960A9095AF26DC2B704F277EA719FDB3",
+      "size_bytes": 258534
+    },
+    "/root/qubo-receptor-ensemble-selection/data/processed/stage102a_fa10_phase_a_primary_median_score_matrix.csv": {
+      "sha256": "7FC6882789ECFF4FCDD547A0977C4D8597B23D073D83DF05D9EDD1CC9CCC2B0C",
+      "size_bytes": 81410
+    },
+    "configs/e1_assets_remote.json": {
+      "sha256": "A1AE1ABC1CC01C9140E8A0EC5CAF18345C51A071A36AD8BF3BBEB2BD46782419",
+      "size_bytes": 3376
+    },
+    "configs/experiments/e1_headroom_preregistration.json": {
+      "sha256": "E704E56DAEFE1985F3DD0AD9674644DB8B1396726558A03B109858CBC4BFE30E",
+      "size_bytes": 2588
+    }
+  },
+  "preregistration": {
+    "path": "configs/experiments/e1_headroom_preregistration.json",
+    "schema": "e1_headroom_v1",
+    "sha256": "E704E56DAEFE1985F3DD0AD9674644DB8B1396726558A03B109858CBC4BFE30E"
+  },
+  "primary_targets_available": [
+    "BACE1",
+    "CDK2",
+    "EGFR",
+    "ESR1",
+    "FA10",
+    "MK14",
+    "PPARA",
+    "PPARA_pool30",
+    "PPARG"
+  ],
+  "primary_targets_missing": [],
+  "roots": {
+    "data_root": "/root/autodl-tmp/qubo_data_root",
+    "repo": "/root/qubo-receptor-ensemble-selection",
+    "runs": "/root/autodl-tmp/qubo_data_root/results/runs"
+  },
+  "run_id": "e1_20260912",
+  "schema": "e1_input_manifest_v1",
+  "targets": [
+    {
+      "active_count": 120,
+      "asset_key": "MK14",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 81
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 82
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 83
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 84
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 84
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "11OY",
+        "1A9U",
+        "1BL6",
+        "1BL7",
+        "1BMK",
+        "1DI9",
+        "1KV1",
+        "1KV2",
+        "1M7Q",
+        "1OUK",
+        "1OUY",
+        "1R39",
+        "1W7H",
+        "1W82",
+        "1W83"
+      ],
+      "role": "primary",
+      "scaffold_count": 414,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/matrices/primary_median_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/matrices/primary_median_matrix.csv",
+        "note": "canonical primary matrix + prepared manifest",
+        "problem_json": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/problem.json",
+        "role": "primary",
+        "target_id": "MK14"
+      },
+      "status": "ok",
+      "target_id": "MK14"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "PPARG",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 56
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 67
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 71
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 72
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 72
+        }
+      },
+      "problems": [],
+      "receptor_count": 16,
+      "receptor_order": [
+        "1FM6",
+        "1FM9",
+        "1I7I",
+        "1K74",
+        "1KNU",
+        "1RDT",
+        "1ZEO",
+        "1ZGY",
+        "2ATH",
+        "2F4B",
+        "2FVJ",
+        "2G0H",
+        "2GTK",
+        "2HFP",
+        "2HWQ",
+        "2HWR"
+      ],
+      "role": "primary",
+      "scaffold_count": 338,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/matrices/primary_median_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/matrices/primary_median_matrix.csv",
+        "note": "",
+        "problem_json": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/problem.json",
+        "role": "primary",
+        "target_id": "PPARG"
+      },
+      "status": "ok",
+      "target_id": "PPARG"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "BACE1",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 66
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "2F3E",
+        "2F3F",
+        "2FDP",
+        "2G94",
+        "2HM1",
+        "2IQG",
+        "2P4J",
+        "2P8H",
+        "2QK5",
+        "2QMD",
+        "2QMF",
+        "2QMG",
+        "2QP8",
+        "2QU3",
+        "2VKM"
+      ],
+      "role": "primary",
+      "scaffold_count": 358,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/matrices/primary_median_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/matrices/primary_median_matrix.csv",
+        "note": "",
+        "problem_json": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/problem.json",
+        "role": "primary",
+        "target_id": "BACE1"
+      },
+      "status": "ok",
+      "target_id": "BACE1"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "ESR1",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 74
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 76
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 76
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 76
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 77
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1GWQ",
+        "1GWR",
+        "1SJ0",
+        "1X7R",
+        "1XP1",
+        "1XP6",
+        "1XP9",
+        "1XPC",
+        "1YIM",
+        "1YIN",
+        "2BJ4",
+        "2IOG",
+        "2IOK",
+        "2JF9",
+        "2OUZ"
+      ],
+      "role": "primary",
+      "scaffold_count": 379,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/matrices/primary_median_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/matrices/primary_median_matrix.csv",
+        "note": "",
+        "problem_json": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/problem.json",
+        "role": "primary",
+        "target_id": "ESR1"
+      },
+      "status": "ok",
+      "target_id": "ESR1"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "PPARA",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 26
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 37
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1I7G",
+        "1K7L",
+        "1KKQ",
+        "2NPA",
+        "2P54",
+        "2REW",
+        "2ZNN",
+        "3ET1",
+        "3FEI",
+        "3G8I",
+        "3KDT",
+        "3KDU",
+        "3SP6",
+        "3VI8",
+        "4BCR"
+      ],
+      "role": "primary",
+      "scaffold_count": 246,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/matrices/primary_median_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/matrices/primary_median_matrix.csv",
+        "note": "",
+        "problem_json": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/problem.json",
+        "role": "primary",
+        "target_id": "PPARA"
+      },
+      "status": "ok",
+      "target_id": "PPARA"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "FA10",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 64
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 66
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 66
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 67
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 67
+        }
+      },
+      "problems": [],
+      "receptor_count": 13,
+      "receptor_order": [
+        "FA10_3KL6_reference",
+        "FA10_1LPK_aligned",
+        "FA10_1KSN_aligned",
+        "FA10_2WYJ_aligned",
+        "FA10_2PHB_aligned",
+        "FA10_1EZQ_aligned",
+        "FA10_5K0H_aligned",
+        "FA10_4A7I_aligned",
+        "FA10_2W3K_aligned",
+        "FA10_1NFU_aligned",
+        "FA10_1F0R_aligned",
+        "FA10_2Y81_aligned",
+        "FA10_1LPZ_aligned"
+      ],
+      "role": "secondary",
+      "scaffold_count": 330,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/qubo-receptor-ensemble-selection/data/processed/stage102a_fa10_phase_a_ligand_manifest.csv",
+        "matrix": "/root/qubo-receptor-ensemble-selection/data/processed/stage102a_fa10_phase_a_primary_median_score_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/qubo-receptor-ensemble-selection/data/processed/stage102a_fa10_phase_a_ligand_manifest.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/qubo-receptor-ensemble-selection/data/processed/stage102a_fa10_phase_a_primary_median_score_matrix.csv",
+        "note": "stage102a phase-A panel, 13 receptors (committed in the repo)",
+        "problem_json": null,
+        "role": "secondary",
+        "target_id": "FA10"
+      },
+      "status": "ok",
+      "target_id": "FA10"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "EGFR",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 85
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 88
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 88
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 88
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 88
+        }
+      },
+      "problems": [],
+      "receptor_count": 12,
+      "receptor_order": [
+        "EGFR_9KL4_aligned",
+        "EGFR_7KXZ_aligned",
+        "EGFR_9FRD_aligned",
+        "EGFR_4I23_aligned",
+        "EGFR_3W2S_aligned",
+        "EGFR_5CAV_aligned",
+        "EGFR_3W32_aligned",
+        "EGFR_8F1Z_aligned",
+        "EGFR_3POZ_aligned",
+        "EGFR_7U9A_aligned",
+        "EGFR_3W33_aligned",
+        "EGFR_9QXN_aligned"
+      ],
+      "role": "secondary",
+      "scaffold_count": 437,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/qubo-receptor-ensemble-selection/data/processed/stage102a_egfr_phase_a_ligand_manifest.csv",
+        "matrix": "/root/qubo-receptor-ensemble-selection/data/processed/stage102a_egfr_phase_a_primary_median_score_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/qubo-receptor-ensemble-selection/data/processed/stage102a_egfr_phase_a_ligand_manifest.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/qubo-receptor-ensemble-selection/data/processed/stage102a_egfr_phase_a_primary_median_score_matrix.csv",
+        "note": "stage102a phase-A panel, 12 receptors (committed in the repo)",
+        "problem_json": null,
+        "role": "secondary",
+        "target_id": "EGFR"
+      },
+      "status": "ok",
+      "target_id": "EGFR"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "PPARA_pool30",
+      "backfilled_fold_rows": 600,
+      "backfilled_scaffold_rows": 600,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 26
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 37
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        }
+      },
+      "problems": [],
+      "receptor_count": 30,
+      "receptor_order": [
+        "1I7G",
+        "1K7L",
+        "1KKQ",
+        "2NPA",
+        "2P54",
+        "2REW",
+        "2ZNN",
+        "3ET1",
+        "3FEI",
+        "3G8I",
+        "3KDT",
+        "3KDU",
+        "3SP6",
+        "3VI8",
+        "4BCR",
+        "4CI4",
+        "5HYK",
+        "6KAX",
+        "6KAY",
+        "6KAZ",
+        "6KB0",
+        "6KB1",
+        "6KB2",
+        "6KB3",
+        "6KB4",
+        "6KB5",
+        "6KB6",
+        "6KB7",
+        "6KB8",
+        "6KB9"
+      ],
+      "role": "pool",
+      "scaffold_count": 246,
+      "scaffold_fill_rate": 1.0,
+      "source": "problem_json",
+      "source_paths": {
+        "problem_json": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_pool30_fixed_k4_remote/problem.json"
+      },
+      "spec": {
+        "backfill_problem_json": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/problem.json",
+        "manifest": null,
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": null,
+        "note": "30-receptor pool; scaffold/outer_fold backfilled from the PPARA adaptive carrier and counted",
+        "problem_json": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_pool30_fixed_k4_remote/problem.json",
+        "role": "pool",
+        "target_id": "PPARA_pool30"
+      },
+      "status": "ok",
+      "target_id": "PPARA"
+    },
+    {
+      "active_count": 80,
+      "asset_key": "CDK2",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 80,
+      "fold_count": 4,
+      "ligand_count": 160,
+      "per_fold": {
+        "0": {
+          "active": 20,
+          "ligands": 40,
+          "scaffolds": 40
+        },
+        "1": {
+          "active": 20,
+          "ligands": 40,
+          "scaffolds": 40
+        },
+        "2": {
+          "active": 20,
+          "ligands": 40,
+          "scaffolds": 40
+        },
+        "3": {
+          "active": 20,
+          "ligands": 40,
+          "scaffolds": 40
+        }
+      },
+      "problems": [],
+      "receptor_count": 16,
+      "receptor_order": [
+        "CDK2_1AQ1_reference",
+        "CDK2_1HCL_aligned",
+        "CDK2_1JVP_aligned",
+        "CDK2_1Y8Y_aligned",
+        "CDK2_2C68_aligned",
+        "CDK2_2C69_aligned",
+        "CDK2_3RKB_aligned",
+        "CDK2_AF2_MD2NS_C00_F001",
+        "CDK2_AF2_MD2NS_C01_F005",
+        "CDK2_AF2_MD2NS_C02_F031",
+        "CDK2_AF2_MD2NS_C03_F041",
+        "CDK2_AF2_MD2NS_C04_F066",
+        "CDK2_AF2_MD2NS_C05_F074",
+        "CDK2_AF2_MD2NS_C06_F077",
+        "CDK2_AF2_MD2NS_C07_F095",
+        "CDK2_AF_P24941_F1_v6"
+      ],
+      "role": "control",
+      "scaffold_count": 160,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/qubo-receptor-ensemble-selection/data/processed/stage04_cdk2_expanded16_development_fold_assignments.csv",
+        "matrix": "/root/qubo-receptor-ensemble-selection/data/processed/stage04_cdk2_expanded16_development_median_score_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/qubo-receptor-ensemble-selection/data/processed/stage04_cdk2_expanded16_development_fold_assignments.csv",
+        "manifest_fold_column": "development_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/qubo-receptor-ensemble-selection/data/processed/stage04_cdk2_expanded16_development_median_score_matrix.csv",
+        "note": "160-ligand / 4-fold development control panel, not part of gate G1; fold assignments now ship with the repo",
+        "problem_json": null,
+        "role": "control",
+        "target_id": "CDK2"
+      },
+      "status": "ok",
+      "target_id": "CDK2"
+    }
+  ]
+}

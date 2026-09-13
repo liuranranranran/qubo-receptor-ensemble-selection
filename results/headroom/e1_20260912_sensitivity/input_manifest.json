@@ -1,0 +1,1682 @@
+{
+  "assets_config": "configs/e1_assets_remote_sensitivity.json",
+  "created_utc": "2026-09-12T20:21:27Z",
+  "files_sha256": {
+    "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/bace1/seed_20260821_matrix.csv": {
+      "sha256": "72AA26E638A9AD128527CA693AE3E36BC37D35959A135248FE097CFCBC022AD9",
+      "size_bytes": 121768
+    },
+    "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/bace1/seed_20260822_matrix.csv": {
+      "sha256": "8404AEE8D7377743EC2E0EB8F4F8B8239421A3C7D32557C9B8EAF206165DB9A5",
+      "size_bytes": 121777
+    },
+    "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/bace1/seed_20260823_matrix.csv": {
+      "sha256": "221E8A2AE72E5B6CC797B36047826653774F43EFC3CC62CE01E8328C1D5551B3",
+      "size_bytes": 121785
+    },
+    "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/esr1/seed_20260821_matrix.csv": {
+      "sha256": "771FABA92502CD43DEC397C4A7A5C1B8B548D353533932EBD6ACEB2E1BACF0AE",
+      "size_bytes": 120367
+    },
+    "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/esr1/seed_20260822_matrix.csv": {
+      "sha256": "81A01DBF52917F041AD86D64494137E594818ABE7408C31B42EDE10F4C3A1452",
+      "size_bytes": 120357
+    },
+    "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/esr1/seed_20260823_matrix.csv": {
+      "sha256": "EBC9055FF244CC8CFAFC75D36886863E63D571BB30202D1889983B16B86EC9DC",
+      "size_bytes": 120363
+    },
+    "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/mk14/seed_20260821_matrix.csv": {
+      "sha256": "1FBB3747DED7B5CA8FCD8807C3DFCA8A8BF83885FB99FDBE89A128249FFCC7F7",
+      "size_bytes": 120214
+    },
+    "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/mk14/seed_20260822_matrix.csv": {
+      "sha256": "DE513985B51FE6DA3DC918B474B3C8F86923B6EC1B8E91319272C3F433EC544D",
+      "size_bytes": 120195
+    },
+    "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/mk14/seed_20260823_matrix.csv": {
+      "sha256": "082A3EF474F361FE8D5504DEBAC17832FDEABF25EFF0BB90F501D70A7D06FC2A",
+      "size_bytes": 120195
+    },
+    "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/ppara/seed_20260821_matrix.csv": {
+      "sha256": "DF640E2D5163F81AC6A2B0A117A952F919A5049B1B7B2EB634F641FCE99FAE6A",
+      "size_bytes": 121625
+    },
+    "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/ppara/seed_20260822_matrix.csv": {
+      "sha256": "845B58CD5F75A76A1EE9ABE569571E59D0A582DB6716B4CE2D5DA8A7672611EA",
+      "size_bytes": 121617
+    },
+    "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/ppara/seed_20260823_matrix.csv": {
+      "sha256": "D51680BF1B517C4075E11C1069ADCC6AA12FF550211B54848632A1AD20C7222D",
+      "size_bytes": 121624
+    },
+    "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/pparg/seed_20260821_matrix.csv": {
+      "sha256": "1DEFC1D38EB6EE97001B2338B06FEDCED4D144895B1B234FB08E5DD5B10950F4",
+      "size_bytes": 128366
+    },
+    "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/pparg/seed_20260822_matrix.csv": {
+      "sha256": "11ECF05A1CD727A13D4A1A2576205B2630A8A8D87558E20941A2F37056AE1ADB",
+      "size_bytes": 128369
+    },
+    "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/pparg/seed_20260823_matrix.csv": {
+      "sha256": "F50380B66C5C28839C5D9656B3DB320AF9E96779600B5A3BAF78462B6682DE18",
+      "size_bytes": 128362
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/matrices/sensitivity_minimum_matrix.csv": {
+      "sha256": "BA79B9BAFC31CC50ABBE1DD15DDA9360E07D39D4A936D1C30AD50B350207AB31",
+      "size_bytes": 94024
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/prepared_ligands.csv": {
+      "sha256": "C0FD0FE0CCA7201A945CE91441151BE43DD29B85A98DE4F29A0DEFDDB503C359",
+      "size_bytes": 357954
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/matrices/sensitivity_minimum_matrix.csv": {
+      "sha256": "70DCD41BC34D90900F57BAFCC9B236C028F70A3CAACE3D56C225B9115861E541",
+      "size_bytes": 92459
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/prepared_ligands.csv": {
+      "sha256": "19212C5A46933C6E6F7DB7CC673296889E3169ED7DEAEC8E62B2ABFA2AB29C69",
+      "size_bytes": 328918
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/matrices/sensitivity_minimum_matrix.csv": {
+      "sha256": "9368FC953B25F9B813A1F2F5840FFFE94B7826FA7A47D75E424B8FE8F6775FE1",
+      "size_bytes": 92295
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv": {
+      "sha256": "28DCA1608C9F36FC6084CCABE9107279DA3960175236A2A912AF9790FD320BB1",
+      "size_bytes": 340475
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/matrices/sensitivity_minimum_matrix.csv": {
+      "sha256": "51FD02C7617D5B604046904C85BE7A9A53E2017939BAA0C2DB835FE8BF7861D5",
+      "size_bytes": 93801
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/prepared_ligands.csv": {
+      "sha256": "3C3462D54D6912EAE372D13770CC89838DE976DD868C7717442B693BF2B2349D",
+      "size_bytes": 346265
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/matrices/sensitivity_minimum_matrix.csv": {
+      "sha256": "B17DE81A03341ED570F1C7FD1FD68604E92FD0D6B351C54F6D5CD7339220DA05",
+      "size_bytes": 98780
+    },
+    "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/prepared_ligands.csv": {
+      "sha256": "B4405B2ACAD08FBE0981BA26A39A0B4B5A218671F5278081F93047A2AB366769",
+      "size_bytes": 344545
+    },
+    "configs/e1_assets_remote_sensitivity.json": {
+      "sha256": "7B16A151BD067BD4CA461975A5AA74D077A6B513CF201B4BAAE716611F862E7E",
+      "size_bytes": 7151
+    },
+    "configs/experiments/e1_headroom_preregistration.json": {
+      "sha256": "E704E56DAEFE1985F3DD0AD9674644DB8B1396726558A03B109858CBC4BFE30E",
+      "size_bytes": 2588
+    }
+  },
+  "preregistration": {
+    "path": "configs/experiments/e1_headroom_preregistration.json",
+    "schema": "e1_headroom_v1",
+    "sha256": "E704E56DAEFE1985F3DD0AD9674644DB8B1396726558A03B109858CBC4BFE30E"
+  },
+  "primary_targets_available": [
+    "BACE1_min",
+    "BACE1_seed20260821",
+    "BACE1_seed20260822",
+    "BACE1_seed20260823",
+    "ESR1_min",
+    "ESR1_seed20260821",
+    "ESR1_seed20260822",
+    "ESR1_seed20260823",
+    "MK14_min",
+    "MK14_seed20260821",
+    "MK14_seed20260822",
+    "MK14_seed20260823",
+    "PPARA_min",
+    "PPARA_seed20260821",
+    "PPARA_seed20260822",
+    "PPARA_seed20260823",
+    "PPARG_min",
+    "PPARG_seed20260821",
+    "PPARG_seed20260822",
+    "PPARG_seed20260823"
+  ],
+  "primary_targets_missing": [
+    "MK14",
+    "PPARG",
+    "BACE1",
+    "ESR1",
+    "PPARA"
+  ],
+  "roots": {
+    "data_root": "/root/autodl-tmp/qubo_data_root",
+    "repo": "/root/qubo-receptor-ensemble-selection",
+    "run_root": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912",
+    "runs": "/root/autodl-tmp/qubo_data_root/results/runs"
+  },
+  "run_id": "e1_20260912_sensitivity",
+  "schema": "e1_input_manifest_v1",
+  "targets": [
+    {
+      "active_count": 120,
+      "asset_key": "MK14_min",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 81
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 82
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 83
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 84
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 84
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "11OY",
+        "1A9U",
+        "1BL6",
+        "1BL7",
+        "1BMK",
+        "1DI9",
+        "1KV1",
+        "1KV2",
+        "1M7Q",
+        "1OUK",
+        "1OUY",
+        "1R39",
+        "1W7H",
+        "1W82",
+        "1W83"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 414,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/matrices/sensitivity_minimum_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/matrices/sensitivity_minimum_matrix.csv",
+        "note": "canonical min-over-seeds aggregation; regenerate with extract-seeds if the file is missing",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "MK14_min"
+      },
+      "status": "ok",
+      "target_id": "MK14"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "PPARA_min",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 26
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 37
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1I7G",
+        "1K7L",
+        "1KKQ",
+        "2NPA",
+        "2P54",
+        "2REW",
+        "2ZNN",
+        "3ET1",
+        "3FEI",
+        "3G8I",
+        "3KDT",
+        "3KDU",
+        "3SP6",
+        "3VI8",
+        "4BCR"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 246,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/matrices/sensitivity_minimum_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/matrices/sensitivity_minimum_matrix.csv",
+        "note": "canonical min-over-seeds aggregation; regenerate with extract-seeds if the file is missing",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "PPARA_min"
+      },
+      "status": "ok",
+      "target_id": "PPARA"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "PPARG_min",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 56
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 67
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 71
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 72
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 72
+        }
+      },
+      "problems": [],
+      "receptor_count": 16,
+      "receptor_order": [
+        "1FM6",
+        "1FM9",
+        "1I7I",
+        "1K74",
+        "1KNU",
+        "1RDT",
+        "1ZEO",
+        "1ZGY",
+        "2ATH",
+        "2F4B",
+        "2FVJ",
+        "2G0H",
+        "2GTK",
+        "2HFP",
+        "2HWQ",
+        "2HWR"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 338,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/matrices/sensitivity_minimum_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/matrices/sensitivity_minimum_matrix.csv",
+        "note": "canonical min-over-seeds aggregation; regenerate with extract-seeds if the file is missing",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "PPARG_min"
+      },
+      "status": "ok",
+      "target_id": "PPARG"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "BACE1_min",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 66
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "2F3E",
+        "2F3F",
+        "2FDP",
+        "2G94",
+        "2HM1",
+        "2IQG",
+        "2P4J",
+        "2P8H",
+        "2QK5",
+        "2QMD",
+        "2QMF",
+        "2QMG",
+        "2QP8",
+        "2QU3",
+        "2VKM"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 358,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/matrices/sensitivity_minimum_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/matrices/sensitivity_minimum_matrix.csv",
+        "note": "canonical min-over-seeds aggregation; regenerate with extract-seeds if the file is missing",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "BACE1_min"
+      },
+      "status": "ok",
+      "target_id": "BACE1"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "ESR1_min",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 74
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 76
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 76
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 76
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 77
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1GWQ",
+        "1GWR",
+        "1SJ0",
+        "1X7R",
+        "1XP1",
+        "1XP6",
+        "1XP9",
+        "1XPC",
+        "1YIM",
+        "1YIN",
+        "2BJ4",
+        "2IOG",
+        "2IOK",
+        "2JF9",
+        "2OUZ"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 379,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/matrices/sensitivity_minimum_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/matrices/sensitivity_minimum_matrix.csv",
+        "note": "canonical min-over-seeds aggregation; regenerate with extract-seeds if the file is missing",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "ESR1_min"
+      },
+      "status": "ok",
+      "target_id": "ESR1"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "MK14_seed20260821",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 81
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 82
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 83
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 84
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 84
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "11OY",
+        "1A9U",
+        "1BL6",
+        "1BL7",
+        "1BMK",
+        "1DI9",
+        "1KV1",
+        "1KV2",
+        "1M7Q",
+        "1OUK",
+        "1OUY",
+        "1R39",
+        "1W7H",
+        "1W82",
+        "1W83"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 414,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/mk14/seed_20260821_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/mk14/seed_20260821_matrix.csv",
+        "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "MK14_seed20260821"
+      },
+      "status": "ok",
+      "target_id": "MK14"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "MK14_seed20260822",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 81
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 82
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 83
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 84
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 84
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "11OY",
+        "1A9U",
+        "1BL6",
+        "1BL7",
+        "1BMK",
+        "1DI9",
+        "1KV1",
+        "1KV2",
+        "1M7Q",
+        "1OUK",
+        "1OUY",
+        "1R39",
+        "1W7H",
+        "1W82",
+        "1W83"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 414,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/mk14/seed_20260822_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/mk14/seed_20260822_matrix.csv",
+        "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "MK14_seed20260822"
+      },
+      "status": "ok",
+      "target_id": "MK14"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "MK14_seed20260823",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 81
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 82
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 83
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 84
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 84
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "11OY",
+        "1A9U",
+        "1BL6",
+        "1BL7",
+        "1BMK",
+        "1DI9",
+        "1KV1",
+        "1KV2",
+        "1M7Q",
+        "1OUK",
+        "1OUY",
+        "1R39",
+        "1W7H",
+        "1W82",
+        "1W83"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 414,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/mk14/seed_20260823_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/mk14_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/mk14/seed_20260823_matrix.csv",
+        "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "MK14_seed20260823"
+      },
+      "status": "ok",
+      "target_id": "MK14"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "PPARA_seed20260821",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 26
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 37
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1I7G",
+        "1K7L",
+        "1KKQ",
+        "2NPA",
+        "2P54",
+        "2REW",
+        "2ZNN",
+        "3ET1",
+        "3FEI",
+        "3G8I",
+        "3KDT",
+        "3KDU",
+        "3SP6",
+        "3VI8",
+        "4BCR"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 246,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/ppara/seed_20260821_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/ppara/seed_20260821_matrix.csv",
+        "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "PPARA_seed20260821"
+      },
+      "status": "ok",
+      "target_id": "PPARA"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "PPARA_seed20260822",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 26
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 37
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1I7G",
+        "1K7L",
+        "1KKQ",
+        "2NPA",
+        "2P54",
+        "2REW",
+        "2ZNN",
+        "3ET1",
+        "3FEI",
+        "3G8I",
+        "3KDT",
+        "3KDU",
+        "3SP6",
+        "3VI8",
+        "4BCR"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 246,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/ppara/seed_20260822_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/ppara/seed_20260822_matrix.csv",
+        "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "PPARA_seed20260822"
+      },
+      "status": "ok",
+      "target_id": "PPARA"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "PPARA_seed20260823",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 26
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 37
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 61
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1I7G",
+        "1K7L",
+        "1KKQ",
+        "2NPA",
+        "2P54",
+        "2REW",
+        "2ZNN",
+        "3ET1",
+        "3FEI",
+        "3G8I",
+        "3KDT",
+        "3KDU",
+        "3SP6",
+        "3VI8",
+        "4BCR"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 246,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/ppara/seed_20260823_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/ppara_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/ppara/seed_20260823_matrix.csv",
+        "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "PPARA_seed20260823"
+      },
+      "status": "ok",
+      "target_id": "PPARA"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "PPARG_seed20260821",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 56
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 67
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 71
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 72
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 72
+        }
+      },
+      "problems": [],
+      "receptor_count": 16,
+      "receptor_order": [
+        "1FM6",
+        "1FM9",
+        "1I7I",
+        "1K74",
+        "1KNU",
+        "1RDT",
+        "1ZEO",
+        "1ZGY",
+        "2ATH",
+        "2F4B",
+        "2FVJ",
+        "2G0H",
+        "2GTK",
+        "2HFP",
+        "2HWQ",
+        "2HWR"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 338,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/pparg/seed_20260821_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/pparg/seed_20260821_matrix.csv",
+        "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "PPARG_seed20260821"
+      },
+      "status": "ok",
+      "target_id": "PPARG"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "PPARG_seed20260822",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 56
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 67
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 71
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 72
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 72
+        }
+      },
+      "problems": [],
+      "receptor_count": 16,
+      "receptor_order": [
+        "1FM6",
+        "1FM9",
+        "1I7I",
+        "1K74",
+        "1KNU",
+        "1RDT",
+        "1ZEO",
+        "1ZGY",
+        "2ATH",
+        "2F4B",
+        "2FVJ",
+        "2G0H",
+        "2GTK",
+        "2HFP",
+        "2HWQ",
+        "2HWR"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 338,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/pparg/seed_20260822_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/pparg/seed_20260822_matrix.csv",
+        "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "PPARG_seed20260822"
+      },
+      "status": "ok",
+      "target_id": "PPARG"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "PPARG_seed20260823",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 56
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 67
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 71
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 72
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 72
+        }
+      },
+      "problems": [],
+      "receptor_count": 16,
+      "receptor_order": [
+        "1FM6",
+        "1FM9",
+        "1I7I",
+        "1K74",
+        "1KNU",
+        "1RDT",
+        "1ZEO",
+        "1ZGY",
+        "2ATH",
+        "2F4B",
+        "2FVJ",
+        "2G0H",
+        "2GTK",
+        "2HFP",
+        "2HWQ",
+        "2HWR"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 338,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/pparg/seed_20260823_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/pparg_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/pparg/seed_20260823_matrix.csv",
+        "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "PPARG_seed20260823"
+      },
+      "status": "ok",
+      "target_id": "PPARG"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "BACE1_seed20260821",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 66
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "2F3E",
+        "2F3F",
+        "2FDP",
+        "2G94",
+        "2HM1",
+        "2IQG",
+        "2P4J",
+        "2P8H",
+        "2QK5",
+        "2QMD",
+        "2QMF",
+        "2QMG",
+        "2QP8",
+        "2QU3",
+        "2VKM"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 358,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/bace1/seed_20260821_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/bace1/seed_20260821_matrix.csv",
+        "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "BACE1_seed20260821"
+      },
+      "status": "ok",
+      "target_id": "BACE1"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "BACE1_seed20260822",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 66
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "2F3E",
+        "2F3F",
+        "2FDP",
+        "2G94",
+        "2HM1",
+        "2IQG",
+        "2P4J",
+        "2P8H",
+        "2QK5",
+        "2QMD",
+        "2QMF",
+        "2QMG",
+        "2QP8",
+        "2QU3",
+        "2VKM"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 358,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/bace1/seed_20260822_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/bace1/seed_20260822_matrix.csv",
+        "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "BACE1_seed20260822"
+      },
+      "status": "ok",
+      "target_id": "BACE1"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "BACE1_seed20260823",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 66
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 73
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "2F3E",
+        "2F3F",
+        "2FDP",
+        "2G94",
+        "2HM1",
+        "2IQG",
+        "2P4J",
+        "2P8H",
+        "2QK5",
+        "2QMD",
+        "2QMF",
+        "2QMG",
+        "2QP8",
+        "2QU3",
+        "2VKM"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 358,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/bace1/seed_20260823_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/bace1_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/bace1/seed_20260823_matrix.csv",
+        "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "BACE1_seed20260823"
+      },
+      "status": "ok",
+      "target_id": "BACE1"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "ESR1_seed20260821",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 74
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 76
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 76
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 76
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 77
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1GWQ",
+        "1GWR",
+        "1SJ0",
+        "1X7R",
+        "1XP1",
+        "1XP6",
+        "1XP9",
+        "1XPC",
+        "1YIM",
+        "1YIN",
+        "2BJ4",
+        "2IOG",
+        "2IOK",
+        "2JF9",
+        "2OUZ"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 379,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/esr1/seed_20260821_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/esr1/seed_20260821_matrix.csv",
+        "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "ESR1_seed20260821"
+      },
+      "status": "ok",
+      "target_id": "ESR1"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "ESR1_seed20260822",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 74
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 76
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 76
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 76
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 77
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1GWQ",
+        "1GWR",
+        "1SJ0",
+        "1X7R",
+        "1XP1",
+        "1XP6",
+        "1XP9",
+        "1XPC",
+        "1YIM",
+        "1YIN",
+        "2BJ4",
+        "2IOG",
+        "2IOK",
+        "2JF9",
+        "2OUZ"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 379,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/esr1/seed_20260822_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/esr1/seed_20260822_matrix.csv",
+        "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "ESR1_seed20260822"
+      },
+      "status": "ok",
+      "target_id": "ESR1"
+    },
+    {
+      "active_count": 120,
+      "asset_key": "ESR1_seed20260823",
+      "backfilled_fold_rows": 0,
+      "backfilled_scaffold_rows": 0,
+      "decoy_count": 480,
+      "fold_count": 5,
+      "ligand_count": 600,
+      "per_fold": {
+        "1": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 74
+        },
+        "2": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 76
+        },
+        "3": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 76
+        },
+        "4": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 76
+        },
+        "5": {
+          "active": 24,
+          "ligands": 120,
+          "scaffolds": 77
+        }
+      },
+      "problems": [],
+      "receptor_count": 15,
+      "receptor_order": [
+        "1GWQ",
+        "1GWR",
+        "1SJ0",
+        "1X7R",
+        "1XP1",
+        "1XP6",
+        "1XP9",
+        "1XPC",
+        "1YIM",
+        "1YIN",
+        "2BJ4",
+        "2IOG",
+        "2IOK",
+        "2JF9",
+        "2OUZ"
+      ],
+      "role": "sensitivity",
+      "scaffold_count": 379,
+      "scaffold_fill_rate": 1.0,
+      "source": "matrix_csv",
+      "source_paths": {
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/prepared_ligands.csv",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/esr1/seed_20260823_matrix.csv"
+      },
+      "spec": {
+        "backfill_problem_json": null,
+        "manifest": "/root/autodl-tmp/qubo_data_root/results/runs/esr1_adaptive_remote/prepared_ligands.csv",
+        "manifest_fold_column": "outer_fold",
+        "manifest_scaffold_column": "scaffold_smiles",
+        "matrix": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/seed_matrices/esr1/seed_20260823_matrix.csv",
+        "note": "single docking seed, rebuilt from score_tables by scripts/headroom_scan.py extract-seeds",
+        "problem_json": null,
+        "role": "sensitivity",
+        "target_id": "ESR1_seed20260823"
+      },
+      "status": "ok",
+      "target_id": "ESR1"
+    }
+  ]
+}

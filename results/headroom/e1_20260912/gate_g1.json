@@ -1,0 +1,874 @@
+{
+  "branch": "headline GO fraction < no_go_below: close the subset-selection line with an upper-bound conclusion; move to E2 + E5 arm A",
+  "decision": "NO_GO",
+  "evidence_paths": {
+    "bootstrap_report": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/bootstrap_report.json",
+    "cell_metrics": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/cell_metrics.csv",
+    "figures": [
+      "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/figures/fig_headroom_map.png",
+      "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/figures/fig_phi_ranking.png"
+    ],
+    "headroom_map": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/headroom_map.csv",
+    "phi_selection": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/phi_selection.json",
+    "run_manifest": "/root/autodl-tmp/qubo_data_root/results/headroom/e1_20260912/run_manifest.json"
+  },
+  "fold_oracle_choices": [
+    {
+      "fold": 1,
+      "h_nested": 0.11477716160539406,
+      "k": 2,
+      "passed": false,
+      "phi": "min",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 1,
+      "h_nested": 0.0766386072984368,
+      "k": 3,
+      "passed": false,
+      "phi": "rrf",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 2,
+      "h_nested": 0.13128998615693802,
+      "k": 2,
+      "passed": false,
+      "phi": "hmean",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 2,
+      "h_nested": 0.18511604307689655,
+      "k": 3,
+      "passed": false,
+      "phi": "mean",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 3,
+      "h_nested": -0.046574147543754385,
+      "k": 2,
+      "passed": false,
+      "phi": "gmean",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 3,
+      "h_nested": 0.019144061352318997,
+      "k": 3,
+      "passed": false,
+      "phi": "rrf",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 4,
+      "h_nested": 0.10803885157691379,
+      "k": 2,
+      "passed": false,
+      "phi": "min",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 4,
+      "h_nested": 0.12101629584275286,
+      "k": 3,
+      "passed": false,
+      "phi": "zmean",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 5,
+      "h_nested": 0.048724923176974244,
+      "k": 2,
+      "passed": false,
+      "phi": "min",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 5,
+      "h_nested": -0.012703095867071912,
+      "k": 3,
+      "passed": false,
+      "phi": "min",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 1,
+      "h_nested": 0.45285752085922026,
+      "k": 2,
+      "passed": true,
+      "phi": "ranksum",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 1,
+      "h_nested": 0.4737938976763541,
+      "k": 3,
+      "passed": true,
+      "phi": "rrf",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 2,
+      "h_nested": -0.07925726047381282,
+      "k": 2,
+      "passed": false,
+      "phi": "max",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 2,
+      "h_nested": -0.044644086830207236,
+      "k": 3,
+      "passed": false,
+      "phi": "min",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 3,
+      "h_nested": 0.15089225528389222,
+      "k": 2,
+      "passed": true,
+      "phi": "min",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 3,
+      "h_nested": 0.10463594234473486,
+      "k": 3,
+      "passed": false,
+      "phi": "zmean",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 4,
+      "h_nested": 0.018615291799926686,
+      "k": 2,
+      "passed": false,
+      "phi": "gmean",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 4,
+      "h_nested": 0.053653204562575885,
+      "k": 3,
+      "passed": false,
+      "phi": "max",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 5,
+      "h_nested": 0.06404944396066925,
+      "k": 2,
+      "passed": false,
+      "phi": "zmean",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 5,
+      "h_nested": 0.12958741975643465,
+      "k": 3,
+      "passed": false,
+      "phi": "max",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 1,
+      "h_nested": 0.03510951756864868,
+      "k": 2,
+      "passed": false,
+      "phi": "ranksum",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 1,
+      "h_nested": 0.012183502129602758,
+      "k": 3,
+      "passed": false,
+      "phi": "hmean",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 2,
+      "h_nested": 0.010734087601242642,
+      "k": 2,
+      "passed": false,
+      "phi": "mean",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 2,
+      "h_nested": 0.0026714545199265916,
+      "k": 3,
+      "passed": false,
+      "phi": "hmean",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 3,
+      "h_nested": 0.03733289304455256,
+      "k": 2,
+      "passed": false,
+      "phi": "ranksum",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 3,
+      "h_nested": 0.05128405890790272,
+      "k": 3,
+      "passed": false,
+      "phi": "min",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 4,
+      "h_nested": -0.007467777836198897,
+      "k": 2,
+      "passed": false,
+      "phi": "max",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 4,
+      "h_nested": -0.004794232543623822,
+      "k": 3,
+      "passed": false,
+      "phi": "max",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 5,
+      "h_nested": -0.06726564251991196,
+      "k": 2,
+      "passed": false,
+      "phi": "gmean",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 5,
+      "h_nested": 0.04971110670517728,
+      "k": 3,
+      "passed": false,
+      "phi": "min",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 1,
+      "h_nested": -0.01621437462050912,
+      "k": 2,
+      "passed": false,
+      "phi": "rrf",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 1,
+      "h_nested": 0.1380002209179114,
+      "k": 3,
+      "passed": false,
+      "phi": "rrf",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 2,
+      "h_nested": 0.057364695597960313,
+      "k": 2,
+      "passed": false,
+      "phi": "hmean",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 2,
+      "h_nested": 0.053994292581970804,
+      "k": 3,
+      "passed": false,
+      "phi": "hmean",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 3,
+      "h_nested": 0.010672613617235982,
+      "k": 2,
+      "passed": false,
+      "phi": "gmean",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 3,
+      "h_nested": 0.03919478075170013,
+      "k": 3,
+      "passed": false,
+      "phi": "gmean",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 4,
+      "h_nested": 0.03239788362177676,
+      "k": 2,
+      "passed": false,
+      "phi": "min",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 4,
+      "h_nested": -0.03191082602285067,
+      "k": 3,
+      "passed": false,
+      "phi": "ranksum",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 5,
+      "h_nested": 0.01593401368536007,
+      "k": 2,
+      "passed": false,
+      "phi": "min",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 5,
+      "h_nested": 0.02238143979801105,
+      "k": 3,
+      "passed": false,
+      "phi": "min",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 1,
+      "h_nested": 0.47146739130434784,
+      "k": 2,
+      "passed": true,
+      "phi": "min",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 1,
+      "h_nested": 0.46202122153209113,
+      "k": 3,
+      "passed": true,
+      "phi": "min",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 2,
+      "h_nested": 0.20199822605839268,
+      "k": 2,
+      "passed": true,
+      "phi": "min",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 2,
+      "h_nested": 0.3416203610239025,
+      "k": 3,
+      "passed": true,
+      "phi": "min",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 3,
+      "h_nested": 0.017419007203449854,
+      "k": 2,
+      "passed": false,
+      "phi": "zmean",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 3,
+      "h_nested": 0.049111933101662786,
+      "k": 3,
+      "passed": false,
+      "phi": "ranksum",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 4,
+      "h_nested": -0.08843279998166154,
+      "k": 2,
+      "passed": false,
+      "phi": "hmean",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 4,
+      "h_nested": 0.0016385388245254706,
+      "k": 3,
+      "passed": false,
+      "phi": "hmean",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 5,
+      "h_nested": 0.19441721512177992,
+      "k": 2,
+      "passed": true,
+      "phi": "min",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 5,
+      "h_nested": 0.20125090438401896,
+      "k": 3,
+      "passed": true,
+      "phi": "min",
+      "target_id": "PPARA"
+    }
+  ],
+  "fraction_cells_go": 0.02,
+  "fraction_cells_go_fold_oracle_phi": 0.18,
+  "fraction_cells_go_per_phi_cell": 0.04,
+  "fraction_cells_go_train_selected_phi": 0.02,
+  "fusion_family": [
+    "mean",
+    "min",
+    "max",
+    "zmean",
+    "gmean",
+    "hmean",
+    "ranksum",
+    "rrf"
+  ],
+  "n_cells_considered_per_phi_cell": 400,
+  "n_cells_go_per_phi_cell": 16,
+  "n_units": 50,
+  "n_units_fold_oracle": 50,
+  "n_units_train_selected": 50,
+  "pass_rule": "h_nested_lower95 > noise_floor and ratio > 1",
+  "primary_ks": [
+    2,
+    3
+  ],
+  "run_id": "e1_20260912",
+  "schema": "e1_gate_g1_v1",
+  "targets": [
+    "MK14",
+    "PPARG",
+    "BACE1",
+    "ESR1",
+    "PPARA"
+  ],
+  "thresholds": {
+    "go_above": 0.3,
+    "no_go_below": 0.1,
+    "require_lower_bound": true
+  },
+  "tie_break_trace": {
+    "k_star_displacement": {
+      "all_targets_shift_right_ge_2": false,
+      "targets": 5,
+      "targets_shift_right_ge_2": 0,
+      "values": [
+        0.0,
+        -1.0,
+        -1.0,
+        1.0,
+        -1.0
+      ]
+    },
+    "oracle_minus_train_fraction": 0.16,
+    "rule": "1) is the fold-oracle phi level significantly better than the train-selected phi level; 2) is k* shifted right by >= 2 consistently across all five targets"
+  },
+  "train_selected_choices": [
+    {
+      "fold": 1,
+      "h_nested": -0.049549452621782675,
+      "k": 2,
+      "passed": false,
+      "phi": "zmean",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 1,
+      "h_nested": -0.007932611467828143,
+      "k": 3,
+      "passed": false,
+      "phi": "hmean",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 2,
+      "h_nested": 0.08295377893698191,
+      "k": 2,
+      "passed": false,
+      "phi": "mean",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 2,
+      "h_nested": 0.08534721294588082,
+      "k": 3,
+      "passed": false,
+      "phi": "gmean",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 3,
+      "h_nested": -0.07152962350257591,
+      "k": 2,
+      "passed": false,
+      "phi": "zmean",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 3,
+      "h_nested": -0.09150013656789244,
+      "k": 3,
+      "passed": false,
+      "phi": "hmean",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 4,
+      "h_nested": -0.042063698459851695,
+      "k": 2,
+      "passed": false,
+      "phi": "zmean",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 4,
+      "h_nested": -0.054824928201876566,
+      "k": 3,
+      "passed": false,
+      "phi": "gmean",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 5,
+      "h_nested": -0.06969216037381107,
+      "k": 2,
+      "passed": false,
+      "phi": "mean",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 5,
+      "h_nested": -0.05212610246549876,
+      "k": 3,
+      "passed": false,
+      "phi": "hmean",
+      "target_id": "MK14"
+    },
+    {
+      "fold": 1,
+      "h_nested": 0.45285752085922026,
+      "k": 2,
+      "passed": true,
+      "phi": "ranksum",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 1,
+      "h_nested": 0.006514902139915291,
+      "k": 3,
+      "passed": false,
+      "phi": "ranksum",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 2,
+      "h_nested": -0.07925726047381282,
+      "k": 2,
+      "passed": false,
+      "phi": "max",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 2,
+      "h_nested": -0.12584576943349463,
+      "k": 3,
+      "passed": false,
+      "phi": "ranksum",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 3,
+      "h_nested": 0.08810468961571513,
+      "k": 2,
+      "passed": false,
+      "phi": "max",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 3,
+      "h_nested": 0.0971091585716631,
+      "k": 3,
+      "passed": false,
+      "phi": "max",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 4,
+      "h_nested": -0.0052495114513183005,
+      "k": 2,
+      "passed": false,
+      "phi": "mean",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 4,
+      "h_nested": -0.07776991118902876,
+      "k": 3,
+      "passed": false,
+      "phi": "ranksum",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 5,
+      "h_nested": 0.04435142934480729,
+      "k": 2,
+      "passed": false,
+      "phi": "ranksum",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 5,
+      "h_nested": -0.041087672964395416,
+      "k": 3,
+      "passed": false,
+      "phi": "ranksum",
+      "target_id": "PPARG"
+    },
+    {
+      "fold": 1,
+      "h_nested": -0.042247668122042975,
+      "k": 2,
+      "passed": false,
+      "phi": "zmean",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 1,
+      "h_nested": 0.012183502129602758,
+      "k": 3,
+      "passed": false,
+      "phi": "hmean",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 2,
+      "h_nested": 0.005706016485048732,
+      "k": 2,
+      "passed": false,
+      "phi": "min",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 2,
+      "h_nested": -0.0016353111272995602,
+      "k": 3,
+      "passed": false,
+      "phi": "gmean",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 3,
+      "h_nested": -0.02648041788917077,
+      "k": 2,
+      "passed": false,
+      "phi": "min",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 3,
+      "h_nested": 0.05128405890790272,
+      "k": 3,
+      "passed": false,
+      "phi": "min",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 4,
+      "h_nested": -0.18838882636759202,
+      "k": 2,
+      "passed": false,
+      "phi": "mean",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 4,
+      "h_nested": -0.11844103099006953,
+      "k": 3,
+      "passed": false,
+      "phi": "min",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 5,
+      "h_nested": -0.06908423460875843,
+      "k": 2,
+      "passed": false,
+      "phi": "zmean",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 5,
+      "h_nested": -0.13808904903809563,
+      "k": 3,
+      "passed": false,
+      "phi": "rrf",
+      "target_id": "BACE1"
+    },
+    {
+      "fold": 1,
+      "h_nested": -0.01621437462050912,
+      "k": 2,
+      "passed": false,
+      "phi": "rrf",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 1,
+      "h_nested": -0.049625319575392374,
+      "k": 3,
+      "passed": false,
+      "phi": "max",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 2,
+      "h_nested": -0.025517260566224553,
+      "k": 2,
+      "passed": false,
+      "phi": "max",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 2,
+      "h_nested": 0.0522081570165191,
+      "k": 3,
+      "passed": false,
+      "phi": "rrf",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 3,
+      "h_nested": -0.005669444745046048,
+      "k": 2,
+      "passed": false,
+      "phi": "rrf",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 3,
+      "h_nested": -0.01895420804307868,
+      "k": 3,
+      "passed": false,
+      "phi": "zmean",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 4,
+      "h_nested": -0.09236561738985088,
+      "k": 2,
+      "passed": false,
+      "phi": "rrf",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 4,
+      "h_nested": -0.051319087119538975,
+      "k": 3,
+      "passed": false,
+      "phi": "min",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 5,
+      "h_nested": -0.008591696248436032,
+      "k": 2,
+      "passed": false,
+      "phi": "gmean",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 5,
+      "h_nested": 0.02238143979801105,
+      "k": 3,
+      "passed": false,
+      "phi": "min",
+      "target_id": "ESR1"
+    },
+    {
+      "fold": 1,
+      "h_nested": -0.36030753442501334,
+      "k": 2,
+      "passed": false,
+      "phi": "max",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 1,
+      "h_nested": -0.0009881422924901129,
+      "k": 3,
+      "passed": false,
+      "phi": "max",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 2,
+      "h_nested": -0.04120935846560936,
+      "k": 2,
+      "passed": false,
+      "phi": "max",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 2,
+      "h_nested": -0.05700974395333319,
+      "k": 3,
+      "passed": false,
+      "phi": "max",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 3,
+      "h_nested": -0.1236643281039904,
+      "k": 2,
+      "passed": false,
+      "phi": "max",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 3,
+      "h_nested": 0.049111933101662786,
+      "k": 3,
+      "passed": false,
+      "phi": "ranksum",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 4,
+      "h_nested": -0.15494345496542097,
+      "k": 2,
+      "passed": false,
+      "phi": "ranksum",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 4,
+      "h_nested": -0.025935660349557105,
+      "k": 3,
+      "passed": false,
+      "phi": "mean",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 5,
+      "h_nested": 0.05059515444731599,
+      "k": 2,
+      "passed": false,
+      "phi": "max",
+      "target_id": "PPARA"
+    },
+    {
+      "fold": 5,
+      "h_nested": 0.05785610048170625,
+      "k": 3,
+      "passed": false,
+      "phi": "max",
+      "target_id": "PPARA"
+    }
+  ],
+  "unit_count": 50
+}

@@ -100,8 +100,10 @@ python scripts/headroom_scan.py run \
 （主判定）与 `configs/e1_assets_remote_sensitivity.json`（min 聚合 + 三 seed 独立）。
 远程正式运行看 [远程运行手册](docs/headroom_scan_remote_runbook_zh.md)：
 `JOBS=32 bash scripts/run_e1_headroom_remote.sh`。
-实现与产物说明见 [docs/headroom_scan_zh.md](docs/headroom_scan_zh.md)；
-本地验证运行（非权威）的结论是 G1 = NO-GO，细节与限制在该文档 §6–§8。
+实现与产物说明见 [docs/headroom_scan_zh.md](docs/headroom_scan_zh.md)。
+**远程权威运行 `e1_20260912`（352 主分片 + 800 敏感性分片）判定 G1 = NO-GO**
+（逐格 4.0% / 折内 oracle-φ 18.0% / train-selected φ 2.0%）；唯一通过三 seed 检验的灰区线索
+是 `PPARA × min`（BEmin），按计划交棒 E4。产物在 `results/headroom/e1_20260912/`。
 
 ## 验证
 
